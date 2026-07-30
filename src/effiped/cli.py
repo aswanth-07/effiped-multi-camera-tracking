@@ -31,7 +31,7 @@ def train() -> None:
 
 
 def evaluate() -> None:
-    """Run the contest evidence validator or a supplied model evaluation."""
+    """Run the system evidence validator or a supplied model evaluation."""
     runner = REPOSITORY_ROOT / "tools" / "validate_results.py"
     if not runner.is_file():
         raise SystemExit("effiped-eval requires a repository checkout containing tools/validate_results.py")

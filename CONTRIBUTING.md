@@ -1,7 +1,7 @@
 # Contributing
 
-Keep contributions focused on the contest system, local identity-review workflow, or verified
-research evolution. Add tests proportional to the change and run:
+Keep contributions focused on the EffiPed model, local identity-review workflow, or verified
+descriptor research. Add tests proportional to the change and run:
 
 ```bash
 ruff check .
@@ -18,5 +18,5 @@ Do not commit datasets, checkpoints, source videos, runtime crops, secrets, abso
 paths, unrelated projects, or unsupported claims. Every P-DESTRE-derived asset must be
 non-commercial, attributed, hashed, and listed in `docs/media/ASSET_MANIFEST.json`.
 
-Code contributions are Apache-2.0. Media and third-party material retain their own compatible
-terms.
+Code contributions are Apache-2.0. Media and third-party material retain their own
+compatible terms.

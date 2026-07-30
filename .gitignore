@@ -31,7 +31,8 @@ runs/
 *.mov
 *.mkv
 *.webm
-!docs/media/pdestre/effiped-demo.webm
+!docs/media/pdestre/multi-camera-tracking.webm
+!docs/media/pdestre/cross-camera-matches.webm
 tmp/
 *.log
 *.aux

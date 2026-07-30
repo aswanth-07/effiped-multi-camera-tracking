@@ -48,7 +48,7 @@ def models():
 @app.post("/api/person-search/jobs", response_model=JobCreateOut)
 def create_person_search_job(
     files: List[UploadFile] = File(...),
-    model_key: str = Form("effiped_tier1_contest"),
+    model_key: str = Form("effiped_tier1"),
     decode_thresh: float = Form(0.05),
     track_thresh: float = Form(0.25),
     max_frames: int = Form(0),

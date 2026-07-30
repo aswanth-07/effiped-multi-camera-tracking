@@ -14,7 +14,7 @@ def test_health_and_portable_model_metadata():
     assert response.status_code == 200
     rows = response.json()
     assert len(rows) == 1
-    assert rows[0]["key"] == "effiped_tier1_contest"
+    assert rows[0]["key"] == "effiped_tier1"
     assert rows[0]["descriptor_dim"] == 256
     assert rows[0]["available"] is False
     assert "path" not in str(rows[0]).lower()
@@ -30,7 +30,7 @@ def test_unavailable_weight_behavior_and_upload_validation():
     empty = client.post(
         "/api/person-search/jobs",
         files={"files": ("camera.mp4", b"", "video/mp4")},
-        data={"model_key": "effiped_tier1_contest"},
+        data={"model_key": "effiped_tier1"},
     )
     assert empty.status_code == 400
     assert "Empty upload" in empty.json()["detail"]
@@ -38,7 +38,7 @@ def test_unavailable_weight_behavior_and_upload_validation():
     unavailable = client.post(
         "/api/person-search/jobs",
         files={"files": ("camera.mp4", b"not-a-video", "video/mp4")},
-        data={"model_key": "effiped_tier1_contest"},
+        data={"model_key": "effiped_tier1"},
     )
     assert unavailable.status_code == 400
     assert "unavailable" in unavailable.json()["detail"].lower()

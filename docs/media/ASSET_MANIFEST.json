@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "collection": "P-DESTRE-derived non-commercial research demonstration media",
   "creator_attribution": "P-DESTRE dataset creators",
   "adapter": "Aswanth Raj",
@@ -8,18 +8,137 @@
   "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
   "assets": [
     {
-      "path": "pdestre/contest-four-camera.jpg",
-      "source": "Private P-DESTRE-derived four-camera contest demonstration video",
-      "transformations": "Frame selected at 00:05, resized to 1600x900, JPEG optimized; existing contest detection overlays retained",
-      "purpose": "Website hero and interactive four-camera replay",
-      "sha256": "e78b9c323f53fc43aa691aade740acdb13dcc839e33be47a1f8139bbda7bfa41"
+      "path": "pdestre/multi-camera-tracking.webm",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
+      "transformations": "Full 15-second replay resized from 1920×1080 to 960×540 at 10 FPS; VP9 CRF 42; audio removed; original detector and tracker overlays retained",
+      "purpose": "Interactive all-local-tracks replay in the identity-review console",
+      "sha256": "73e4b0348018aa48b0181e32a507f72ee584a9e4bb22f60ecd57259c3a59962f"
     },
     {
-      "path": "pdestre/effiped-demo.webm",
-      "source": "Private P-DESTRE-derived four-camera contest demonstration video",
-      "transformations": "Seven-second excerpt from 00:04, resized to 960x540, 15 FPS, VP9 CRF 38, audio removed",
-      "purpose": "Short non-commercial contest-system demonstration",
-      "sha256": "6919de5fb8637c8845a4b95538783902f4cecea773e657efdef63e99195267ff"
+      "path": "pdestre/cross-camera-matches.webm",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
+      "transformations": "Full 15-second replay resized from 1920×1080 to 960×540 at 10 FPS; VP9 CRF 42; audio removed; original cross-camera overlays retained",
+      "purpose": "Interactive cross-camera association replay in the identity-review console",
+      "sha256": "98efec988e57a81e9560c7b6b9ea896174057ee2923ec64d8f676c637e2ab511"
+    },
+    {
+      "path": "pdestre/four-camera-tracking.jpg",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
+      "transformations": "Frame selected at 00:06 and resized to 1600×900; original tracker annotations retained",
+      "purpose": "Poster frame for the all-local-tracks replay",
+      "sha256": "6ba64f8ddd5636a3046d139eca2ce75743678dae88e59ee47007a2b837b483b1"
+    },
+    {
+      "path": "pdestre/cross-camera-matches.jpg",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
+      "transformations": "Frame selected at 00:06 and resized to 1600×900; original cross-camera annotations retained",
+      "purpose": "Poster frame for the cross-camera association replay",
+      "sha256": "266e024efe217b59e5ae81049c38bff281506de475c7cea392962625f235cb2d"
+    },
+    {
+      "path": "pdestre/id-10385-query.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10385 query panel and encoded as WebP quality 84",
+      "purpose": "Interactive query example",
+      "sha256": "4d44398cfb7305dd7ba577033bf73a624dc24459f163338474b640e646ea8923"
+    },
+    {
+      "path": "pdestre/id-10385-rank1.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10385 rank-1 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "88e1fda276e8ee4256121b957a8489be4056330fa71bce51ee90f6c0e620017f"
+    },
+    {
+      "path": "pdestre/id-10385-rank2.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10385 rank-2 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "dbcf3323b039d8baf7d65242eaf45b055a8e6b0bce193f78544de133b51de4a5"
+    },
+    {
+      "path": "pdestre/id-10385-rank3.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10385 rank-3 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "8e9ecb97f74796a71d3e52314ef539a1bd1c5775c56b2f27adea6a8687039075"
+    },
+    {
+      "path": "pdestre/id-10385-rank4.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10385 rank-4 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked distractor",
+      "sha256": "0f5e0167e0408bf847fa0068c092c7cde906f876262f70f07ef180cee649f1ca"
+    },
+    {
+      "path": "pdestre/id-10380-query.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10380 query panel and encoded as WebP quality 84",
+      "purpose": "Interactive query example",
+      "sha256": "253e81e4cd5696cf4479885fce4480ec69ba0685456bdb71201857154c6262b4"
+    },
+    {
+      "path": "pdestre/id-10380-rank1.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10380 rank-1 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "56846672bace21ea207a00d16310a41f35cb50a7aad027c6b02b6b7bf0070b36"
+    },
+    {
+      "path": "pdestre/id-10380-rank2.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10380 rank-2 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "caa330641450d6a42d983f7064c05365efc1072a071ccde780eac40fc5ada07f"
+    },
+    {
+      "path": "pdestre/id-10380-rank3.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10380 rank-3 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "f98495bfcbc3136fe8f7b58d482888607bc35ebcdb7e4b97709a7f333cad1f3c"
+    },
+    {
+      "path": "pdestre/id-10380-rank4.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10380 rank-4 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked distractor",
+      "sha256": "f9fd922d2fed020e00beb8cd339c369840a9753a906e3aca9693c5d393c4b59e"
+    },
+    {
+      "path": "pdestre/id-10354-query.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10354 query panel and encoded as WebP quality 84",
+      "purpose": "Interactive query example",
+      "sha256": "9ef12e8d5fb4bba282b64194605558a45c45e87bbae4f644a8ac004c63ada14b"
+    },
+    {
+      "path": "pdestre/id-10354-rank1.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10354 rank-1 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "5b2302116753c12fb65f4c2a0bb181caa567dee407e6d2f8e1f25d6265564d03"
+    },
+    {
+      "path": "pdestre/id-10354-rank2.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10354 rank-2 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked candidate",
+      "sha256": "0ea87ee5732df2b36fb8cbf8c88c20bf14fa7478b15b2809150e7bd8e9af779d"
+    },
+    {
+      "path": "pdestre/id-10354-rank3.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10354 rank-3 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked distractor",
+      "sha256": "0f5e0167e0408bf847fa0068c092c7cde906f876262f70f07ef180cee649f1ca"
+    },
+    {
+      "path": "pdestre/id-10354-rank4.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/retrieval_ranking.png",
+      "transformations": "Cropped the ID 10354 rank-4 result and encoded as WebP quality 84",
+      "purpose": "Interactive ranked distractor",
+      "sha256": "488c95b844f831c55705644c27accd3adc1906d9b54421d7cb4d1c0b21eacfa2"
     }
   ]
 }

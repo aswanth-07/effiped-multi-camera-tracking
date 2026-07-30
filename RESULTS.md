@@ -1,9 +1,9 @@
 # Results and Protocol Ledger
 
-All website cards, charts, README values, and report tables are generated from
+The website, README, report, charts, and tests read the same checked-in fixture:
 `research/results/summary.json`.
 
-## 1. Verified contest system
+## EffiPed system benchmarks
 
 | Evaluation | Metric | Value |
 |---|---|---:|
@@ -15,17 +15,13 @@ All website cards, charts, README values, and report tables are generated from
 | MOT17 val-half Protocol A | IDF1 | 74.24 |
 | MOT17 val-half Protocol A | HOTA | 61.34 |
 
-Canonical Tier-1 footprint: 7.78M parameters and approximately 18 FPS for the full tracking
-pipeline at 1088×608 on an NVIDIA RTX 5080 Laptop GPU.
+EffiPed Tier-1 contains 7.78M parameters and runs at approximately 18 FPS for the complete
+tracking pipeline at 1088×608 on an NVIDIA RTX 5080 Laptop GPU.
 
-## 2. Contest submission snapshot
+The browser replay is not used to measure these numbers. It is an interactive presentation
+of archived detector, tracker, and cross-camera association output.
 
-The submitted poster displayed 7.92M parameters, 22 FPS, and 62.8% cross-camera Rank-1.
-That snapshot is preserved as submitted. It is not substituted for the later canonical
-Tier-1 measurement. The poster’s +16.2 percentage-point row combined multiple configuration
-differences; it is not a pure part-readout ablation.
-
-## 3. Post-contest evolution
+## Descriptor research extensions
 
 | Study | Boundary | Rank-1 gain | mAP gain |
 |---|---|---:|---:|
@@ -34,5 +30,13 @@ differences; it is not a pure part-readout ablation.
 | BoxJDE | five-fold natural predicted boxes | +13.31 pp | +12.29 pp |
 | BoxJDE | five-fold natural end-to-end | +13.01 pp | +12.00 pp |
 
-PartJDE’s separate evaluation reports 7.92M parameters and 27.0 FPS. BoxJDE’s primary
-P-DESTRE protocol is a constructed per-date descriptor-readout ablation, not official Task 4.
+PartJDE's separate evaluation reports 7.92M parameters and 27.0 FPS. BoxJDE uses a
+constructed P-DESTRE per-date descriptor-readout ablation, not official Task 4; its full
+evidence and technical report live in the
+[BoxJDE repository](https://github.com/aswanth-07/boxjde-person-search).
+
+## Interpretation boundary
+
+Cross-camera similarities rank candidate evidence. They do not establish identity, and the
+reported evaluations do not establish behavior for other sites, populations, cameras, or
+operating conditions.

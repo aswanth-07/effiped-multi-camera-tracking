@@ -1,18 +1,18 @@
 {
   "schema_version": 1,
-  "artifact_version": "contest-v1",
+  "artifact_version": "v1",
   "release_url": "https://github.com/aswanth-07/effiped-multi-camera-tracking/releases/tag/v1.0.0",
   "weights_status": "withheld_pending_dataset_rights_review",
   "models": [
     {
-      "key": "effiped_tier1_contest",
-      "label": "EffiPed Tier-1 — contest system",
+      "key": "effiped_tier1",
+      "label": "EffiPed Tier-1",
       "fold": 0,
       "readout": "four-strip-part-based",
       "descriptor_dim": 256,
-      "filename": "effiped-tier1-contest-v1.pt",
-      "config": "configs/contest/effiped-tier1.yaml",
-      "description": "Contest-era ConvNeXt V2 JDE model with RoIAlign, four body strips, CoordinateAttention, and gallery association.",
+      "filename": "effiped-tier1-v1.pt",
+      "config": "configs/system/effiped-tier1.yaml",
+      "description": "ConvNeXt V2 JDE model with RoIAlign, four body strips, Coordinate Attention, and gallery association.",
       "benchmark": {
         "protocol": "P-DESTRE fold-0 validation and test; MOT17 val-half Protocol A",
         "pdestre_val_rank1_cross": 62.8,
@@ -24,4 +24,3 @@
     }
   ]
 }
-
