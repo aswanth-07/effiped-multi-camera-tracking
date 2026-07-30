@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -10,6 +11,28 @@ TEXT_SUFFIXES = {".py", ".ts", ".tsx", ".js", ".json", ".yaml", ".yml", ".md", "
 SKIP_PARTS = {".git", ".venv", "node_modules", "dist", "tmp"}
 FORBIDDEN_NAMES = {"datasets", "checkpoints", "runs_compact", "runs_fivefold", "asu_reid"}
 FORBIDDEN_SUFFIXES = {".pt", ".pth", ".ckpt", ".onnx", ".mp4", ".mov", ".avi", ".mkv"}
+ARCHITECTURE_SVG = Path("docs/architecture/effiped-architecture.svg")
+
+
+def validate_svg(path: Path, relative: Path) -> list[str]:
+    """Reject mislabeled raster exports and malformed SVG documents."""
+
+    errors: list[str] = []
+    data = path.read_bytes()
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return [f"PNG bytes mislabeled as SVG: {relative}"]
+    try:
+        root = ET.fromstring(data)
+    except ET.ParseError as exc:
+        return [f"Malformed SVG: {relative} ({exc})"]
+    if root.tag.rsplit("}", 1)[-1] != "svg":
+        errors.append(f"SVG root element missing: {relative}")
+    if relative == ARCHITECTURE_SVG:
+        child_names = {child.tag.rsplit("}", 1)[-1] for child in root}
+        for required in {"title", "desc"}:
+            if required not in child_names:
+                errors.append(f"Architecture SVG missing accessible {required}: {relative}")
+    return errors
 
 
 def validate() -> list[str]:
@@ -29,6 +52,8 @@ def validate() -> list[str]:
             errors.append(f"Forbidden binary artifact: {relative}")
         if path.stat().st_size > 20 * 1024 * 1024:
             errors.append(f"File exceeds 20 MB: {relative}")
+        if path.suffix.lower() == ".svg":
+            errors.extend(validate_svg(path, relative))
         if path.suffix.lower() not in TEXT_SUFFIXES or path.name == "LICENSE":
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
