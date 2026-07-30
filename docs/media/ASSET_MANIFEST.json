@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "collection": "P-DESTRE-derived non-commercial research demonstration media",
+  "creator_attribution": "P-DESTRE dataset creators",
+  "adapter": "Aswanth Raj",
+  "source_reference": "https://arxiv.org/abs/2004.02782",
+  "license": "CC BY-NC-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+  "assets": [
+    {
+      "path": "pdestre/contest-four-camera.jpg",
+      "source": "Private P-DESTRE-derived four-camera contest demonstration video",
+      "transformations": "Frame selected at 00:05, resized to 1600x900, JPEG optimized; existing contest detection overlays retained",
+      "purpose": "Website hero and interactive four-camera replay",
+      "sha256": "e78b9c323f53fc43aa691aade740acdb13dcc839e33be47a1f8139bbda7bfa41"
+    },
+    {
+      "path": "pdestre/effiped-demo.webm",
+      "source": "Private P-DESTRE-derived four-camera contest demonstration video",
+      "transformations": "Seven-second excerpt from 00:04, resized to 960x540, 15 FPS, VP9 CRF 38, audio removed",
+      "purpose": "Short non-commercial contest-system demonstration",
+      "sha256": "6919de5fb8637c8845a4b95538783902f4cecea773e657efdef63e99195267ff"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use EffiPed, please cite this software and the P-DESTRE dataset paper."
+title: "Multi-Camera Pedestrian Detection, Tracking & Re-Identification using Joint ConvNeXt V2 Architecture"
+version: 1.0.0
+date-released: 2026-07-30
+type: software
+authors:
+  - family-names: Raj
+    given-names: Aswanth
+repository-code: "https://github.com/aswanth-07/effiped-multi-camera-tracking"
+license: Apache-2.0
+keywords:
+  - pedestrian tracking
+  - person re-identification
+  - multi-camera tracking
+  - joint detection and embedding
+preferred-citation:
+  type: report
+  title: "EffiPed: Multi-Camera Pedestrian Detection, Tracking & Re-Identification using Joint ConvNeXt V2 Architecture"
+  authors:
+    - family-names: Raj
+      given-names: Aswanth
+  year: 2026

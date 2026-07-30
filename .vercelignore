@@ -1,0 +1,12 @@
+.venv
+.pytest_cache
+__pycache__
+tests
+research
+src
+apps/api
+configs
+tools
+*.pt
+*.pth
+*.ckpt
