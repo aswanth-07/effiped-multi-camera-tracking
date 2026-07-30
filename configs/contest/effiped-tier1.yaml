@@ -1,0 +1,187 @@
+# Canonical EffiPed Tier-1 contest configuration.
+# Dataset paths are repository-relative placeholders; users must obtain each source separately.
+
+model:
+  backbone: convnextv2_tiny
+  embedding_dim: 256
+  pretrained: false
+  pretrained_path: null
+  resume: null
+  reset_optimizer: false
+  use_bifpn: false
+  fpn_out_channels: 256
+  num_bifpn_layers: 2
+  use_multiscale_fusion: true
+  fusion_level: p2
+  fusion_stride: 4
+  det_stride: 4
+  reid_stride: 4
+  p3_refiner_depth: 3
+  attention_type: none
+  use_decoupled_reid: true
+  use_iou_branch: true
+  use_dcn: true
+  reid_head_use_dcn: false
+  reid_head_depth: 3
+  reid_extraction: part_based
+  num_parts_v: 4
+  num_parts_h: 1
+  roi_output_size: [32, 8]
+  use_coord_attention: true
+  part_fusion_type: attention_sum
+  part_attention_dropout_p: 0.0
+  use_group_norm: true
+  eval_use_bnneck: true
+
+data:
+  root: datasets
+  train_seqs:
+    - P-DESTRE/jde_splits/fold_0/train.txt
+    - MOT17/train/MOT17-02-SDP
+    - MOT17/train/MOT17-04-SDP
+    - MOT17/train/MOT17-05-SDP
+    - MOT17/train/MOT17-10-SDP
+    - MOT17/train/MOT17-11-SDP
+    - MOT17/train/MOT17-13-SDP
+    - MOT20/train/MOT20-02
+    - MOT20/train/MOT20-03
+    - MOT20/train/MOT20-05
+    - sompt22/train/SOMPT22-02
+    - sompt22/train/SOMPT22-04
+    - sompt22/train/SOMPT22-05
+    - sompt22/train/SOMPT22-07
+    - sompt22/train/SOMPT22-08
+    - sompt22/train/SOMPT22-10
+    - sompt22/train/SOMPT22-11
+    - sompt22/train/SOMPT22-12
+    - sompt22/train/SOMPT22-13
+  val_seqs:
+    - P-DESTRE/jde_splits/fold_0/val.txt
+  secondary_val_seqs:
+    - MOT17/train/MOT17-09-SDP
+    - MOT20/train/MOT20-01
+  additional_sources:
+    - source: crowdhuman_og/crowdhuman_og.train
+      ratio: 0.12
+  dataset_type: mot17
+  sampler_type: identity_aware
+  cross_camera_ratio: 0.5
+  min_visibility: 0.3
+  img_size: [1088, 608]
+  batch_size: 2
+  num_workers: 4
+  frame_skip: 3
+  augmentation:
+    enabled: true
+    apply_prob: 0.6
+    mosaic:
+      probability: 0.2
+      mixup_probability: 0.1
+      scale: [0.5, 1.5]
+    cutout: 0.1
+    gaussian_blur:
+      probability: 0.1
+      kernel_sizes: [3, 5]
+    gaussian_noise:
+      probability: 0.1
+      std: 10
+    color_jitter:
+      probability: 0.7
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.2
+      hue: 0.05
+    random_erasing:
+      probability: 0.5
+      scale: [0.05, 0.25]
+      ratio: [0.3, 3.3]
+    random_grayscale:
+      probability: 0.1
+    surveillance:
+      enabled: true
+      jpeg_compression:
+        probability: 0.2
+        quality_range: [30, 70]
+      resolution_degradation:
+        probability: 0.25
+        scale_range: [0.25, 0.5]
+      gamma_shift:
+        probability: 0.1
+        gamma_range: [0.7, 1.3]
+
+training:
+  epochs: 15
+  lr: 0.0001
+  warmup_epochs: 1
+  warmup_batches: 1000
+  id_warmup_epochs: 0
+  backbone_lr_mult: 0.1
+  use_amp: false
+  use_ema: false
+  save_freq: 1
+  val_freq: 1
+  grad_clip: 10.0
+  gradient_accumulation_steps: 8
+  auto_resume: false
+
+loss:
+  cls_weight: 1.0
+  reg_weight: 0.5
+  ctr_weight: 1.0
+  id_weight: 1.0
+  rep_weight: 0.4
+  iou_weight: 1.0
+  use_visibility_weighted_loss: true
+  uncertainty_loss: true
+  use_bnneck: true
+  part_classifier_mode: per_part
+  part_loss_weight: 0.3
+  part_triplet_weight: 0.09
+  diversity_loss_weight: 0.1
+  dcn_bbox_penalty_weight: 0.0
+  dcn_penalty_samples_per_box: 16
+  dcn_offset_mag_weight: 0.0
+  arcface_s: 16.0
+  arcface_m: 0.25
+  arcface_subcenter_k: 1
+  triplet_weight: 0.3
+  triplet_margin: 0.5
+  xbm_memory_size: 8192
+  reid_dropout: 0.1
+  label_smoothing: 0.1
+
+tracker:
+  det_thresh: 0.4
+  low_thresh: 0.1
+  match_thresh: 0.4
+  iou_thresh: 0.5
+  embedding_weight: 0.8
+  embedding_fusion_alpha: 0.7
+  reid_trust: 0.4
+  track_buffer: 30
+  min_hits: 1
+  use_oc_sort: false
+  use_botsort: true
+  botsort_alpha: 0.3
+  use_gallery: true
+  reid_thresh: 0.45
+  memory_bank_capacity: 500
+  return_part_features: true
+  part_aware_alpha: 0.4
+  cmc:
+    enabled: false
+
+cross_camera:
+  match_thresh: 0.50
+  gallery_size: 10
+  temporal_window: 300
+  transition_weight: 0.15
+  max_global_ids: 2000
+  timestamp_mode: seconds
+  gallery_top_k: 3
+  distinctiveness_ratio: 0.80
+  merge_thresh: 0.990
+
+experiment:
+  name: effiped-tier1-contest
+  save_dir: runs/effiped-tier1-contest
