@@ -26,7 +26,7 @@ jobs:
       - run: ruff check .
       - run: python -m build
       - run: pytest
-      - run: python tools/validate_results.py --config configs/contest/effiped-tier1.yaml
+      - run: python tools/validate_results.py --config configs/system/effiped-tier1.yaml
       - run: python tools/validate_media.py
       - run: python tools/validate_release.py
 

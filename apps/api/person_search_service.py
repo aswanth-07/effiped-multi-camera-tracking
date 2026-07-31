@@ -179,7 +179,7 @@ def _save_rgb(path: Path, image_rgb: np.ndarray) -> None:
 
 def _normalize_settings(settings: Dict[str, Any]) -> Dict[str, Any]:
     return {
-        "model_key": str(settings.get("model_key") or "effiped_tier1_contest"),
+        "model_key": str(settings.get("model_key") or "effiped_tier1"),
         "decode_thresh": float(settings.get("decode_thresh", 0.05)),
         "track_thresh": float(settings.get("track_thresh", 0.25)),
         "max_frames": int(settings.get("max_frames", 0)),

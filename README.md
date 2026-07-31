@@ -1,80 +1,36 @@
 <div align="center">
-  <img src="docs/social-preview.png" alt="EffiPed — 3rd-Prize multi-camera pedestrian tracking system" width="100%">
+  <img src="docs/social-preview.png" alt="EffiPed multi-camera pedestrian tracking and identity-review system" width="100%">
 
   # EffiPed
 
   ## Multi-Camera Pedestrian Detection, Tracking & Re-Identification using Joint ConvNeXt V2 Architecture
 
-  **3rd Prize — Student Innovation Project Contest 2026**  
-  Vertical 1: AI & Intelligent Systems · VIT Vellore SCOPE
-
-  By [Aswanth Raj](https://github.com/aswanth-07) · Guide: Sri Preethaa KR
+  By [Aswanth Raj](https://github.com/aswanth-07)
 
   [![CI](https://github.com/aswanth-07/effiped-multi-camera-tracking/actions/workflows/ci.yml/badge.svg)](https://github.com/aswanth-07/effiped-multi-camera-tracking/actions/workflows/ci.yml)
-  [![Software: Apache-2.0](https://img.shields.io/badge/software-Apache--2.0-24e6bd)](LICENSE)
-  [![Media: CC BY-NC-SA 4.0](https://img.shields.io/badge/P--DESTRE_media-CC_BY--NC--SA_4.0-e8a94d)](docs/media/LICENSE.md)
+  [![Software: Apache-2.0](https://img.shields.io/badge/software-Apache--2.0-22c7b8)](LICENSE)
+  [![Media: CC BY-NC-SA 4.0](https://img.shields.io/badge/P--DESTRE_media-CC_BY--NC--SA_4.0-70b8ff)](docs/media/LICENSE.md)
 </div>
 
+EffiPed is a compact video-intelligence system that detects pedestrians, maintains
+camera-local tracks, and ranks cross-camera identity candidates for human review. Its
+React investigation console is available as a precomputed browser demo; the same workflow
+can connect to local FastAPI/CUDA inference when an authorized checkpoint is available.
+
 > [!IMPORTANT]
-> The hosted experience is a precomputed, non-commercial research demonstration. It ranks
-> appearance evidence for human review; it does not prove identity. Public model weights are
-> withheld while training-data redistribution terms remain unresolved.
+> Ranked matches are reviewable appearance evidence, not proof of identity. The hosted
+> experience is a precomputed, non-commercial research demonstration. Public model weights
+> remain withheld while training-data redistribution terms are unresolved.
 
-## The contest system
+## Try the identity-review demo
 
-EffiPed shares one compact ConvNeXt V2 feature hierarchy across three connected tasks:
-CenterNet-style pedestrian detection, BoT-SORT temporal association, and 256-D part-based
-descriptors for cross-camera candidate retrieval. RoIAlign divides each person into four
-body strips, CoordinateAttention weights visible evidence, and the analyst UI exposes the
-result as reviewable candidates rather than an automated identity verdict.
+The hosted UI restores the original PedestrianTracker workflow:
 
-| Verified contest evidence | Result |
-|---|---:|
-| P-DESTRE validation cross-camera Rank-1 | **62.8%** |
-| P-DESTRE test cross-camera Rank-1 | **61.3%** |
-| P-DESTRE validation / test detection mAP@0.5 | **90.74% / 88.4%** |
-| MOT17 val-half MOTA / IDF1 / HOTA | **64.08 / 74.24 / 61.34** |
-| Canonical Tier-1 footprint | **7.78M · ≈18 full-pipeline FPS** |
-
-The submitted poster is preserved as an archived contest artifact with its original
-`7.92M / 22 FPS / 62.8%` snapshot. The later canonical registry associates Tier-1 with
-`7.78M` parameters and approximately `18 FPS` for the full pipeline. The poster’s
-`+16.2 pp` row combined multiple configuration changes and is not presented as a pure
-part-only ablation. See [RESULTS.md](RESULTS.md).
-
-## From contest prototype to research
-
-```text
-EffiPed contest system
-  joint detection + four-strip descriptor + multi-camera review
-      │
-      ├── PartJDE matched readout study: +6.66 pp validation Rank-1
-      │
-      └── BoxJDE five-fold readout study:
-          +13.64/+12.94 pp source-level Rank-1/mAP
-          +13.31/+12.29 pp natural predicted-box
-          +13.01/+12.00 pp natural end-to-end
-```
-
-BoxJDE uses a constructed P-DESTRE per-date ablation, not official Task 4. Its complete
-code, evidence, and technical report live in the
-[BoxJDE Person Search repository](https://github.com/aswanth-07/boxjde-person-search).
-
-## Repository map
-
-```text
-src/effiped/          installable model, descriptor, tracker, runtime
-apps/api/             FastAPI local-GPU service and job lifecycle
-apps/web/             React/Vite portfolio + identity-review UI
-configs/contest/      contest and matched PartJDE configurations
-research/results/     the single evidence fixture
-research/report/      generated technical report
-docs/architecture/    editable PowerPoint + site exports
-docs/media/           optimized attributed demonstration media
-tools/ and tests/     release validation and regression tests
-```
-
-## Explore the Vercel-safe demo
+- a synchronized four-camera replay with tracker-rendered boxes;
+- indexed query crops and ranked cross-camera candidates;
+- camera scope, playback, frame stepping, and detection timelines;
+- a second replay containing the archived cross-camera association output;
+- responsive desktop and mobile review modes.
 
 ```bash
 cd apps/web
@@ -82,8 +38,48 @@ npm install
 npm run dev
 ```
 
-The demo supports camera switching, clickable tracks, query selection, confidence-grouped
-cross-camera candidates, timeline navigation, and evidence details without uploading video.
+No synthetic browser boxes are drawn over the footage. The boxes visible in the demo are
+the annotations rendered by the original tracking pipeline.
+
+## System
+
+One ConvNeXt V2 feature hierarchy supports CenterNet-style detection and a 256-D
+part-aware identity descriptor. RoIAlign extracts a person feature map, four horizontal
+body strips retain local appearance, and Coordinate Attention fuses the visible evidence.
+BoT-SORT combines motion, overlap, and appearance for local temporal association; the
+gallery then ranks possible cross-camera matches for an analyst.
+
+| Evaluation | Result |
+|---|---:|
+| P-DESTRE validation cross-camera Rank-1 | **62.8%** |
+| P-DESTRE test cross-camera Rank-1 | **61.3%** |
+| P-DESTRE validation / test detection mAP@0.5 | **90.74% / 88.4%** |
+| MOT17 val-half MOTA / IDF1 / HOTA | **64.08 / 74.24 / 61.34** |
+| EffiPed Tier-1 footprint | **7.78M · ≈18 full-pipeline FPS** |
+
+Each value has a protocol label in [RESULTS.md](RESULTS.md). The interactive replay is an
+application demonstration, not a benchmark run.
+
+## Architecture
+
+[![EffiPed end-to-end architecture](docs/architecture/effiped-architecture.svg)](docs/architecture/effiped-architecture.svg)
+
+The diagram is also available as an
+[editable PowerPoint](docs/architecture/effiped-architecture.pptx).
+
+## Repository map
+
+```text
+src/effiped/          installable model, descriptors, tracking, runtime
+apps/api/             FastAPI local-GPU service and job lifecycle
+apps/web/             React/Vite identity-review UI and hosted replay
+configs/system/       active EffiPed and matched PartJDE configurations
+research/results/     single source of truth for published evidence
+research/report/      generated technical report
+docs/architecture/    editable diagram source and web exports
+docs/media/           optimized, attributed demonstration media
+tools/ and tests/     validation, regression, and release checks
+```
 
 ## Run live inference locally
 
@@ -97,19 +93,14 @@ pip install -e ".[runtime]"
 effiped-app
 ```
 
-Place an authorized checkpoint in `EFFIPED_WEIGHTS_DIR`; the API reports unavailable
-weights cleanly when none is present.
-
-Containerized local runtime:
+Place an authorized checkpoint in `EFFIPED_WEIGHTS_DIR`. When none is present, the API
+reports the model as unavailable without exposing a local filesystem path.
 
 ```bash
-docker build -t effiped .
-docker run --gpus all --rm -p 127.0.0.1:8000:8000 \
-  -v /authorized/weights:/weights:ro -v effiped-runtime:/runtime effiped
+effiped-train --config configs/system/effiped-tier1.yaml
+effiped-eval --config configs/system/effiped-tier1.yaml
+effiped-demo
 ```
-
-The loopback-only host mapping keeps the review surface local while the container listens on
-its internal interface.
 
 | Variable | Purpose |
 |---|---|
@@ -118,14 +109,6 @@ its internal interface.
 | `EFFIPED_DEVICE` | `auto`, `cpu`, `cuda`, or `cuda:N` |
 | `EFFIPED_MAX_UPLOAD_MB` | per-video upload limit |
 | `EFFIPED_ALLOWED_ORIGINS` | comma-separated CORS allowlist |
-
-Commands:
-
-```bash
-effiped-train --config configs/contest/effiped-tier1.yaml
-effiped-eval --config configs/contest/effiped-tier1.yaml
-effiped-demo
-```
 
 ## Public API
 
@@ -138,22 +121,28 @@ effiped-demo
 - `DELETE /api/person-search/jobs/{job_id}`
 - `GET /api/assets/{asset_id}`
 
-Deleting a job removes uploaded video and all generated assets. Model metadata is portable
-and never exposes workstation paths.
+Deleting a job removes uploaded video and generated assets.
 
-## Reports, architecture, and responsible use
+## Research connections
 
-- [Editable architecture PowerPoint](docs/architecture/effiped-architecture.pptx)
-- [Technical report](docs/report/effiped-technical-report.pdf)
-- [Model card](MODEL_CARD.md)
-- [Award record](AWARD.md)
-- [Data and weight-release audit](DATA_LICENSES.md)
-- [Third-party notices](THIRD_PARTY_NOTICES.md)
+The later [BoxJDE Person Search](https://github.com/aswanth-07/boxjde-person-search)
+repository isolates the full-person descriptor readout and documents its five-fold
+P-DESTRE ablation. It is linked as related research; its code and report are not duplicated
+here.
 
-Software is © 2026 Aswanth Raj and licensed under Apache-2.0. P-DESTRE-derived media under
-`docs/media/pdestre/` is a separate CC BY-NC-SA 4.0 adaptation for this non-commercial
-showcase. Its [asset manifest](docs/media/ASSET_MANIFEST.json) records transformations and
-hashes. No source videos, datasets, person-level benchmark records, or checkpoints are included.
+## Licensing and responsible use
 
+Original software is © 2026 Aswanth Raj and licensed under Apache-2.0. P-DESTRE-derived
+media under `docs/media/pdestre/` is separately licensed as a CC BY-NC-SA 4.0 adaptation
+for this non-commercial showcase. The
+[asset manifest](docs/media/ASSET_MANIFEST.json) records the source, transformations,
+hash, purpose, and license for every derived asset.
+
+No dataset, source video, person-level benchmark record, checkpoint, or runtime crop is
+included.
+
+[Model card](MODEL_CARD.md) ·
+[Data and weight-release audit](DATA_LICENSES.md) ·
+[Third-party notices](THIRD_PARTY_NOTICES.md) ·
 [P-DESTRE paper](https://arxiv.org/abs/2004.02782) ·
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)

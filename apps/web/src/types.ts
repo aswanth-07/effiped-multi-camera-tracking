@@ -1,35 +1,38 @@
-export type Camera = {
+export type DemoVideo = {
   id: string;
   label: string;
-  position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
-  time: string;
+  description: string;
+  source: string;
+  poster: string;
 };
 
-export type Appearance = {
-  camera: string;
-  similarity: number;
-  bbox: [number, number, number, number];
+export type DemoCandidate = {
+  rank: number;
+  image: string;
+  score: number;
+  same_identity: boolean;
 };
 
-export type Subject = {
+export type DemoSubject = {
   id: string;
   label: string;
-  color: string;
-  appearances: Appearance[];
+  query_source: string;
+  gallery_source: string;
+  query_image: string;
+  candidates: DemoCandidate[];
 };
 
 export type ResultFixture = {
+  schema_version: number;
   project: {
     brand: string;
+    application: string;
     title: string;
     author: string;
-    guide: string;
-    award: string;
-    event: string;
-    track: string;
-    institution: string;
+    summary: string;
   };
-  verified_contest_system: {
+  system_benchmarks: {
+    model: string;
     pdestre: {
       validation: { protocol: string; rank1_cross: number; detection_map50: number };
       test: { protocol: string; rank1_cross: number; detection_map50: number };
@@ -43,14 +46,7 @@ export type ResultFixture = {
       descriptor_dim: number;
     };
   };
-  contest_submission_snapshot: {
-    reported_parameters_m: number;
-    reported_fps: number;
-    reported_rank1_cross: number;
-    composite_gain_pp: number;
-    note: string;
-  };
-  post_contest_evolution: {
+  research_extensions: {
     partjde: Record<string, string | number>;
     boxjde: Record<string, string | number>;
   };
@@ -58,10 +54,16 @@ export type ResultFixture = {
     id: string;
     title: string;
     description: string;
-    source_media: string;
-    cameras: Camera[];
-    subjects: Subject[];
-    session_diagnostic: Record<string, string | number>;
+    videos: DemoVideo[];
+    subjects: DemoSubject[];
+    session_diagnostic: {
+      cameras: number;
+      frames: number;
+      local_tracks: number;
+      cross_camera_ids: number;
+      pairwise_association_precision: number;
+      playback_fps: number;
+      label: string;
+    };
   };
 };
-

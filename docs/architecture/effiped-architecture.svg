@@ -69,7 +69,7 @@
   <circle cx="1450" cy="40" r="250" fill="#0e776f" opacity="0.07"/>
   <circle cx="1450" cy="40" r="150" fill="#d89b5b" opacity="0.045"/>
 
-  <g id="header" role="group" aria-label="Diagram title and award">
+  <g id="header" role="group" aria-label="Diagram title and scope">
     <text x="64" y="52" class="eyebrow">EFFIPED / SYSTEM ARCHITECTURE</text>
     <text x="64" y="99" class="headline">One shared visual backbone carries a person from pixels</text>
     <text x="64" y="140" class="headline">to reviewable cross-camera evidence.</text>
@@ -79,8 +79,8 @@
       <path d="M0 22 L22 0 H244 L266 22 V82 L244 104 H22 L0 82 Z" fill="#211a17" stroke="url(#bronze)" stroke-width="2"/>
       <circle cx="38" cy="52" r="22" fill="none" stroke="#d89b5b" stroke-width="2"/>
       <path d="M28 57 L36 65 L50 39" fill="none" stroke="#f0c082" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="73" y="45" style="font:700 21px Inter,'Segoe UI',Arial,sans-serif;fill:#f4d2a5">3RD PRIZE</text>
-      <text x="73" y="71" style="font:700 12px Inter,'Segoe UI',Arial,sans-serif;fill:#b99067;letter-spacing:1.5px">SIPC 2026 · VIT VELLORE</text>
+      <text x="73" y="45" style="font:700 19px Inter,'Segoe UI',Arial,sans-serif;fill:#b8fff6">IDENTITY REVIEW</text>
+      <text x="73" y="71" style="font:700 11px Inter,'Segoe UI',Arial,sans-serif;fill:#7ecfc5;letter-spacing:1.2px">DETECTION · TRACKING · RETRIEVAL</text>
     </g>
   </g>
 

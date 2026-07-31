@@ -1,16 +1,13 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "project": {
     "brand": "EffiPed",
+    "application": "EffiPed Identity Review",
     "title": "Multi-Camera Pedestrian Detection, Tracking & Re-Identification using Joint ConvNeXt V2 Architecture",
     "author": "Aswanth Raj",
-    "guide": "Sri Preethaa KR",
-    "award": "3rd Prize",
-    "event": "Student Innovation Project Contest 2026",
-    "track": "Vertical 1: AI & Intelligent Systems",
-    "institution": "VIT Vellore — School of Computer Science and Engineering (SCOPE)"
+    "summary": "A compact video-intelligence system that detects pedestrians, maintains camera-local tracks, and ranks cross-camera identity candidates for human review."
   },
-  "verified_contest_system": {
+  "system_benchmarks": {
     "model": "EffiPed Tier-1 / G_tier1",
     "pdestre": {
       "validation": {
@@ -38,15 +35,7 @@
       "descriptor_dim": 256
     }
   },
-  "contest_submission_snapshot": {
-    "status": "archived_as_submitted",
-    "reported_parameters_m": 7.92,
-    "reported_fps": 22,
-    "reported_rank1_cross": 62.8,
-    "composite_gain_pp": 16.2,
-    "note": "The poster snapshot is preserved as the contest artifact. The canonical registry associates Tier-1 with 7.78M parameters and approximately 18 full-pipeline FPS; the 16.2-point row combines multiple configuration changes and is not presented as a pure part-only ablation."
-  },
-  "post_contest_evolution": {
+  "research_extensions": {
     "partjde": {
       "label": "PartJDE P2 composed",
       "matched_part_readout_gain_pp": 6.66,
@@ -55,7 +44,7 @@
       "detection_map50": 90.79,
       "parameters_m": 7.92,
       "fps": 27.0,
-      "protocol": "P-DESTRE fold-0 validation; separate post-contest PartJDE study"
+      "protocol": "P-DESTRE fold-0 matched part-readout study"
     },
     "boxjde": {
       "label": "BoxJDE full-person readout",
@@ -72,61 +61,81 @@
     }
   },
   "demo_case": {
-    "id": "SIPC-2026-DEMO-03",
-    "title": "Four-camera identity handoff review",
-    "description": "A precomputed, non-commercial research replay adapted from a P-DESTRE four-camera session.",
-    "source_media": "/media/pdestre/contest-four-camera.jpg",
-    "cameras": [
-      {"id": "C1", "label": "Camera 1 · entrance", "position": "top-left", "time": "00:05.1"},
-      {"id": "C2", "label": "Camera 2 · road", "position": "top-right", "time": "00:06.4"},
-      {"id": "C3", "label": "Camera 3 · south path", "position": "bottom-left", "time": "00:08.8"},
-      {"id": "C4", "label": "Camera 4 · east path", "position": "bottom-right", "time": "00:11.2"}
+    "id": "EFFIPED-DEMO-SESSION-3",
+    "title": "Four-camera identity review session",
+    "description": "A precomputed, non-commercial replay built from the original PedestrianTracker application outputs.",
+    "videos": [
+      {
+        "id": "tracking",
+        "label": "All local tracks",
+        "description": "Four synchronized camera views with detector and tracker annotations rendered by the original pipeline.",
+        "source": "/media/pdestre/multi-camera-tracking.webm",
+        "poster": "/media/pdestre/four-camera-tracking.jpg"
+      },
+      {
+        "id": "cross-camera",
+        "label": "Cross-camera matches",
+        "description": "The same session filtered to tracks associated across camera views.",
+        "source": "/media/pdestre/cross-camera-matches.webm",
+        "poster": "/media/pdestre/cross-camera-matches.jpg"
+      }
     ],
     "subjects": [
       {
-        "id": "S-38",
-        "label": "Selected subject",
-        "color": "#24e6bd",
-        "appearances": [
-          {"camera": "C1", "similarity": 1.0, "bbox": [51, 40, 10, 33]},
-          {"camera": "C2", "similarity": 0.91, "bbox": [37, 31, 10, 40]},
-          {"camera": "C3", "similarity": 0.86, "bbox": [31, 46, 11, 38]},
-          {"camera": "C4", "similarity": 0.82, "bbox": [57, 49, 10, 35]}
+        "id": "10385",
+        "label": "Blue shirt",
+        "query_source": "S3_C3",
+        "gallery_source": "S3_C4",
+        "query_image": "/media/pdestre/id-10385-query.webp",
+        "candidates": [
+          {"rank": 1, "image": "/media/pdestre/id-10385-rank1.webp", "score": 0.998, "same_identity": true},
+          {"rank": 2, "image": "/media/pdestre/id-10385-rank2.webp", "score": 0.998, "same_identity": true},
+          {"rank": 3, "image": "/media/pdestre/id-10385-rank3.webp", "score": 0.998, "same_identity": true},
+          {"rank": 4, "image": "/media/pdestre/id-10385-rank4.webp", "score": 0.997, "same_identity": false}
         ]
       },
       {
-        "id": "S-12",
-        "label": "Possible candidate",
-        "color": "#e8a94d",
-        "appearances": [
-          {"camera": "C1", "similarity": 0.58, "bbox": [68, 45, 10, 35]},
-          {"camera": "C2", "similarity": 0.54, "bbox": [55, 39, 9, 37]}
+        "id": "10380",
+        "label": "Striped shirt",
+        "query_source": "S3_C4",
+        "gallery_source": "S3_C3",
+        "query_image": "/media/pdestre/id-10380-query.webp",
+        "candidates": [
+          {"rank": 1, "image": "/media/pdestre/id-10380-rank1.webp", "score": 0.999, "same_identity": true},
+          {"rank": 2, "image": "/media/pdestre/id-10380-rank2.webp", "score": 0.999, "same_identity": true},
+          {"rank": 3, "image": "/media/pdestre/id-10380-rank3.webp", "score": 0.999, "same_identity": true},
+          {"rank": 4, "image": "/media/pdestre/id-10380-rank4.webp", "score": 0.995, "same_identity": false}
         ]
       },
       {
-        "id": "S-27",
-        "label": "Low-confidence candidate",
-        "color": "#ff6a76",
-        "appearances": [
-          {"camera": "C2", "similarity": 0.34, "bbox": [71, 47, 9, 33]},
-          {"camera": "C4", "similarity": 0.29, "bbox": [72, 41, 9, 34]}
+        "id": "10354",
+        "label": "Red backpack",
+        "query_source": "S2_C5",
+        "gallery_source": "S2_C4",
+        "query_image": "/media/pdestre/id-10354-query.webp",
+        "candidates": [
+          {"rank": 1, "image": "/media/pdestre/id-10354-rank1.webp", "score": 0.999, "same_identity": true},
+          {"rank": 2, "image": "/media/pdestre/id-10354-rank2.webp", "score": 0.999, "same_identity": true},
+          {"rank": 3, "image": "/media/pdestre/id-10354-rank3.webp", "score": 0.998, "same_identity": false},
+          {"rank": 4, "image": "/media/pdestre/id-10354-rank4.webp", "score": 0.998, "same_identity": false}
         ]
       }
     ],
     "session_diagnostic": {
       "cameras": 4,
       "frames": 150,
+      "local_tracks": 367,
       "cross_camera_ids": 45,
       "pairwise_association_precision": 0.77,
-      "label": "Curated session diagnostic — not a benchmark"
+      "playback_fps": 10,
+      "label": "Archived application output diagnostic; not a benchmark"
     }
   },
   "provenance": {
-    "contest_registry": "Original private research workspace: docs/RESULTS_REGISTRY.md",
-    "contest_poster": "PedestrianTracker/docs/A3_Project_Poster.pptx",
+    "demo_runtime": "Original PedestrianTracker cross_camera_demo/session_3_4cam outputs",
+    "technical_registry": "Private research workspace documentation",
     "boxjde_fixture": "boxjde-person-search/research/results/summary.json",
     "contains_local_paths": false,
     "contains_person_level_benchmark_records": false
   }
 }
-

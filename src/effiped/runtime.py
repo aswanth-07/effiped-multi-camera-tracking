@@ -95,12 +95,12 @@ def _torch_load(path: str | Path):
         return torch.load(path, map_location="cpu")
 
 
-def load_contest_model(
+def load_effiped_model(
     preset: RuntimePreset,
     device: torch.device,
     allow_checkpoint_mismatch: bool = False,
 ):
-    """Build the contest JDENet model and load an authorized checkpoint."""
+    """Build the EffiPed JDENet model and load an authorized checkpoint."""
     if not preset.config_path.is_file():
         raise FileNotFoundError(f"Missing config: {preset.config_path}")
     if not preset.checkpoint_path.is_file():
@@ -186,7 +186,7 @@ class EffiPedRuntime:
     def ensure_loaded(self, preset: RuntimePreset):
         if self.model is not None and self.preset_key == preset.key:
             return
-        self.model, self.config, self.checkpoint = load_contest_model(preset, self.device)
+        self.model, self.config, self.checkpoint = load_effiped_model(preset, self.device)
         self.preset_key = preset.key
         self.img_size = tuple(self.config.get("data", {}).get("img_size", [1088, 608]))
         self.mean = torch.tensor([0.485, 0.456, 0.406], device=self.device).view(1, 3, 1, 1)

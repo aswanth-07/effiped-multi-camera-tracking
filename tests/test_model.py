@@ -10,7 +10,7 @@ from effiped.model import build_jdenet_from_config
 
 @pytest.fixture(scope="module")
 def compact_config():
-    config = yaml.safe_load(Path("configs/contest/effiped-tier1.yaml").read_text(encoding="utf-8"))
+    config = yaml.safe_load(Path("configs/system/effiped-tier1.yaml").read_text(encoding="utf-8"))
     config = deepcopy(config)
     config["model"]["pretrained"] = False
     config["model"]["use_dcn"] = False
