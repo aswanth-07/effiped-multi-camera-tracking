@@ -1,0 +1,560 @@
+/* ============================================================================
+   Workbench — six-tab console mirroring the Gradio application layout.
+   Replaces the previous identity-review DemoConsole.
+   ========================================================================== */
+
+.workbench {
+  max-width: 1400px;
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+  scroll-margin-top: 5rem;
+}
+
+.wb-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 1.75rem 0 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.wb-header h2 {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 0 0 0.35rem;
+}
+.wb-header p {
+  color: var(--muted);
+  margin: 0;
+  max-width: 54ch;
+  font-size: 0.94rem;
+}
+
+.wb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.wb-chips > div {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.8rem;
+  min-width: 8.5rem;
+}
+.wb-chips span {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.wb-chips strong {
+  display: block;
+  font-size: 0.86rem;
+  margin-top: 0.15rem;
+  color: var(--text);
+}
+
+.wb-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 1.25rem 0 0;
+  border-bottom: 1px solid var(--line);
+}
+.wb-tabs button {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.7rem 1rem;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.wb-tabs button:hover {
+  color: var(--text);
+}
+.wb-tabs button.active {
+  color: var(--accent-bright);
+  border-bottom-color: var(--accent);
+}
+
+.wb-panel {
+  padding-top: 1.5rem;
+}
+.wb-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.wb-row {
+  display: grid;
+  gap: 1.25rem;
+}
+.wb-row--split {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 1060px) {
+  .wb-row--split {
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 2fr);
+  }
+}
+.wb-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+/* Selecting a person scrolls here; clear the sticky site nav. */
+.wb-results-anchor {
+  scroll-margin-top: 5rem;
+}
+
+.wb-lede {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------- inputs */
+
+.wb-slot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.wb-slot {
+  margin: 0;
+  background: var(--surface-2);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.wb-slot figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+.wb-slot figcaption small {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 12ch;
+}
+.wb-slot video,
+.wb-slot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+}
+
+.wb-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.wb-field select {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.86rem;
+  padding: 0.55rem 0.65rem;
+}
+
+.wb-accordion {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.wb-accordion > button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  padding: 0.65rem 0.75rem;
+}
+.wb-accordion > button svg {
+  transition: transform 0.15s ease;
+  color: var(--accent);
+}
+.wb-accordion[data-open="false"] > button svg {
+  transform: rotate(-90deg);
+}
+.wb-accordion__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 0.25rem 0.75rem 0.85rem;
+}
+
+.wb-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.wb-slider__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.wb-slider__head output {
+  color: var(--accent-bright);
+  font-family: var(--mono);
+}
+.wb-slider__scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.64rem;
+  color: var(--faint);
+  font-family: var(--mono);
+}
+.wb-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- run */
+
+.wb-run {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.wb-run__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #04120f;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.65rem 1rem;
+  transition: filter 0.15s ease;
+}
+.wb-run__button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+.wb-run__button:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+.wb-run__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.wb-run__progress small {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-family: var(--mono);
+}
+.wb-run__bar {
+  height: 4px;
+  background: var(--surface-3);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.wb-run__bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.08s linear;
+}
+
+/* ------------------------------------------------------------ outputs */
+
+.wb-output {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.wb-output > header {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.wb-output__body {
+  padding: 0.75rem;
+}
+.wb-output__body > video,
+.wb-output__body > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #000;
+}
+.wb-output__body pre {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.wb-placeholder {
+  margin: 0;
+  color: var(--faint);
+  font-size: 0.82rem;
+  font-style: italic;
+}
+.wb-caption {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-family: var(--mono);
+}
+.wb-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.6rem 0 0;
+  color: var(--faint);
+  font-size: 0.76rem;
+}
+.wb-image-out {
+  border-radius: 6px;
+}
+
+.wb-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.75rem;
+  font-size: 0.76rem;
+}
+.wb-table th,
+.wb-table td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.wb-table th {
+  color: var(--faint);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  letter-spacing: 0.05em;
+}
+.wb-table td {
+  font-family: var(--mono);
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------- galleries */
+
+.wb-gallery {
+  display: grid;
+  gap: 0.5rem;
+}
+.wb-gallery--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.wb-gallery--4 {
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  max-height: 520px;
+  overflow-y: auto;
+}
+.wb-gallery--5 {
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+}
+
+.wb-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.wb-tile:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.wb-tile.is-selected {
+  border-color: var(--accent-bright);
+  box-shadow: inset 0 0 0 1px var(--accent-bright);
+}
+.wb-tile img {
+  display: block;
+  width: 100%;
+  height: 116px;
+  object-fit: contain;
+  background: #05080c;
+}
+.wb-tile--frame img,
+.wb-tile--frame canvas {
+  height: auto;
+}
+.wb-tile__cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.3rem 0.4rem;
+  border-top: 1px solid var(--line);
+}
+.wb-tile__cap strong {
+  font-size: 0.7rem;
+  color: var(--text);
+  font-family: var(--mono);
+}
+.wb-tile__cap small {
+  font-size: 0.62rem;
+  color: var(--faint);
+}
+
+.wb-tile--match.is-cross {
+  border-left: 2px solid var(--accent);
+}
+.wb-tile--match.is-same {
+  border-left: 2px solid var(--warning);
+}
+.wb-score {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  z-index: 1;
+  background: rgba(7, 10, 15, 0.82);
+  border-radius: 4px;
+  color: var(--accent-bright);
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  padding: 0.12rem 0.3rem;
+}
+
+.wb-crop-lg {
+  display: block;
+  max-height: 300px;
+  width: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+  background: #05080c;
+}
+
+/* --------------------------------------------------------- frame view */
+
+.frame-view {
+  position: relative;
+}
+.frame-view canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: #05080c;
+}
+.frame-view__note {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(7, 10, 15, 0.6);
+  border-radius: 6px;
+  color: var(--faint);
+  font-size: 0.75rem;
+}
+
+/* -------------------------------------------------------------- misc */
+
+.wb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--muted);
+}
+.wb-empty strong {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.wb-empty span {
+  font-size: 0.84rem;
+  max-width: 52ch;
+}
+.wb-empty svg {
+  color: var(--accent);
+}
+
+.wb-provenance {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin: 0;
+  color: var(--faint);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.wb-provenance svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.wb-prose {
+  max-width: 76ch;
+}
+.wb-prose h3 {
+  font-family: var(--display);
+  font-size: 1.02rem;
+  margin: 1rem 0 0.4rem;
+}
+.wb-prose p,
+.wb-prose li {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+.wb-prose ul {
+  padding-left: 1.1rem;
+}
+.wb-prose strong {
+  color: var(--text);
+}

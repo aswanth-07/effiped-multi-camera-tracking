@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 
 import { Architecture } from "./components/Architecture";
-import { DemoConsole } from "./components/DemoConsole";
 import { LiveConsole } from "./components/LiveConsole";
+import { Workbench } from "./components/Workbench";
 import { results } from "./data/results";
 
 const repository = "https://github.com/aswanth-07/effiped-multi-camera-tracking";
@@ -96,7 +96,7 @@ function App() {
           </div>
         </header>
 
-        {mode === "live" ? <LiveConsole /> : <DemoConsole />}
+        {mode === "live" ? <LiveConsole /> : <Workbench />}
 
         <section className="content-section" id="architecture">
           <div className="section-heading">

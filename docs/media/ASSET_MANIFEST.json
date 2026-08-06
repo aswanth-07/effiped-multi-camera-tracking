@@ -10,28 +10,28 @@
     {
       "path": "pdestre/multi-camera-tracking.webm",
       "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
-      "transformations": "Full 15-second replay resized from 1920×1080 to 960×540 at 10 FPS; VP9 CRF 42; audio removed; original detector and tracker overlays retained",
+      "transformations": "Full 15-second replay resized from 1920\u00d71080 to 960\u00d7540 at 10 FPS; VP9 CRF 42; audio removed; original detector and tracker overlays retained",
       "purpose": "Interactive all-local-tracks replay in the identity-review console",
       "sha256": "73e4b0348018aa48b0181e32a507f72ee584a9e4bb22f60ecd57259c3a59962f"
     },
     {
       "path": "pdestre/cross-camera-matches.webm",
       "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
-      "transformations": "Full 15-second replay resized from 1920×1080 to 960×540 at 10 FPS; VP9 CRF 42; audio removed; original cross-camera overlays retained",
+      "transformations": "Full 15-second replay resized from 1920\u00d71080 to 960\u00d7540 at 10 FPS; VP9 CRF 42; audio removed; original cross-camera overlays retained",
       "purpose": "Interactive cross-camera association replay in the identity-review console",
       "sha256": "98efec988e57a81e9560c7b6b9ea896174057ee2923ec64d8f676c637e2ab511"
     },
     {
       "path": "pdestre/four-camera-tracking.jpg",
       "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
-      "transformations": "Frame selected at 00:06 and resized to 1600×900; original tracker annotations retained",
+      "transformations": "Frame selected at 00:06 and resized to 1600\u00d7900; original tracker annotations retained",
       "purpose": "Poster frame for the all-local-tracks replay",
       "sha256": "6ba64f8ddd5636a3046d139eca2ce75743678dae88e59ee47007a2b837b483b1"
     },
     {
       "path": "pdestre/cross-camera-matches.jpg",
       "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output",
-      "transformations": "Frame selected at 00:06 and resized to 1600×900; original cross-camera annotations retained",
+      "transformations": "Frame selected at 00:06 and resized to 1600\u00d7900; original cross-camera annotations retained",
       "purpose": "Poster frame for the cross-camera association replay",
       "sha256": "266e024efe217b59e5ae81049c38bff281506de475c7cea392962625f235cb2d"
     },
@@ -139,6 +139,1777 @@
       "transformations": "Cropped the ID 10354 rank-4 result and encoded as WebP quality 84",
       "purpose": "Interactive ranked distractor",
       "sha256": "488c95b844f831c55705644c27accd3adc1906d9b54421d7cb4d1c0b21eacfa2"
+    },
+    {
+      "path": "pdestre/session3/cam1-source.webm",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Unaltered 15-second 960x540 10 FPS view re-encoded to VP9 CRF 50; audio removed",
+      "purpose": "Pre-attached source clip for camera 1 in the workbench demo",
+      "sha256": "1a4cee55870a8fc65df257d96e61c7c88a66511c78fe56441ca58b3b5396d47e"
+    },
+    {
+      "path": "pdestre/session3/cam1-tracked.webm",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Cropped the 960x540 quadrant for sequence 1 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
+      "purpose": "Single-camera tracked output for camera 1",
+      "sha256": "af56e2e54bfebf45aef29174710c45273895da032236c652faad6125082b8b02"
+    },
+    {
+      "path": "pdestre/session3/cam1-poster.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Frame at 00:06 from the sequence 1 quadrant, resized to 640 px wide and encoded as WebP",
+      "purpose": "Poster frame for the camera 1 clips",
+      "sha256": "31f649d5883c0dbe3d95778131497c403894f5bd1b90db837a048805730dc893"
+    },
+    {
+      "path": "pdestre/session3/cam2-source.webm",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Unaltered 15-second 960x540 10 FPS view re-encoded to VP9 CRF 50; audio removed",
+      "purpose": "Pre-attached source clip for camera 2 in the workbench demo",
+      "sha256": "36a06d6de43180d50cbd33e0368c179413d231786c73794176c949057cefe518"
+    },
+    {
+      "path": "pdestre/session3/cam2-tracked.webm",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Cropped the 960x540 quadrant for sequence 2 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
+      "purpose": "Single-camera tracked output for camera 2",
+      "sha256": "8be8913648d42d424408833ed63bc61283e7576a5a62b78edb3fbb76e3fa00a5"
+    },
+    {
+      "path": "pdestre/session3/cam2-poster.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Frame at 00:06 from the sequence 2 quadrant, resized to 640 px wide and encoded as WebP",
+      "purpose": "Poster frame for the camera 2 clips",
+      "sha256": "d85d136e69008b7755e7e30649f1bbe1c49829d4e55dd4f603e8f327924b5873"
+    },
+    {
+      "path": "pdestre/session3/cam3-source.webm",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Unaltered 15-second 960x540 10 FPS view re-encoded to VP9 CRF 50; audio removed",
+      "purpose": "Pre-attached source clip for camera 3 in the workbench demo",
+      "sha256": "5584fe150c599bb63b8dc9cd6847765285a7061e0a37a0665d9d5c5e7cea3c2e"
+    },
+    {
+      "path": "pdestre/session3/cam3-tracked.webm",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Cropped the 960x540 quadrant for sequence 3 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
+      "purpose": "Single-camera tracked output for camera 3",
+      "sha256": "0b5b114ce115bebb20910d3a719a159fb2201f5b5f68c1f71941cb4673074695"
+    },
+    {
+      "path": "pdestre/session3/cam3-poster.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Frame at 00:06 from the sequence 3 quadrant, resized to 640 px wide and encoded as WebP",
+      "purpose": "Poster frame for the camera 3 clips",
+      "sha256": "db05ed3f9df91259a42ba805ed948b2351f486e8fe53452130e61bc5410b1de4"
+    },
+    {
+      "path": "pdestre/session3/cam4-source.webm",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Unaltered 15-second 960x540 10 FPS view re-encoded to VP9 CRF 50; audio removed",
+      "purpose": "Pre-attached source clip for camera 4 in the workbench demo",
+      "sha256": "1a642bf664b87ec58b6445bd008612bb610178c985451a14bb64ff26c237f2df"
+    },
+    {
+      "path": "pdestre/session3/cam4-tracked.webm",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Cropped the 960x540 quadrant for sequence 4 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
+      "purpose": "Single-camera tracked output for camera 4",
+      "sha256": "0eef983ba4f7c2a7c4aab3aa1b348b88f4cac65fa813688731c781d63a9ceada"
+    },
+    {
+      "path": "pdestre/session3/cam4-poster.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Frame at 00:06 from the sequence 4 quadrant, resized to 640 px wide and encoded as WebP",
+      "purpose": "Poster frame for the camera 4 clips",
+      "sha256": "bc7bdd0d44add3bf58da671d4c378237e56967affb268952b033609ec9210b3c"
+    },
+    {
+      "path": "pdestre/session3/detection-input.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Frame at 00:06 encoded as WebP quality 85; no annotations",
+      "purpose": "Input image for the image-detection panel",
+      "sha256": "b692eb23e5a2e1d4399829ee147fd4f317031679b0c94e0e162588f051cb8c49"
+    },
+    {
+      "path": "pdestre/session3/detection-output.webp",
+      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
+      "transformations": "Frame at 00:06 from the sequence 1 quadrant encoded as WebP quality 85; original detector annotations retained",
+      "purpose": "Annotated result for the image-detection panel",
+      "sha256": "113f8ccc193a33edea8cd38aafa5f8990f2d4ce1afee12121f131a6524a35c03"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t163_4ced6ea8b3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "20f452970f4f1e08d6bb16c4985e697f772cde9465643233ca53dbd6a0592759"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t163_506d9d6f5f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6b94bd3340a4a544392e56a16d18571265839f47c6676610af2e7250f338f3f0"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t163_5a91e1ca96_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e441b11788be66e69ec3abf79b93d879f3df5bbd35b314df91e6cb7eef5b9de0"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t163_c845f72eed_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "0bd5fb7363881c06e520e7c0da5944a8d59e663af6a6cccf1541816bb82c71ca"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t163_c87d7dd592_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3fcd7903bf361c620f22b7a44de8c8ae7bd87f4dd6e262f5bc18293552c8420d"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t163_fc0cb3cc63_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "35aabdf9fe5040b57ce208ff4f2416604f7ce414d72dabf8e215f32e95bfa720"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t187_08339d1902_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a01d91bcc35a0f48610f9d0e5ff979bfc87989e5e4f4443ded84bfa3234018a3"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t187_21a10864b9_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "94568e12883d5ccf5f1b167fdaa6a6d854754deb334f6fa7ce15a7d417908d8c"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t187_6b7d39f890_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "1f49bb1cca609ce5430862e4e47b76c128a4e5b9cda00fa3332315b7dfa847b6"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t187_789a3ad3b7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "81cc680f939026cc4dafd69560a06a73124eebe5b9b973202ff7f71d6e353b71"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t187_b4fff4c8f7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e81241a17683b9ce4bc989ae5f03d52632627ab015b9d64350cf07c2594ec048"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t187_c92c6156ca_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2046568f04598babd74b3b40f3859bda45eaf7027e7965f5dd1bf71a4c2ffc98"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t2_1eadb9ec20_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "70418788299141445b451ce4a131f29ead203223adbb7d3ba4da2018fb6919c0"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t2_2a91b04e1e_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4e884850adf981f3782c1753f95d704b03960d462dbee47868a79691b5e84fb9"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t2_434b59f0ee_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ac57807ddd3e42d819c122142470aea93b2042e5fc89a5d5bf20822cc0111a44"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t2_69c43deb38_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8351860d27e17261a79027d06a1772a73cce9f080769185349cb8cdf99ed53d7"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t2_c6263d29d1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "f20926a332b92f1d40225255610dc653168e37befe9afa63ef5a1c94bac30b47"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t2_f5d113e2c4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "afb7c9f72780c161944d8c69f75e0a6df629b3c175b99385ce933a373501d8ac"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t34_0dbe0db6d1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "84524740d8fafcecbc3fef48b8484753bb355963e24160d37f3348a98be4e89a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t34_2e84a0ef5e_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b5907743c37ef965c24917f695f0c532e54c102fd4397f509e98baaac60637e9"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t34_711545f1d1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "346988a1607259f5f23e5eb7bb54eb48175ac26c5aa89da2921d8c771ea8a512"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t34_766380b877_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "1c25610dd811880ed1de8aae6797e944ff1a4741b8ebd5d7329b6bc71b11721c"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t34_eb29d4ba10_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3a535fd7083ff41daca8858b2fd379814411b74076f6b6f906386d76f09c7bb9"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t34_ef00724840_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "417d0f6ff30557e4b0cd2feb345987013d5312c9fcb06913972bbffd6a34b6cf"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t45_0b677a695d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "0b1683b5c1562ef37cdf0496bf637416f8f6117a4db1ec0b677c9cf7e8a8baf7"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t45_1d416f323f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c3e4ba6f3b3eaa97e9a3d34a6ea06bb28a16eaf66dd57bcf231779a31cc3c5a9"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t45_63cf53ebda_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ac30960d43daf24496ea963286182dd1fb43ea03e8be58d3b239669f1f3ca3c9"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t45_7ee27806e4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2ce9042147962f55c5344294fc346e881d8f6e8169531dd980db20169e3dfcf7"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t45_835b0c210c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b842d8bb152d220065b86f956a03a7d6cf3991100ab4ffee4d17a893cdf17f73"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t45_dbe40b2b77_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "77de5622c94d718072446576a4ee68f04b6dcfe381d30499fbc42f603654e4d3"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t4_15255462da_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7ba4cf3be68e2e709c80e2acbea0f16c105bd8d9aafbcd8018056546ffb20a18"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t4_2cfe1cefc7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "300390b596cb9af915ea5a72b8b166964d25f74c3bb7ef17a5da3c5046197f24"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t4_628cb86c89_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b36225b0a2457e116d78fe0297be1b5a284e8a2bfa806c829c72b825ab571433"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t4_69ad9cf0d7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d9582e8f5cef748ad509fd5b5571c56564aba1409360c278ddaadaa4751ba4f5"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t4_7616781eaf_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e5649dce6704150b1a25090a70aa5fd666ffb5a77091379d3fae4a9565221e26"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t4_eadc7698a0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a54acda9d9229863d48636b9829105925cf2095aa595d75a49095929d3317763"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t67_0b2e3abce7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "29c596e0a0879210b2cdabc77592d6c064dcde5da03f1fedfdd0771487efbfcc"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t67_0b723a6f1f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "12b5900dab729a5664f766e4b22ace21610375756b34694b89308fa0fd1379f3"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t67_445439b4f9_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c795935ee5a37dee7d009a9b567f71328e7affcdfd0c750320e52b0a1b020f71"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t67_537fd8ed50_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3bf638ea4777c634fe4325dfc68a756f79fdd5077abd20c73ce7ab8a7b70121a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t67_a2da9ab187_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d3c42fc2d6cf53835cd747684ac3d8817fc8d33b6cc7819903e6326d7989c230"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t67_e8cbc223bb_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5d191820f2274e3af77d0956e0f3555562904fc9c515dcfd1a859fa0f0a70550"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t72_0e1bb37285_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "108edac67c556f270abe43a3b5e4f32cafaa0726597360bc8c190dfaf53e573a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t72_25fdb10e2c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4159855f6174cbfb1b9c45903f3ca2fe8ecb290cb781a2e380adf47a974d4768"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t72_861ac72a57_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c8eb424b01c4dea832053b449d26d6eac10408125cdb88579df898f8193d1a8a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t72_8e0718d044_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a2995ba703a78ae768b8e9fa1730a395ff82f79e07c5b2057f53b00cb8ac7e44"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t72_8fb38e1a98_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "03d24b9b1471639ab192bd6404714ac28c89d1fc45b195d6c1e44b93916b4ac1"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t72_bf5764f96f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3d495d2bc586d6ab3efc2d49e20c77d53f3fad6b4dfd5f702c2763f619bd17bf"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t83_46101848c7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "f1378ba22688bf63307e1be802e8d98a1958f718ab1641e501151578d989575a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t83_5660e16070_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "60cf65e070c2df5c0e0a7e38e22fccdb3b20184648c2f25610eeb3ee2810dc71"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t83_71eb4411a4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "84bf7a426606ce4c9d413c42ddf6615df25d05ecf52601dc52c07fc297a9668a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t83_a518461c01_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2a10e7741c0778b4f59ecafbbb397d8765e8ace18a8544aaa7122ff99436c805"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t83_f25575c6b5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "91359572b3b99305befc149303a98e56b32e186ba01a5364905981a43ae00150"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t83_fdad2ba51a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "21d5f8f3dded437c2018af72b8ac5b917f12af8134c94631c64e1faaff59b4ab"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t84_081462d5d3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a2e06a6af5535bd31c9ab01db079ecfb1810486ee25b50fe13b33d20cb8e8e46"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t84_18ffb8c57b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4dfb8205a3486e7417fee246bdd2b3e9e31cefe9ba27cb3656cf558aa2fa295b"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t84_2366b93784_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "79e756a10ea5b04ea6bd96644163dd7b39afdfff8fcadb4d8256da9317f327d4"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t84_46c33cd6a7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "801db9ba881081a13802fed213bfa426127010c9eb9faa61259219cb7ac8d59a"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t84_71369ee7bb_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "bc89bf8032b9f14b3cdfcbf245c1e848fe855386dfc83dd9a04cf232e0f0f88d"
+    },
+    {
+      "path": "pdestre/session3/crops/v0_t84_de33af6bc1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "61c8f94e08f4ab60e0ca1ac7a7020c088924d87639a263b8f4f6421f15e2ee6c"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t12_05ca8d3cb7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4291ca409d58ae2d4657651277600886458069b0d3c4450e4cf6c8633e65c7d3"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t12_0a50cb7789_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "423bdbda736c0a75f6cfdd6fd1de024cb4a8a1259411e8efd6bc24c6922ddb1c"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t12_0c3d7c2d24_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "08b85a0d5d6e1949be0f83c01ec80dcf88dfd026966dddb765fda6ba50646b78"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t12_2eeab4bb37_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a67c9d751c17febbbf10e6a850293612a7d67123b2157be1ac85e9fe203be2c4"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t12_456b2cf266_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "0d1a06e1fe15ef371e47de034822b389e7d5498f00c3641f9c2d526f5f7e58cd"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t12_cd4878a1c1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4f1a1f83c7b08b1da93fe5fb623506fdc83fcc9f357008eb19688819bfe84f03"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t13_171b8b404c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6e3bb37b11cec1c7a8bab0d5df50698802241c1265414fb98782f0aae3cb8890"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t13_2d8ebf8b29_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3865799ad2135fb778778c6d174592fdb70f34fa7550ac788be2721ffc9d8564"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t13_70c1aca331_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "de5ed09c3cc02062cf85ec4d63bc0654870dcbf7f00d30391d9cb8c771bf4711"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t13_8092da42a8_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9d52de501f4163872247930639d6528aea9aeaa75406e73153cf65e8e2e64bd7"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t13_af557ffdd2_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5dce4ac24bcef23b4d5c386422433a4725f1747866fb2348f85a0de686204c19"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t13_e9bccdb13a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e5e6317f75bbc401686858ec6941255d949da684325473d7c8570583be44156a"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t35_48b9b89fe0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "61145cf3778b5074cbb405bd357886afd600379d8bc101cc7385d6355e233806"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t35_a188b14675_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "908bd33fbe3111bfe6e1f8cfb5ada25ed58b735e0f6d809305930ca729d61ea4"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t35_e38d9885d7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "af43a74c311bfa0d71078641041c35bee90cc2de1cc0b2b3e933bb710e6e426c"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t35_e534599413_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6d20aa971d08f64f857a82b271d5693476ab20c5b437608b1e8eaa5cdbc4923d"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t35_e65d392450_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b4ffa5d93ec44756288668a8864e333ba9147ee6cf81bff83f024de10df2d0c4"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t35_ff11c43fd5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "549a3461e5c0bcaf38de61ac27014720ebf9c0504a8d8650670a89fa26fca3a3"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t36_0ef2b1d9f3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3d863838fbad44a076188d93dcdc6d1faa341da39b76407153c547b8bac023f9"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t36_5ee4c833ab_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "14f4c99cf8cc0c58c0c487b73a85aaab42530a25668216612eb27b9524a60188"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t36_89bd76f564_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "fb98b03ca6e41caab4966ea21e51649d81706a5c22d6450f75ded0a6c1d0d1c2"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t36_debf7339d0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c22b12c281f6d146fc034737333b36fb0291044f176a10615426b2ed98c77aeb"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t36_eb3d6197e3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "f9b1a2ba4938dcec3ed16ddcc970e8ea66f7824cac3a976df8585da1cafa4ddc"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t36_fa9fbddeb7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7daab1b41e640285fb43d71d256fe7e49ba02bf686bb0fe6773caac40e3bd1ea"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t37_40a6f9872d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "257b94a3509bf854f9f77b149b4dc792a76428792b52a9d75e60f158d7bafac9"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t37_7342760340_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "dd09ffd3ca6691961d4ff1d8fbfff45470b62c373865c1f7aca59ff19394dd85"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t37_d86ebc23cf_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a315a70baed4386d2c69b5ab9ee4473806926d6f79cc793699b6ae711674f0ee"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t37_dd22b1f7ae_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "1a4dfeda57fec4d2126d0529a15b581b054aa5c750e72f7b465d8eef52b408c0"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t37_f1bdc7f228_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c4c815b1310f00ec145ffe216eb6c5c9d7d65260b206a54b47b6b2f87b56254d"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t37_fa83de1024_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "714a7654c050ebc5a2ec590dc400b4e71a8c7f8c56543fe5c60baca7037aa44e"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t64_0eb5ece271_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "439559b3d1c4cb94d29dcd96088a448140d45583d06e79de9c08cdcf87bb225c"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t64_3346f7ab9b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "751a55385a1d15e1d7a27814147afedeb5df0caf79bcc2b695cb6eb4f1eccf35"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t64_645da44db5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a8007aebcd316e1f2ca94ffdda304f47c1849bdb14abd0fb11852d8f9ab8e86f"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t64_aa8e2bd5a2_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "645465bd1bbbf5fcd6e37f3af1fbdc6011ad38169f2d6be9afc35ed33df5a1e2"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t64_b2bfce8493_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "44c8677267eca4facf42187692af515e34664d4ded540f6d2cc92032205cebc4"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t64_f086a34e8d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c999b3c744c717308599938ebfb49592839e5a3b16f5d600c3eb71aa675097ed"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t66_24f631bc07_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a6b2221b285c9bb08d4f31b5a4dd5cfb7529e5917e1f8182e96be22da42dcd2a"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t66_38add71c18_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "18dc279c52ae5a4bca80e4e3981354cef3f864fc4033f9b8088ce7358254e41d"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t66_6fd49516ca_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "280fdda0281e429b983fbbf334354bea84ba9bda9bc29b745a3bb755b28d8569"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t66_a7c85a6cd9_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "fb32ae343139cd0ecb3ee464c95a03587b5d832d19b27d3c441152f1b5382691"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t66_f2d6a81cbc_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4d1a68db7e43d02e5896d0c1b255c32139ee20b6181ae13a95c91d9fbbd4267e"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t66_f87a63d9f5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "abc2cab72bec27d793a357053ad87c00b9ea5d2b455b49726cdab6fd8f1560e8"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t6_5902794ffd_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "56af92443052881a4747a53d1f0c2b40dab09201568fff0cd5212447fb1f19e9"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t6_a1c9b6c6e2_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2518482bf58d94f343d4d370d941a0b407e0fe42122cbada53504892ac1323ea"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t6_c6478f7a23_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6eeb9becaec0b4b98d6715cd84999e6a9363e05df90aedd38a0b2c3963767223"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t6_d4b2292669_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "871a2e061b916d35cd0d6375ccab42ff6f50cea0ceb02ca7bcb41da24fd90ae9"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t6_dc3d1f79c8_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "33471f82b46e8d8582e20e4cb8a0b607daff26b01cfa3aad11fdd5e9be3df626"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t6_e99b170fba_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8fe6e4c42330427f331a14f293a34af42a56a41d116dec1297e368c1c2f1a48b"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t89_0a917fe2ad_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8b1024f9ae54e457c7760a11088b1204c07a9f903e73cd5c1f7891aa9fb35e3f"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t89_582bc96a76_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "51efcb3b0afcaf979694a83b98e6e95be5e8e910a9a08e9bc6355b18c184a8bf"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t89_690afde291_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6736f24ec6cbd30db358a16cac43009f444112c7f36dd3313d2b7878bd24cd5d"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t89_855b94e99a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "f08bfcd8c7a8bdfdea4b6e812b24ca16e0610444d3ecf67cd0c0d129af161e36"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t89_8a40986508_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d680c1bd1b80c298863d053bb1f4a680a225ed95c1e1de18e02371c7092692c0"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t89_b83916c85e_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d1f067ca8a43d40f1f55bc098477f37e993e9c45d2e51e9fff604164ba4f216b"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t8_2f07e7bdd2_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "dbca4cec15acf67eba9d4f9be50f7002a9470b0d5c9cf14e85f749d1b09bd721"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t8_63a743ece1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "520189fb031bf28ec785ad91c21003dfbb4e3c7cd8038c7b26bb0aa573833aa8"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t8_74b4c7a8f3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a84b0330ab51ed40cc7ff66eac54dd76d219756b427de8e4bca98363ba81c47e"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t8_c3e8df1ef0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "630af65956bef68abbdad28aac3425e5f3a2fcb8c884179bd37469d8ed0a03c9"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t8_c547c79ef1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "61c561a5a9d096fc529e809be02adb96ac74796693cfca38b7267932356eb883"
+    },
+    {
+      "path": "pdestre/session3/crops/v1_t8_e827ceb507_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b59719f0ba993f8de4b4e819fc0d7e27db258b8e78a867d42157dad82b87714a"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t120_76bb53fa41_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "614a8f45f1503a633215d701d23f7ad0d64e05c5d856b845785b0a2f6ee9810f"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t120_a69fa284f9_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d467ba178a696eff016d06a084213675d52eeec23b00681566366067ec207404"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t120_b8dee61f1e_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9e7776efd21df62de234bc7a5de3b94b0476f2bc791eba2138a22d52c6bc742d"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t120_c4980d8f79_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8f84a5abbef5eea9158089897e83c95f3d41a04c8379808f2a235b841bf0f00e"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t120_e4e8aad6a2_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "45886bb10fc930ecd5a39a113bb69f319370d4098039d925f9100e9f4fb65e8c"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t136_02f65a92eb_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "129602e1ba8901f67c667af5e4e8303b8d85c0b5d480d3e311d35782e2d9c2f8"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t136_6d4166e860_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "435301c93ad59cc750d394708dd7bc546c57f6f8420f8cd2be467afce304918b"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t136_a075d12c08_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d8fbe3e5fd7753221cc7b843feb9e6449fa2ddec950cae16997acb1fefc33c06"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t136_a11f556e5d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "096b6fac1455aae2ac3fd02a510e690faa939f0b8b9d10e34a52192080d14169"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t136_e87fe26fb4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ba435b9d1af215434bee6ea60323b1a4ba269818a22b724b3d45dbf9515c28e4"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t136_f33d8d5b27_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a713a3f4a0d810081a33459d34d1acd1063ba1a41a8c1e6c38c5d1b5189fa51c"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t137_8ce17ad682_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e971f470cea248d78f1d30d1768a312c2aa767ecb755017bef92488b5989b2ed"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t137_91ce110a2a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8c50dba8fc25dad8965cbff4cdf1448bf3c02ffc9857535bf69eed7fd4624cef"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t143_1dd0ee44ac_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c04a8bcfb1fd37d19281f2bffe37dc5c4dfe457adbd440c0ab1e6d84c6b93b07"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t143_21e1a4781b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b9dd3b40286cd3fc923e43fe6d38af3f1fa04f294c61ad596618f787c9741974"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t143_48e4dcf5ae_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e9393356e6e6a151146cd4260fde9c0cd3bc7cb4cb89521b167a1a853e2d3d99"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t143_88dcfb5884_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c20bd568808e8f2f030cc56efcbc27695b340eb7f9b74295b54be0ea3edd2233"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t143_d43c0a0172_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "892ce9f2cf24f6ef4eeb13a37c761273803c0e27a5a342e3d094ba0863d60baf"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t145_012d865069_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9eb372178838a58248845f1cc70bb4de2294a8223d562de781f9eeb75cd67741"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t145_937cdcc836_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "390fcd4d53f1128d55d166208b7d632fb5121b866e36460fdba0dacb4ed68093"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t145_c9688f30b0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e23acec7ef8e82ab76e3d36579d41958188f325d5e40a027a3979ad8c363b5bb"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t145_cbf1c0b33b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "06526637c9ea9b734fe513216c92cb904da0091e8c766b68416ff1a67e28a5b6"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t145_f3a1b2dbd5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "dfc0c4c16ba2e2f6b3ac5d83c6fed04bb1cd0aefebb52c31ca972ba0a0279403"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t145_f9fa45b030_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "49799039e6757640daee23b1d78306747174757dd0248ddaa4aebc62fba9b805"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t147_2e65dbdc5b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "22ff1d11f12bd46f64e90dbbbcffde4ffab95b4e5ee2482d7e70af9954e6f0ad"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t147_67d25ecc7c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2395eb6d726a8cb25743ead79667619db32affd3120185d876e70aa1c09ea030"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t147_8264666cbd_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5bdec7a4171b0081b507983ede4cf3bf8fea67768f143e1bbbaa27915b88c257"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t147_8ddddddcf5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "daeb5bb88ebb9eb5a70a82a35f1775f38e3212c9e19a0b28284f376245ae7d2e"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t147_b4a4a759ee_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e1f42bed8e613dad867255120026ee65ab1a618e8c121d838fc0c02b7205db9d"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t147_d82381850a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2860ede5243844915fa26d2fdc0434e29d0c796dceb67b0ca7127c1b98f1d03b"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t148_0a53251637_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3f498012ab72c271085d9a58ab08aaf02e7f1c7a045c96303b4a4df815e6bf21"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t148_68dfb56f00_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "31a656f04b698ff595086153250b498a27a747eb52ed93dc488cb8db79b17d36"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t148_828414dd42_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d5490666f6b6afe20a413d9db5e345c68a097ccdc6c0e96f8ec9acbae10f708e"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t148_d1fc423308_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7c3653a0c45a3e162bfcecd5d588edde47c6a07afb970dbf48123573733b38de"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t148_d94be3ceef_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ee8a5e569709862c53583c4e183baab4c8b1e7d22aff03c1af42297f74dd29e9"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t148_fa7d95ed77_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "df78dc88fcd0f1744b8fdc39089bb5c11a56c92e0556e4fb461bef95a2fa47e0"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t152_4556814a65_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b738230504c2d5b4f10ed2565c1ed0c1265d55913887209cebec1edf4c9ee78c"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t152_aaa9bc5485_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "0d71bdb8cd06aa007a51bde4df1cf208a242f5de6c4e6f5e89acc7cb78ca6fa4"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t152_c537c30ec7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5a152279cdeccd5b31434d20d204e8254598581898f3e12d6e2192c986131957"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t152_f5449a97ed_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a865208bf89f77837b5a95a0d71e06809486f3864e63083821a6670b671c9411"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t152_f71d1c605b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "53a148b5bd24eeb2ef955520b287de13395dffec6d7d6e44a6b7cbcdc4d6ca2c"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t158_33c1ba084a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8605ca0f77f122dcf972415afa726d6e9bbcc7ebb8b7847cbd1cf391f31c75a9"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t158_422ed451b7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "38279734807bc485812cd22eb5ca974fe6d83878b42cc11d30a4013c3d90c160"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t158_669ab8b41c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "bc01234397b201ce1dd1dc7bf36c51d018813cccdd780ed90ebd294571e774c3"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t158_c53c0564ef_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "c0e516464d8d4aa0e363594dae56fa6f635e2f0b4717122087745b2a98a45742"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t158_c80d731366_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ecd9a422c60e85776980a056f06c96b69152baa4a3f8251d9252b2e447a05f7a"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t158_df3d873d2f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "14c2c7dd7e622458a93fd199eaf7b10369a927e1943071b5610b907120491aeb"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t200_a2a43200a4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4fb32b57c2d7669ff0e6730f696f20bf6780b5db01d301a7dad73d3db9446ef1"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t214_40e231e0bc_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d10bfd35af971f0bac8b64ef2f63d99c7d334638626209cff827f7f0670ff9f7"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t220_0cab6aae92_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "50027614b795f4b53a928a3a1b18d2b5e5547494b3a7884ca1205adb6171ca82"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t220_24ed50f561_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "bf3bf5b01229a26bb22881ef2745be4436247872132fb4e0645e04a82edaf4ce"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t220_2daee60ff7_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "448d95c53e7cf4c31c24c523a6fdb67545e005fdc77656ec3ab092c1b5ec90ab"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t220_ae763b1244_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d656d33da5ba4658e7cfbb7b2a59640dd7e6583514d6b49f884ee3aa8050080a"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t220_bcd21872d3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "85ebd4db060e46ec924f8b57f9355adfcf996045176727d097e813f4bc86cf08"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t223_aa38f8046a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5409529daa3ff8ed62a820ca6b537eabf72d73857b64864b84dddb81f2ac3193"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t85_0b4428613d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d7274b3558809bd89c0ea4cd27df5be0278d3c7ae5e22e716bf0552bd939af30"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t85_13c1bbb14b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "41aab1a5d765a27896f7c7297442eeee93afe83ad8395787c4d34710185984e4"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t85_3c6fa93893_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4c71be6b79adad595d18c5fb2653b3bdf99ee9a8279f01423c961b11bb19f60a"
+    },
+    {
+      "path": "pdestre/session3/crops/v2_t85_64e2d997fd_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "1fa4f14c124c82d191655a19dd94853b1db1d7f65b88b8dcf7d303df18809fba"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t155_3c56109a24_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7ffee37947d7837c46bee25da17e1cbf4bc08042d31ef167254927e5a211a961"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t155_928db178b8_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3f49100343067aed6434b7d895f1e303a38e81ae3d031df8a21cbb7b4c7c0b78"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t155_98c77bc224_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "00d78d761e159df263b25e03edfe5c88df64e8af2201d84badbdc33319d70b2b"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t155_a790c5300f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "359c6cd700a3f6556f69ed24c3af2a6a338bf73adfc16ae52f2293b8ceba84b2"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t155_bdeffa4de8_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "722eb391ed354de9fc974d102b147dc3f579c6dbbfc7e8f6a3ceffbc70258d9c"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t155_e4a126df89_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6d5097996d4414e205b7d18b7f2ff1b4ad7f05de1128a6fd9fd40d90dbc19ea4"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t170_059b043f8d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9f755ac2e73f711a2bd538090f1f63482968d310588561eb9001d377ea47bf92"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t170_18f661a815_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ac4caad13e3723936f5ac517816748efc76a3dc449509d4477be460a4553fa22"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t170_37c2db344f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "88fadd3671bd454144fbffc3757a771a7e00adb5592ffbac9b319008021d2e79"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t170_9795dea1e8_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "81c3a60231648b057cfbb181a6a6d7d63b88cb2df58b236df6d91099699dcbd7"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t170_ba39b618d3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d3e021eb4e2b8b235a1f7b584500e48310a51aadbad32fa390849f35814bc767"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t170_d36102bb8c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8374dd41a0b79ae343b8002f02d1e6afd3d2ccada28b236cc8bb04f300c4b315"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t172_e24473220e_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "472c8cf2532772a070216b7ef4d8567ec2f4502437cc70cb9f5bb21046fa4dab"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t27_0709357e11_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "6207d7ede1ea8119111a87f9e5ef49e11882f2a271d0f0e933f812a2e6dcfead"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t27_62d296cf66_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3452c8c942066fbe82bf4351550704d50ecc25c85b4da69d714cf4fe7646e72e"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t27_88303ed9df_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "726570ce923fb9d51b22fe4bc625b8b5e1346a2e61b85164cadff87c71d299c7"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t27_af101aeba4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4d91c35ad28a6ee4e95c0745183ebe341d42da4779fd4f31a2be0de178c1b2e6"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t27_befdedda96_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "889d9c242b37e5087d2e5be2c8dd99b18324f4482fff086ac8b7866351c3ab74"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t27_de7053d6ac_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "79ef44f63007c1e28f4af8c78ffe60915fabe8dba42cbe9bc3494e6d3879e62c"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t29_06ed100c13_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "f2201fa347af900f7020f1cf779b2a666cc1a1f7a6c7868bbe82ef8c498bc06f"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t29_0c96051f5f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "94dfde5ca2f8b02338684eb3d8cdbe5d17a20060d3de99256c1cccdaf0207a27"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t29_2f3cf7cc3c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "dfb7334c552a67d559762b417fb4943d0ed03eaa5f0f21d18561f099af8cc369"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t29_a08474daf3_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "82635786dfac45d5aa2b6163090b36dc873dcd7751cf009834bde2031253c70e"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t29_d21d74fddf_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "cf41892e7b6d2be42362c451bb25ae8f57a94ee8de1dddc763f5d9463788841c"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t29_d30a0d428b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "46dd2a1cbea0555370c2f7ace55c41d92923fc1562e7c5435bb3a0d52876dbd0"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t30_1c60807ea0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5c54ec2d09f53f336984281a7968da204a1cea14c3747b57d9c146779d15425c"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t30_24e2fafc22_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5422672341794eedb6e99207bd2524807bfcdb6d94e137ba5314f402385e1715"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t30_24f0545937_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "5e8820d2d97042a1d49c63699d75c3be1d03087902927b64658631b9b2d72321"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t30_856298906a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d449bba2684153e5a24fea20358e1fc400f7f9cf65a30794c70c28a8d77b19aa"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t30_a87a2571aa_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4b1bba540738e0d205c11bcb8954e91d7bb609451b8c7b2ce93f13e521bad722"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t30_eb188388e6_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "fb64497c3aa872fb7ebeb6f47b9cc3d2b1c8b0ca8e113347dfebfd1519d63239"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t31_7c561a17f2_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "a8652af46d4b1cc405577a31a08c12c1199407e3f51359a170a63154a35d3d87"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t31_a7e06dfc0d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "e568827b6b218582291bbb1e19aec3db4a430c097f62c76c755d02534046e843"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t31_aade36156b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "f3c5a871543f8955366a17b491c4a8df72b5d8a37445275784e9ee25bd496ad7"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t31_bcfa524e1f_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "29888270726466f0226bf002d33751111198821fd29f3049aa4864c004065e8a"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t31_ce4f3a5f2c_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "38b66fe3886a29650d8461371b873243455064cd454ad33f9d699a2da8f3b87e"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t31_f467db158a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7ed40e6c67f3d448f8abd9709fa31789a174c9e106e5fdde9629c9a4bb4f36e3"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t32_397207d101_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "57bfbc5a992eb7ba5b1f5edb217f5915c271b78d44bfa1363867f54dc0f57ccc"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t32_73ae969fb6_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "01b255f8cb1d4cdd5c20e4d51588475cb88e3145540160def7c43e7b9e685530"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t32_9a67b28661_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3f3405d807bcd380c4c63e60c14e9315b85d86a4140d7c6bcfd8985c5b31b15c"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t32_c7f4b23078_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7cbbb632ca2e5b855bb5c51e89dd2d27ec84937fcb05332d64e56440dff501ae"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t32_d48fdb74c1_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2814b8610e366c238444db9f8f6531d7a043d30d471b87defc0fa0d9dbdb24de"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t32_dd74ebc92a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7fac79740ef3c743450c1734f76438079407b8634e18bb13ee3b64abc653ae57"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t41_15652cc11d_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d253f7390321d7634e2375a57035cc4a7df85741583fd462b363a122f25fd0ab"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t41_49c3268adb_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9bc9298b9bf673be501f8e6fe339633b553c7505cb4755cd730c6c3b86fe17b7"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t41_7b5ae7f9c4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "2f5f861a2e712bb2d5d40f38649b764de612230e44a76ee6a29b355d8550354e"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t41_b6a3b86e13_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "010cb09e238c5e73739f5ac37d55e1b881c84b845b3d690b761ce48c144cd2aa"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t41_ea8a290582_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "de9a15de8191a580327b11b9210343d724debe064ca8c0dccf89f4c3a44c9dca"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t91_3dcc9e6e87_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "4c8b951fdbfe382db8adfe01031dc4729dea0affa94152e65b90946efd6b674b"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t91_6738fa52de_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "7f2cf752b3df9c3e05a8c24f5cabac28a268cd21525c922ed45b2cbdce94c9ea"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t91_891a91cd4a_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "d1c7ba78c09cf8abffd8be59699c7ab869b928489a6dbbc761bed58e7f3543d7"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t91_94814929df_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9624fd1138dd0f54807e6528d9d2bc1c9f05e5147ca9780ebf13021467e4bea2"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t91_b001b91fe5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "3bd6985cba19801136af259281d6a401b6d74097026dbba1b40e85afb019f25a"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t91_ce030c04e5_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "8fcadd535cde3c4a7132d53a9d76388d6687b34dd4ceb96ad6ec1e3d544f9fa7"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t94_32a1d49089_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "61f39f3fd09e3b551eb762475d185d6a0d852a7a01a6bf7b021cbdceda494fd2"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t94_534f661281_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "ca477422773dbeaf81829371452c713a9ef82d226a08f532eaf070e05137f8ef"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t94_96eff5550b_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "617e403d834b61c9bc245ca5fd664326830dbfeca2b8c2b06fbaaaf9f7b20d5c"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t94_adad3328f0_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "193da52e28df94c82d505e584223f7a8afb8e9e9a7b130560b4467f6fe86402a"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t94_dd073be0a4_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "9d850610941e5137dc0bb903898136912a69f89811743ad3c21c67fa618e0776"
+    },
+    {
+      "path": "pdestre/session3/crops/v3_t94_e2757ee369_crop.webp",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
+      "purpose": "Detected-person thumbnail in the person-search gallery",
+      "sha256": "b48744b4a6d0fdc162be2624eb2165259e3d4434ca580359505949467f2541a7"
     }
   ]
 }

@@ -22,15 +22,18 @@ can connect to local FastAPI/CUDA inference when an authorized checkpoint is ava
 > experience is a precomputed, non-commercial research demonstration. Public model weights
 > remain withheld while training-data redistribution terms are unresolved.
 
-## Try the identity-review demo
+## Try the demo workbench
 
-The hosted UI restores the original PedestrianTracker workflow:
+The hosted UI mirrors the original PedestrianTracker application layout, with four
+P-DESTRE session `12-11-2019_3` clips already attached as though you had uploaded them.
+Six panels:
 
-- a synchronized four-camera replay with tracker-rendered boxes;
-- indexed query crops and ranked cross-camera candidates;
-- camera scope, playback, frame stepping, and detection timelines;
-- a second replay containing the archived cross-camera association output;
-- responsive desktop and mobile review modes.
+- **Single Camera** — per-camera tracked output and run summary;
+- **Cross Camera** — four-view association replay plus the per-pair precision table;
+- **Person Search** — the main feature: build the index, pick any detected person, and
+  review their stored appearances and ranked cross-video candidates;
+- **Image Detection** — a single-frame detection pass;
+- **Model Status** and **Research Context** — runtime and protocol notes.
 
 ```bash
 cd apps/web
@@ -38,8 +41,19 @@ npm install
 npm run dev
 ```
 
-No synthetic browser boxes are drawn over the footage. The boxes visible in the demo are
-the annotations rendered by the original tracking pipeline.
+The controls are live, but the hosted build performs no inference: each **Run** replays a
+precomputed result. Full-frame views are redrawn in the browser by seeking the shipped
+clip to the appearance's timestamp and stroking its stored box, so no per-appearance
+scene images ship.
+
+No synthetic browser boxes are drawn over the footage. The boxes baked into the replay
+videos are the annotations rendered by the original tracking pipeline.
+
+> [!NOTE]
+> The person-search index was computed offline with the BoxJDE research checkpoint,
+> because the EffiPed Tier-1 weights are withheld pending dataset rights review. The
+> Person Search and Model Status panels both state this. Regenerate it with
+> [`tools/build_person_search_fixture.py`](tools/build_person_search_fixture.py).
 
 ## System
 
@@ -72,7 +86,7 @@ The diagram is also available as an
 ```text
 src/effiped/          installable model, descriptors, tracking, runtime
 apps/api/             FastAPI local-GPU service and job lifecycle
-apps/web/             React/Vite identity-review UI and hosted replay
+apps/web/             React/Vite demo workbench UI and hosted replay
 configs/system/       active EffiPed and matched PartJDE configurations
 research/results/     single source of truth for published evidence
 research/report/      generated technical report

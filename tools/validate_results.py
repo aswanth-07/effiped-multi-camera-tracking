@@ -35,7 +35,8 @@ PUBLIC_SURFACES = [
     ROOT / "MODEL_CARD.md",
     ROOT / "apps" / "web" / "index.html",
     ROOT / "apps" / "web" / "src" / "App.tsx",
-    ROOT / "apps" / "web" / "src" / "components" / "DemoConsole.tsx",
+    ROOT / "apps" / "web" / "src" / "components" / "Workbench.tsx",
+    ROOT / "apps" / "web" / "src" / "components" / "PersonSearchTab.tsx",
 ]
 
 
