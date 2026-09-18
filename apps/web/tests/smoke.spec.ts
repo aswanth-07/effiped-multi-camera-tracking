@@ -1,143 +1,202 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/workbench", "/system", "/evidence", "/deploy"];
+/** Read the live counters the status bar prints for the current job. */
+async function counters(page: import("@playwright/test").Page) {
+  const text = await page.locator(".statusbar__cells").innerText();
+  const read = (name: string) => {
+    const match = text.match(new RegExp(`${name}\\s+([0-9.]+)`));
+    return match ? Number(match[1]) : Number.NaN;
+  };
+  return {
+    clips: read("clips"),
+    detections: read("detections"),
+    people: read("people"),
+    links: read("links"),
+    meanConf: read("mean conf")
+  };
+}
 
-test("the overview presents the project and routes into the workbench", async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
+  // The console runs the default job on load.
+  await expect(page.locator(".statusbar__stage")).toContainText("ready", { timeout: 15000 });
+});
 
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Multi-Camera Pedestrian");
+test("boots as a console with a job already loaded", async ({ page }) => {
+  await expect(page.locator(".topbar__brand")).toContainText("EffiPed");
+  await expect(page.getByRole("tab", { name: "Person Search" })).toHaveAttribute("aria-selected", "true");
+
+  const stats = await counters(page);
+  expect(stats.clips).toBe(4);
+  expect(stats.people).toBeGreaterThan(10);
+  expect(stats.detections).toBeGreaterThan(50);
+
+  // The gallery is the job's output, not a fixed list.
+  expect(await page.locator(".tile").count()).toBe(stats.people);
+
   const eventTerms = ["con" + "test", "compe" + "tition", "pr" + "ize", "aw" + "ard", "SI" + "PC"];
   await expect(page.locator("body")).not.toContainText(new RegExp(eventTerms.join("|"), "i"));
-
-  // Every published figure is read from the evidence fixture, so the headline
-  // numbers have to reach the page rather than being written into it.
-  await expect(page.locator(".metric-row")).toContainText("62.8");
-  await expect(page.locator(".metric-row")).toContainText("7.78");
-
-  // The overview is a route in an application, not a single scrolling page.
-  await page.getByRole("link", { name: /open the workbench/i }).first().click();
-  await expect(page).toHaveURL(/\/workbench$/);
-  await expect(page.getByRole("heading", { name: "EffiPed Pedestrian Tracker" })).toBeVisible();
 });
 
-test("client-side routing reaches every route and survives a reload", async ({ page }) => {
-  await page.goto("/");
-  for (const name of ["System", "Evidence", "Run it", "Overview"]) {
-    // Narrow viewports keep the rail behind a drawer, so open it when it is there.
-    const toggle = page.getByRole("button", { name: "Open navigation" });
-    if (await toggle.isVisible()) await toggle.click();
-    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name }).click();
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+test("raising a threshold changes the job output", async ({ page }) => {
+  const before = await counters(page);
+
+  await page.locator("#ctl-detConf").fill("0.65");
+  await page.locator("#ctl-similarity").fill("0.8");
+  await expect(page.locator("output[for='ctl-detConf']")).toHaveText("0.65");
+  await expect(page.locator(".controls__dirty")).toBeVisible();
+  await page.getByRole("button", { name: /run pipeline|re-run/i }).click();
+
+  // The dirty marker also hides while a run is in flight, so it cannot be the
+  // signal. Wait for the counters themselves to move.
+  await expect
+    .poll(async () => (await counters(page)).detections, { timeout: 15000 })
+    .toBeLessThan(before.detections);
+
+  const after = await counters(page);
+  expect(after.detections).toBeLessThan(before.detections);
+  expect(after.links).toBeLessThan(before.links);
+  // Whatever survives a higher floor is more confident than the full set was.
+  expect(after.meanConf).toBeGreaterThan(before.meanConf);
+});
+
+test("the source picker attaches a subset and the job narrows", async ({ page }) => {
+  await page.getByRole("button", { name: /select video sources/i }).click();
+
+  const dialog = page.getByRole("dialog", { name: /select video sources/i });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator(".source-card")).toHaveCount(4);
+
+  await dialog.getByRole("button", { name: /camera 3/i }).click();
+  await dialog.getByRole("button", { name: /camera 4/i }).click();
+  await expect(dialog.locator(".modal__count")).toContainText("2 of 4");
+
+  await dialog.getByRole("button", { name: /attach 2 clips/i }).click();
+  await expect(dialog).toBeHidden();
+
+  // "ready" is already on screen from the previous job, so it cannot be the
+  // signal that this one finished. Wait for the clip count itself.
+  await expect.poll(async () => (await counters(page)).clips, { timeout: 15000 }).toBe(2);
+
+  const stats = await counters(page);
+  expect(stats.clips).toBe(2);
+  // Every indexed person now belongs to one of the two attached clips.
+  const codes = await page.locator(".tile code").allInnerTexts();
+  expect(codes.length).toBeGreaterThan(0);
+  for (const code of codes) expect(code.startsWith("v1/") || code.startsWith("v2/")).toBe(true);
+});
+
+test("the picker closes on Escape without changing the job", async ({ page }) => {
+  const before = await counters(page);
+  await page.getByRole("button", { name: /select video sources/i }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
+  expect(await counters(page)).toEqual(before);
+});
+
+test("selecting a person opens their appearances and ranked candidates", async ({ page }) => {
+  await page.locator(".tile").first().click();
+  await expect(page.locator(".tile.is-on")).toHaveCount(1);
+
+  const result = page.locator(".result");
+  await expect(result).toBeVisible();
+  await expect(result.locator(".strip__item").first()).toBeVisible();
+
+  const candidates = result.locator(".candidate");
+  await expect(candidates.first()).toBeVisible();
+
+  // Candidates arrive ranked.
+  const scores = (await result.locator(".candidate__score").allInnerTexts()).map(Number);
+  expect(scores.length).toBeGreaterThan(1);
+  expect([...scores].sort((a, b) => b - a)).toEqual(scores);
+
+  await expect(result).toContainText(/not an identification/i);
+});
+
+test("every workspace renders and number keys switch between them", async ({ page }) => {
+  for (const [key, heading] of [
+    ["1", /attached sources/i],
+    ["2", /single frame detection/i],
+    ["3", /camera local tracking/i],
+    ["5", /cross camera association/i],
+    ["6", /model and runtime/i],
+    ["4", /person search index/i]
+  ] as const) {
+    await page.keyboard.press(key);
+    await expect(page.locator(".viewport").getByRole("heading", { level: 2 })).toHaveText(heading);
   }
-
-  // A deep link has to work on its own, because the rewrite serves the shell.
-  await page.goto("/evidence");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Evidence");
-
-  await page.goto("/not-a-real-route");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("No page at");
 });
 
-test("the workbench person-search flow works end to end", async ({ page }) => {
-  await page.goto("/workbench");
+test("detection draws stored boxes on a decoded frame", async ({ page }) => {
+  await page.getByRole("tab", { name: "Detection" }).click();
+  const scrub = page.locator("#frame-scrub");
+  await expect(scrub).toBeEnabled();
 
-  // Person Search is the landing tab and the four clips arrive pre-attached.
-  await expect(page.getByRole("tab", { name: "Person Search" })).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator(".wb-slot video")).toHaveCount(4);
+  // Mid-clip, where the footage is lit and the frame is not a dark lead-in.
+  const max = Number(await scrub.getAttribute("max"));
+  await scrub.fill(String(Math.floor(max / 2)));
+  await expect(page.locator(".stage__hud")).toContainText(/\d+ detections/);
 
-  // Build the index, then the detected-person gallery appears.
-  await page.getByRole("button", { name: "Build person-search index" }).click();
-  const people = page.locator(".wb-gallery--4 .wb-tile");
-  await expect(people.first()).toBeVisible({ timeout: 15000 });
-  expect(await people.count()).toBeGreaterThan(10);
-
-  // Selecting a person fills the crop, the summary, and the ranked candidates,
-  // and brings the evidence panels into view.
-  const scrollBefore = await page.evaluate(() => window.scrollY);
-  await people.first().click();
-  await expect(page.locator(".wb-tile.is-selected")).toHaveCount(1);
-  await expect(page.locator(".wb-results-anchor")).toBeInViewport({ timeout: 5000 });
-  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(scrollBefore);
-  await expect(page.locator(".wb-crop-lg")).toBeVisible();
-  await expect(page.locator(".wb-output", { hasText: "Selection summary" })).toContainText("Ranked candidates");
-
-  const matches = page.locator(".wb-tile--match");
-  await expect(matches.first()).toBeVisible();
-  // Cross-video association is the point of the feature.
-  await expect(page.locator(".wb-tile--match.is-cross").first()).toBeVisible();
-
-  // Clicking a candidate updates the clicked full-frame view.
-  await matches.first().click();
-  await expect(page.locator(".wb-output", { hasText: "Clicked crop full-frame view" })).toContainText(
-    /similarity|cross-video|same video/
-  );
+  await expect
+    .poll(
+      async () =>
+        page.locator(".stage__canvas").evaluate((element) => {
+          const canvas = element as HTMLCanvasElement;
+          const ctx = canvas.getContext("2d");
+          if (!ctx || canvas.width === 0) return 0;
+          const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          let lit = 0;
+          for (let i = 0; i < data.length; i += 4) {
+            if (data[i] > 12 || data[i + 1] > 12 || data[i + 2] > 12) lit += 1;
+          }
+          return Math.round((100 * lit) / (data.length / 4));
+        }),
+      { timeout: 20000 }
+    )
+    .toBeGreaterThan(40);
 });
 
-test("every workbench tab renders", async ({ page }) => {
-  await page.goto("/workbench");
-  for (const name of ["Single Camera", "Cross Camera", "Image Detection", "Model Status", "Research Context"]) {
-    await page.getByRole("tab", { name }).click();
-    await expect(page.getByRole("tab", { name })).toHaveAttribute("aria-selected", "true");
-    await expect(page.locator(".wb-panel")).toBeVisible();
-  }
-
-  // Single-camera tracking reveals the tracked render for the chosen clip.
-  await page.getByRole("tab", { name: "Single Camera" }).click();
-  await page.getByRole("button", { name: "Run single-camera tracking" }).click();
-  const tracked = page.locator(".wb-output video").first();
-  await expect(tracked).toHaveAttribute("src", /cam1-tracked\.webm$/, { timeout: 15000 });
-});
-
-test("desktop and mobile layouts do not overflow on any route", async ({ page }) => {
+test("no layout overflows at desktop or phone width", async ({ page }) => {
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
-    for (const route of routes) {
-      await page.goto(route);
-      const dimensions = await page.evaluate(() => ({
+    for (const tab of ["Sources", "Detection", "Tracking", "Person Search", "Cross Camera", "Model"]) {
+      await page.getByRole("tab", { name: tab }).click();
+      const size = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
         scroll: document.documentElement.scrollWidth
       }));
-      expect(dimensions.scroll, `${route} at ${viewport.width}px`).toBe(dimensions.client);
+      expect(size.scroll, `${tab} at ${viewport.width}px`).toBe(size.client);
     }
   }
 });
 
-test("the mobile drawer opens, navigates and closes on Escape", async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
-
-  const toggle = page.getByRole("button", { name: "Open navigation" });
-  await expect(toggle).toBeVisible();
-  await toggle.click();
-  await expect(page.locator(".rail.is-open")).toBeVisible();
-
-  await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Evidence" }).click();
-  await expect(page).toHaveURL(/\/evidence$/);
-  await expect(page.locator(".rail.is-open")).toHaveCount(0);
-
-  await page.getByRole("button", { name: "Open navigation" }).click();
-  await expect(page.locator(".rail.is-open")).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(page.locator(".rail.is-open")).toHaveCount(0);
-});
-
-test("has no serious automated accessibility violations on any route", async ({ page }) => {
-  for (const route of routes) {
-    await page.goto(route);
+test("has no serious automated accessibility violations", async ({ page }) => {
+  for (const tab of ["Sources", "Detection", "Tracking", "Person Search", "Cross Camera", "Model"]) {
+    await page.getByRole("tab", { name: tab }).click();
     const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
     const serious = results.violations.filter((violation) =>
       ["serious", "critical"].includes(violation.impact ?? "")
     );
-    expect(serious, `${route}: ${serious.map((v) => v.id).join(", ")}`).toEqual([]);
+    expect(serious, `${tab}: ${serious.map((v) => v.id).join(", ")}`).toEqual([]);
   }
+
+  await page.getByRole("button", { name: /select video sources/i }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  const modalResults = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
+  const modalSerious = modalResults.violations.filter((violation) =>
+    ["serious", "critical"].includes(violation.impact ?? "")
+  );
+  expect(modalSerious, `modal: ${modalSerious.map((v) => v.id).join(", ")}`).toEqual([]);
 });
 
 test("honors reduced motion", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
+  await page.reload();
+  await expect(page.locator(".statusbar__stage")).toContainText("ready", { timeout: 15000 });
   const duration = await page
-    .locator(".primary-link")
+    .locator(".primary-button")
     .first()
     .evaluate((element) => getComputedStyle(element).transitionDuration);
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.001);

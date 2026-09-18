@@ -29,15 +29,28 @@ EXPECTED = {
     ("research_extensions", "boxjde", "natural_e2e_map_gain_pp"): 12.0,
 }
 
-PUBLIC_SURFACES = [
-    ROOT / "README.md",
-    ROOT / "RESULTS.md",
-    ROOT / "MODEL_CARD.md",
-    ROOT / "apps" / "web" / "index.html",
-    ROOT / "apps" / "web" / "src" / "App.tsx",
-    ROOT / "apps" / "web" / "src" / "components" / "Workbench.tsx",
-    ROOT / "apps" / "web" / "src" / "components" / "PersonSearchTab.tsx",
-]
+def public_surfaces() -> list[Path]:
+    """Every file whose text a visitor or a reader can end up seeing.
+
+    Discovered rather than listed. A hardcoded list quietly stops covering the
+    interface the moment a component is renamed, which is what happened when the
+    site became a console: two of the named files no longer existed and this
+    check crashed instead of scanning their replacements. Test files are left
+    out because they assert on the forbidden terms themselves.
+    """
+    web = ROOT / "apps" / "web"
+    paths = [
+        ROOT / "README.md",
+        ROOT / "RESULTS.md",
+        ROOT / "MODEL_CARD.md",
+        web / "index.html",
+    ]
+    paths += sorted(
+        path
+        for path in (web / "src").rglob("*")
+        if path.suffix in {".ts", ".tsx"} and ".test." not in path.name
+    )
+    return [path for path in paths if path.is_file()]
 
 
 def nested(payload: dict, keys: tuple[str, ...]):
@@ -75,7 +88,7 @@ def validate(config: Path | None = None) -> list[str]:
     if any(len(subject["candidates"]) != 4 for subject in data["demo_case"]["subjects"]):
         errors.append("Every demo subject must include four ranked candidates.")
 
-    public_text = "\n".join(path.read_text(encoding="utf-8") for path in PUBLIC_SURFACES)
+    public_text = "\n".join(path.read_text(encoding="utf-8") for path in public_surfaces())
     event_terms = ["con" + "test", "compe" + "tition", "pr" + "ize", "aw" + "ard", "SI" + "PC"]
     forbidden = [
         (r"\bstate[- ]of[- ]the[- ]art\b", "unsupported state-of-the-art claim"),

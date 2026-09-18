@@ -79,10 +79,14 @@ function enqueue<T>(src: string, task: () => Promise<T>): Promise<T> {
   return next;
 }
 
+export type Overlay = { box: Box; label?: string; color?: string };
+
 export type DrawFrameOptions = {
   box?: Box;
   boxColor?: string;
   boxLabel?: string;
+  /** Every detection to stroke on the frame, drawn under `box`. */
+  overlays?: Overlay[];
   /** Render at this width; height follows the clip's aspect ratio. */
   width?: number;
   dim?: boolean;
@@ -113,8 +117,27 @@ export async function drawFrame(
     ctx.drawImage(video, 0, 0, width, height);
 
     if (options.dim) {
-      ctx.fillStyle = "rgba(7, 10, 15, 0.45)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.55)";
       ctx.fillRect(0, 0, width, height);
+    }
+
+    // Detections first, so a highlighted subject always strokes over them.
+    for (const overlay of options.overlays ?? []) {
+      const [ox1, oy1, ox2, oy2] = overlay.box.map((value) => value * scale) as Box;
+      ctx.lineWidth = Math.max(1, Math.round(1.5 * scale));
+      ctx.strokeStyle = overlay.color ?? "rgba(121, 192, 255, 0.9)";
+      ctx.strokeRect(ox1, oy1, Math.max(1, ox2 - ox1), Math.max(1, oy2 - oy1));
+      if (overlay.label) {
+        ctx.font = `500 ${Math.max(9, Math.round(10 * scale))}px Consolas, monospace`;
+        const pad = 3;
+        const w = ctx.measureText(overlay.label).width;
+        const h = Math.max(12, Math.round(13 * scale));
+        const ly = oy1 - h < 0 ? oy1 : oy1 - h;
+        ctx.fillStyle = overlay.color ?? "rgba(121, 192, 255, 0.9)";
+        ctx.fillRect(ox1, ly, w + pad * 2, h);
+        ctx.fillStyle = "#000";
+        ctx.fillText(overlay.label, ox1 + pad, ly + h - pad - 1);
+      }
     }
 
     const box = options.box;
@@ -133,20 +156,20 @@ export async function drawFrame(
         ctx.restore();
       }
 
-      const color = options.boxColor ?? "#22c7b8";
+      const color = options.boxColor ?? "#86ff6b";
       ctx.lineWidth = Math.max(2, Math.round(2 * scale));
       ctx.strokeStyle = color;
       ctx.strokeRect(x1, y1, boxWidth, boxHeight);
 
       if (options.boxLabel) {
-        ctx.font = `600 ${Math.max(11, Math.round(13 * scale))}px Inter, system-ui, sans-serif`;
+        ctx.font = `600 ${Math.max(11, Math.round(12 * scale))}px Consolas, monospace`;
         const padding = 5;
         const textWidth = ctx.measureText(options.boxLabel).width;
         const labelHeight = Math.max(16, Math.round(18 * scale));
         const labelY = y1 - labelHeight < 0 ? y1 : y1 - labelHeight;
         ctx.fillStyle = color;
         ctx.fillRect(x1, labelY, textWidth + padding * 2, labelHeight);
-        ctx.fillStyle = "#04120f";
+        ctx.fillStyle = "#000";
         ctx.fillText(options.boxLabel, x1 + padding, labelY + labelHeight - padding);
       }
     }
