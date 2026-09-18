@@ -33,6 +33,7 @@ export default function App() {
   const [view, setView] = useState<ViewId>("search");
   const [selected, setSelected] = useState<string | null>(null);
   const [modal, setModal] = useState(false);
+  const [controlsOpen, setControlsOpen] = useState(false);
   const [stageIndex, setStageIndex] = useState(-1);
   const timers = useRef<number[]>([]);
   /** The run the status bar compares against, kept out of render state. */
@@ -63,9 +64,9 @@ export default function App() {
               setResult(computed);
               setApplied(next);
               // Keep the open selection when it survived the new thresholds.
-              setSelected((current) =>
-                current && computed.byId[current] ? current : computed.people[0]?.person.id ?? null
-              );
+              // A selection that no longer survives is dropped rather than
+              // silently replaced with somebody else.
+              setSelected((current) => (current && computed.byId[current] ? current : null));
             }
           }, index * step)
         );
@@ -86,6 +87,10 @@ export default function App() {
       if (event.metaKey || event.ctrlKey || event.altKey) return;
       const target = event.target as HTMLElement | null;
       if (target && /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)) return;
+      if (event.key === "Escape") {
+        setControlsOpen(false);
+        return;
+      }
       const match = VIEWS.find((item) => item.key === event.key);
       if (match) setView(match.id);
     };
@@ -105,19 +110,37 @@ export default function App() {
 
   return (
     <div className="console">
-      <TopBar onView={setView} running={running} view={view} />
+      <TopBar
+        controlsOpen={controlsOpen}
+        dirty={dirty}
+        onToggleControls={() => setControlsOpen((open) => !open)}
+        onView={setView}
+        running={running}
+        view={view}
+      />
+
+      {controlsOpen ? (
+        <>
+          <Controls
+            dirty={dirty}
+            onChange={setSettings}
+            onOpenSources={() => setModal(true)}
+            onReset={() => setSettings(DEFAULT_SETTINGS)}
+            onRun={() => run(settings)}
+            running={running}
+            settings={settings}
+          />
+          <button
+            aria-label="Close thresholds"
+            className="panel-scrim"
+            onClick={() => setControlsOpen(false)}
+            tabIndex={-1}
+            type="button"
+          />
+        </>
+      ) : null}
 
       <div className="workspace">
-        <Controls
-          dirty={dirty}
-          onChange={setSettings}
-          onOpenSources={() => setModal(true)}
-          onReset={() => setSettings(DEFAULT_SETTINGS)}
-          onRun={() => run(settings)}
-          running={running}
-          settings={settings}
-        />
-
         <main aria-labelledby={`tab-${view}`} className="viewport" id={`view-${view}`} role="tabpanel">
           {running ? (
             <div className="runbar" role="status">
@@ -134,7 +157,13 @@ export default function App() {
           {view === "detection" ? <DetectionView result={result} settings={applied ?? settings} /> : null}
           {view === "tracking" ? <TrackingView onInspect={inspect} result={result} /> : null}
           {view === "search" ? (
-            <SearchView onSelect={setSelected} result={result} selected={selected} settings={applied ?? settings} />
+            <SearchView
+              onOpenSources={() => setModal(true)}
+              onSelect={setSelected}
+              result={result}
+              selected={selected}
+              settings={applied ?? settings}
+            />
           ) : null}
           {view === "cross" ? (
             <CrossCameraView onInspect={inspect} result={result} settings={applied ?? settings} />

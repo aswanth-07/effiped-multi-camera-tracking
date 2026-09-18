@@ -1,4 +1,4 @@
-import { Activity, CircleDot, Cpu, ExternalLink } from "lucide-react";
+import { Activity, ChevronDown, Cpu, ExternalLink, SlidersHorizontal } from "lucide-react";
 
 import type { RunResult } from "../engine/pipeline";
 import { repository } from "../lib/site";
@@ -6,11 +6,11 @@ import { repository } from "../lib/site";
 export type ViewId = "sources" | "detection" | "tracking" | "search" | "cross" | "model";
 
 export const VIEWS: { id: ViewId; label: string; key: string }[] = [
-  { id: "sources", label: "Sources", key: "1" },
+  { id: "search", label: "Person Search", key: "1" },
   { id: "detection", label: "Detection", key: "2" },
   { id: "tracking", label: "Tracking", key: "3" },
-  { id: "search", label: "Person Search", key: "4" },
-  { id: "cross", label: "Cross Camera", key: "5" },
+  { id: "cross", label: "Cross Camera", key: "4" },
+  { id: "sources", label: "Sources", key: "5" },
   { id: "model", label: "Model", key: "6" }
 ];
 
@@ -29,20 +29,30 @@ function Mark() {
 export function TopBar({
   view,
   onView,
-  running
+  running,
+  controlsOpen,
+  onToggleControls,
+  dirty
 }: {
   view: ViewId;
   onView: (next: ViewId) => void;
   running: boolean;
+  controlsOpen: boolean;
+  onToggleControls: () => void;
+  dirty: boolean;
 }) {
   return (
     <header className="topbar">
-      <div className="topbar__brand">
+      <div className="topbar__identity">
         <Mark />
-        <div>
+        <div className="topbar__name">
           <strong>EffiPed</strong>
           <span>Identity Review Console</span>
         </div>
+        <span className={running ? "chip chip--live" : "chip"}>
+          <span className="chip__dot" aria-hidden="true" />
+          {running ? "Running" : "Replay"}
+        </span>
       </div>
 
       <nav aria-label="Workspace" className="topbar__nav" role="tablist">
@@ -63,24 +73,27 @@ export function TopBar({
         ))}
       </nav>
 
-      <div className="topbar__right">
-        <span className={running ? "runpill is-live" : "runpill"}>
-          <CircleDot aria-hidden="true" size={11} />
-          {running ? "Running" : "Replay"}
-        </span>
+      <div className="topbar__tools">
+        <button
+          aria-expanded={controlsOpen}
+          className={controlsOpen ? "tool-button is-on" : "tool-button"}
+          onClick={onToggleControls}
+          type="button"
+        >
+          <SlidersHorizontal aria-hidden="true" size={13} />
+          <span>Thresholds</span>
+          {dirty ? <span className="tool-button__dot" aria-hidden="true" /> : null}
+          <ChevronDown aria-hidden="true" className="tool-button__caret" size={12} />
+        </button>
         <a className="topbar__link" href={repository} rel="noreferrer" target="_blank">
-          Source <ExternalLink aria-hidden="true" size={11} />
+          <span>Source</span>
+          <ExternalLink aria-hidden="true" size={11} />
         </a>
       </div>
     </header>
   );
 }
 
-/**
- * One counter, with how far it moved since the previous run. The delta is the
- * point of the readout: it turns "190 detections" into "190, down 108", which
- * is what a threshold change actually did.
- */
 function Cell({ label, value, previous, format }: {
   label: string;
   value: number;
@@ -136,10 +149,6 @@ export function StatusBar({
           previous={p?.meanConfidence ?? null}
           value={s?.meanConfidence ?? 0}
         />
-        <span className="cell">
-          <span className="cell__label">descriptor</span>
-          <b className="cell__value">{s?.descriptorDim ?? 256}D</b>
-        </span>
       </span>
 
       <span className="statusbar__mode" title="No model runs in this browser">
@@ -150,9 +159,8 @@ export function StatusBar({
   );
 }
 
-/** Holds the viewport's shape while a run recomputes, instead of blanking it. */
 export function Skeleton({ kind }: { kind: ViewId }) {
-  const rows = kind === "search" ? 18 : kind === "cross" ? 8 : 6;
+  const rows = kind === "search" ? 12 : 6;
   return (
     <div aria-busy="true" aria-live="polite" className={`skeleton skeleton--${kind}`}>
       <span className="sr-only">Applying thresholds</span>

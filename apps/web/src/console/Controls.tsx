@@ -121,7 +121,6 @@ export function Controls({
     <aside aria-label="Pipeline controls" className="controls">
       <div className="controls__scroll">
         <section className="controls__section">
-          <h2 className="panel-label">Input</h2>
           <button className="source-button" onClick={onOpenSources} type="button">
             <Video aria-hidden="true" size={14} />
             <span>Select video sources</span>
@@ -129,8 +128,7 @@ export function Controls({
           </button>
         </section>
 
-        <section className="controls__section">
-          <h2 className="panel-label">Thresholds</h2>
+        <section className="controls__section controls__section--grid">
           {RANGES.map((range) => (
             <Control
               key={range.key}

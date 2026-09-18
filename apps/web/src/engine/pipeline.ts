@@ -295,3 +295,34 @@ export function belowIndexFloor(settings: Settings): Range[] {
     return (settings[range.key] as number) < range.indexedAt;
   });
 }
+
+/**
+ * The frame a person's crop was taken from.
+ *
+ * Every candidate a reviewer is shown has to be traceable back to a moment in a
+ * clip: which camera, which frame, which box. Without that the crop is just a
+ * picture, and the whole point of the workflow is that a person can check it.
+ */
+export type Provenance = {
+  video: WorkbenchVideo;
+  appearance: WorkbenchAppearance;
+};
+
+export function provenanceFor(personId: string): Provenance | null {
+  const person = personSearch.people.find((entry) => entry.id === personId);
+  if (!person) return null;
+  const appearances = personSearch.details[personId]?.appearances ?? [];
+  if (appearances.length === 0) return null;
+  // Prefer the appearance the headline crop came from, else the most confident.
+  const appearance =
+    appearances.find((entry) => entry.crop === person.crop) ??
+    appearances.reduce((best, entry) => (entry.score > best.score ? entry : best), appearances[0]);
+  const video = personSearch.videos.find((entry) => entry.id === person.video_index);
+  if (!video) return null;
+  return { video, appearance };
+}
+
+/** The seconds a clip spans, used to bound the gallery's time filter. */
+export function clipDuration(videoId: number): number {
+  return personSearch.videos.find((video) => video.id === videoId)?.duration_s ?? 15;
+}
