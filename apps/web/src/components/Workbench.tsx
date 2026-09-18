@@ -86,7 +86,7 @@ function SingleCameraTab({ modelKey, onModelChange }: { modelKey: string; onMode
             >
               {personSearch.videos.map((item) => (
                 <option key={item.id} value={item.id}>
-                  {item.file_name} — {item.label}
+                  {item.file_name} &middot; {item.label}
                 </option>
               ))}
             </select>
@@ -326,15 +326,15 @@ function ResearchContextTab() {
       <h3>Reported protocols</h3>
       <ul>
         <li>
-          <strong>Detection</strong> — {benchmark.pdestre.validation.detection_map50}% mAP@0.5 on P-DESTRE
+          <strong>Detection</strong>: {benchmark.pdestre.validation.detection_map50}% mAP@0.5 on P-DESTRE
           validation ({benchmark.pdestre.validation.protocol}).
         </li>
         <li>
-          <strong>Tracking</strong> — {benchmark.mot17.mota.toFixed(2)} MOTA, {benchmark.mot17.idf1} IDF1,
+          <strong>Tracking</strong>: {benchmark.mot17.mota.toFixed(2)} MOTA, {benchmark.mot17.idf1} IDF1,
           {" "}{benchmark.mot17.hota} HOTA on MOT17 val-half ({benchmark.mot17.protocol}).
         </li>
         <li>
-          <strong>Cross-camera retrieval</strong> — {benchmark.pdestre.validation.rank1_cross}% Rank-1 on
+          <strong>Cross-camera retrieval</strong>: {benchmark.pdestre.validation.rank1_cross}% Rank-1 on
           validation, {benchmark.pdestre.test.rank1_cross}% on the held-out test split.
         </li>
       </ul>
@@ -343,7 +343,7 @@ function ResearchContextTab() {
         Every panel here replays a precomputed run over four P-DESTRE session {sessionStats.session}
         {" "}clips. The hosted build performs no inference: the controls are live, but changing them does
         not re-execute the model. Application metrics shown are demonstration diagnostics, not official
-        evaluation numbers — those come from the reproducible evaluator in the research repository.
+        evaluation numbers. Those come from the reproducible evaluator in the research repository.
       </p>
       <p className="wb-provenance">{personSearch.generated_with.note}</p>
     </div>

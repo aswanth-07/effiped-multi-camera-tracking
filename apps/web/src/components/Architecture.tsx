@@ -40,7 +40,7 @@ export function Architecture() {
         <div className="architecture__output">
           <span>Review output</span>
           <strong>{"{box, local track, 256-D identity}"}</strong>
-          <small>Candidate evidence for human review — not proof of identity</small>
+          <small>Candidate evidence for human review, not proof of identity</small>
         </div>
       </div>
     </div>

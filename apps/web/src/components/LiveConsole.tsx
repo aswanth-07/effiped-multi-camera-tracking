@@ -155,7 +155,7 @@ export function LiveConsole() {
             <select value={modelKey} onChange={(event) => setModelKey(event.target.value)}>
               {models.map((model) => (
                 <option value={model.key} key={model.key}>
-                  {model.label}{model.available ? "" : " — checkpoint unavailable"}
+                  {model.label}{model.available ? "" : " (checkpoint unavailable)"}
                 </option>
               ))}
             </select>

@@ -153,7 +153,7 @@ export function PersonSearchTab({
 {`Indexed ${personSearch.job.people_count} people across ${personSearch.videos.length} videos.
 Model: ${personSearch.generated_with.checkpoint}
 Frame sets processed: ${personSearch.job.processed_frame_sets}/${personSearch.job.total_frame_sets}
-Status: ${personSearch.job.status} — ${personSearch.job.message}`}
+Status: ${personSearch.job.status}. ${personSearch.job.message}`}
               </pre>
             ) : (
               <Placeholder text="Build the index to populate the detected-person gallery." />
@@ -321,7 +321,7 @@ Ranked candidates: ${matches.length} (${crossVideoCount} cross-video)`}
 
           <OutputBox
             label={`Similar detected tracks across uploaded videos${
-              selected ? ` — ${matches.length} candidates` : ""
+              selected ? `, ${matches.length} candidates` : ""
             }`}
           >
             {selected ? (

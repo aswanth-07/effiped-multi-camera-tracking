@@ -3,7 +3,7 @@
  * highlight box.
  *
  * The hosted build ships the four source clips but no per-appearance scene
- * images — those would have been ~200 KB each. Instead we seek a shared,
+ * images , those would have been ~200 KB each. Instead we seek a shared,
  * offscreen <video> to the appearance's timestamp and redraw it on demand,
  * which keeps the deployed bundle small and the frames pixel-exact.
  */
