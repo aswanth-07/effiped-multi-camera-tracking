@@ -102,7 +102,7 @@ export function Overview() {
           />
         </div>
         <p className="section__foot">
-          Every value is read from a single checked-in fixture and pinned by a validator in CI, so a
+          Every value is read from a single checked-in fixture and pinned by a validator, so a
           published number cannot drift without the check failing.{" "}
           <Link className="text-link-inline" to="/evidence">
             The full ledger, with what each figure does not establish

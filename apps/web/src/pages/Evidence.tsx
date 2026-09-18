@@ -15,7 +15,7 @@ export function Evidence() {
       <PageHead
         index="03"
         label="Evidence"
-        lede="Every figure this project publishes lives in one checked-in fixture, and a validator in CI pins each value and the claim language around it. Changing a published number requires changing the validator too, which is the intended friction."
+        lede="Every figure this project publishes lives in one checked-in fixture, and a validator pins each value and the claim language around it. Changing a published number requires changing the validator too, which is the intended friction."
         title="Evidence and protocols"
       >
         <p className="page-head__source">

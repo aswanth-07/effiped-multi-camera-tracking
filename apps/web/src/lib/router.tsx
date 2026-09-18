@@ -4,7 +4,7 @@
  * The site is four content routes plus the workbench, with no nested layouts,
  * no loaders and no code splitting beyond what Vite already does. A routing
  * library would be more dependency surface than the problem deserves, and this
- * application's dependency graph is audited in CI.
+ * application's dependency graph is kept deliberately small.
  */
 
 import {

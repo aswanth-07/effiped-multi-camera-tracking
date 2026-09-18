@@ -12,7 +12,6 @@ try that workflow in a browser, with nothing to install.
 
   By [Aswanth Raj](https://github.com/aswanth-07)
 
-  [![CI](https://github.com/aswanth-07/effiped-multi-camera-tracking/actions/workflows/ci.yml/badge.svg)](https://github.com/aswanth-07/effiped-multi-camera-tracking/actions/workflows/ci.yml)
   [![Software: Apache-2.0](https://img.shields.io/badge/software-Apache--2.0-22c7b8)](LICENSE)
   [![Media: CC BY-NC-SA 4.0](https://img.shields.io/badge/P--DESTRE_media-CC_BY--NC--SA_4.0-70b8ff)](docs/media/LICENSE.md)
 </div>

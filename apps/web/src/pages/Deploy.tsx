@@ -135,8 +135,8 @@ npm run dev --prefix apps/web    # http://127.0.0.1:5173`}</Code>
       <Section label="Licensing" title="Two licences, deliberately.">
         <p className="prose">
           The software is Apache-2.0. P-DESTRE-derived media is separately licensed CC BY-NC-SA 4.0,
-          and every derived asset is hashed and attributed in a manifest that a validator re-checks on
-          every CI run. No dataset, source video, annotation archive, checkpoint or person-level
+          and every derived asset is hashed and attributed in a manifest that a validator re-checks.
+          No dataset, source video, annotation archive, checkpoint or person-level
           benchmark record is committed. The model is not distributed under Apache-2.0, because it is
           not distributed at all.
         </p>

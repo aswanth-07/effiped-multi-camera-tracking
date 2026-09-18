@@ -7,6 +7,13 @@ Dates are the dates of the commits that made each change.
 
 ## [Unreleased]
 
+### Removed
+
+- The GitHub Actions workflow. Lint, tests, the three release validators, the
+  web typecheck, build, audit and end-to-end suite, and the secret scan are no
+  longer run automatically on push. Every one of those commands is listed in
+  [CONTRIBUTING.md](CONTRIBUTING.md) and still fails the same way when run.
+
 ### Changed
 
 - The demo workbench replaces the earlier single-pane demo console with six panels:
@@ -54,7 +61,7 @@ demo, and the evidence and licensing record that governs what may be published.
 - A single source of truth for published evidence, `research/results/summary.json`,
   read by the README, `RESULTS.md`, `MODEL_CARD.md`, the website and the generated
   technical report (2026-07-30).
-- Quality gates run in CI: `tools/validate_results.py` pins every published metric and
+- Quality gates, run from `CONTRIBUTING.md`: `tools/validate_results.py` pins every published metric and
   the claim-boundary language, `tools/validate_media.py` verifies attribution and
   SHA-256 for every P-DESTRE-derived asset, and `tools/validate_release.py` enforces
   repository hygiene (2026-07-30).
