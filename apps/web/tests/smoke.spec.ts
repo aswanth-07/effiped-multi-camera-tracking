@@ -45,7 +45,7 @@ test("raising a threshold changes the job output", async ({ page }) => {
   await page.locator("#ctl-detConf").fill("0.65");
   await page.locator("#ctl-similarity").fill("0.8");
   await expect(page.locator("output[for='ctl-detConf']")).toHaveText("0.65");
-  await expect(page.locator(".controls__dirty")).toBeVisible();
+  await expect(page.locator(".controls__state")).toContainText(/changed since the last run/i);
   await page.getByRole("button", { name: /run pipeline|re-run/i }).click();
 
   // The dirty marker also hides while a run is in flight, so it cannot be the
@@ -59,6 +59,27 @@ test("raising a threshold changes the job output", async ({ page }) => {
   expect(after.links).toBeLessThan(before.links);
   // Whatever survives a higher floor is more confident than the full set was.
   expect(after.meanConf).toBeGreaterThan(before.meanConf);
+
+  // The readout reports what the change cost, not just where it landed.
+  await expect(page.locator(".cell__delta.is-down").first()).toBeVisible();
+  await expect(page.locator(".controls__state")).toContainText(/matches the current settings/i);
+});
+
+test("each threshold shows the distribution it cuts and what survives", async ({ page }) => {
+  const histograms = page.locator(".histogram");
+  expect(await histograms.count()).toBeGreaterThanOrEqual(5);
+
+  const note = page.locator("#ctl-detConf-note");
+  await expect(note).toContainText(/of .* kept/i);
+  const before = await note.innerText();
+
+  await page.locator("#ctl-detConf").fill("0.68");
+  await expect(note).not.toHaveText(before);
+
+  // Bars below the cut are marked dead, bars above it live.
+  const control = page.locator(".control").filter({ has: page.locator("#ctl-detConf") });
+  expect(await control.locator(".histogram__bar.is-live").count()).toBeGreaterThan(0);
+  expect(await control.locator(".histogram__bar:not(.is-live)").count()).toBeGreaterThan(0);
 });
 
 test("the source picker attaches a subset and the job narrows", async ({ page }) => {
@@ -196,7 +217,7 @@ test("honors reduced motion", async ({ page }) => {
   await page.reload();
   await expect(page.locator(".statusbar__stage")).toContainText("ready", { timeout: 15000 });
   const duration = await page
-    .locator(".primary-button")
+    .locator(".run-button")
     .first()
     .evaluate((element) => getComputedStyle(element).transitionDuration);
   expect(Number.parseFloat(duration)).toBeLessThanOrEqual(0.001);

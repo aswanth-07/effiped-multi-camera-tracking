@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Film, X } from "lucide-react";
+import { Check, X } from "lucide-react";
 
 import { personSearch } from "../data/personSearch";
 
+/**
+ * A native <dialog>, so the top layer, the backdrop, the focus trap and Escape
+ * come from the platform rather than from hand-rolled key handling that has to
+ * be right on every browser.
+ */
 export function SourceModal({
   open,
   selected,
@@ -15,43 +20,18 @@ export function SourceModal({
   onConfirm: (ids: number[]) => void;
 }) {
   const [draft, setDraft] = useState<number[]>(selected);
-  const dialog = useRef<HTMLDivElement>(null);
-  const closeButton = useRef<HTMLButtonElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (open) setDraft(selected);
+    const element = dialog.current;
+    if (!element) return;
+    if (open) {
+      setDraft(selected);
+      if (!element.open) element.showModal();
+    } else if (element.open) {
+      element.close();
+    }
   }, [open, selected]);
-
-  useEffect(() => {
-    if (!open) return;
-    closeButton.current?.focus();
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onCancel();
-        return;
-      }
-      if (event.key !== "Tab") return;
-      // A modal that lets focus escape into the page behind it is not a modal.
-      const focusable = dialog.current?.querySelectorAll<HTMLElement>(
-        'button, [href], input, [tabindex]:not([tabindex="-1"])'
-      );
-      if (!focusable || focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onCancel]);
-
-  if (!open) return null;
 
   const toggle = (id: number) =>
     setDraft((current) =>
@@ -59,20 +39,23 @@ export function SourceModal({
     );
 
   return (
-    <div className="modal-scrim" role="presentation">
-      <div
-        aria-labelledby="source-modal-title"
-        aria-modal="true"
-        className="modal"
-        ref={dialog}
-        role="dialog"
-      >
+    <dialog
+      aria-labelledby="source-modal-title"
+      className="modal"
+      onCancel={(event) => {
+        event.preventDefault();
+        onCancel();
+      }}
+      onClick={(event) => {
+        // A click on the backdrop lands on the dialog element itself.
+        if (event.target === dialog.current) onCancel();
+      }}
+      ref={dialog}
+    >
+      <div className="modal__inner">
         <header className="modal__head">
-          <div>
-            <p className="modal__eyebrow">Job input</p>
-            <h2 id="source-modal-title">Select video sources</h2>
-          </div>
-          <button aria-label="Close" className="icon-button" onClick={onCancel} ref={closeButton} type="button">
+          <h2 id="source-modal-title">Select video sources</h2>
+          <button aria-label="Close" className="icon-button" onClick={onCancel} type="button">
             <X aria-hidden="true" size={16} />
           </button>
         </header>
@@ -85,7 +68,7 @@ export function SourceModal({
         <div className="source-grid">
           {personSearch.videos.map((video) => {
             const checked = draft.includes(video.id);
-            const people = personSearch.people.filter((person) => person.video_index === video.id).length;
+            const tracks = personSearch.people.filter((p) => p.video_index === video.id).length;
             return (
               <button
                 aria-pressed={checked}
@@ -94,22 +77,35 @@ export function SourceModal({
                 onClick={() => toggle(video.id)}
                 type="button"
               >
-                <span className="source-card__check" aria-hidden="true">
-                  {checked ? <Check size={12} /> : null}
+                <span className="source-card__frame">
+                  <img alt="" className="source-card__poster" loading="lazy" src={video.poster} />
+                  <span className="source-card__check" aria-hidden="true">
+                    {checked ? <Check size={11} strokeWidth={3} /> : null}
+                  </span>
                 </span>
-                <img alt="" className="source-card__poster" loading="lazy" src={video.poster} />
                 <span className="source-card__body">
-                  <strong>{video.label}</strong>
-                  <code>{video.file_name}</code>
-                  <span className="source-card__meta">
-                    <span>{video.width} x {video.height}</span>
-                    <span>{video.duration_s.toFixed(0)}s</span>
-                    <span>{video.fps} fps</span>
-                    <span>{video.frame_count} frames</span>
+                  <span className="source-card__title">
+                    <strong>{video.label}</strong>
+                    <code>{video.file_name}</code>
                   </span>
-                  <span className="source-card__tracks">
-                    <Film aria-hidden="true" size={11} /> {people} tracks indexed
-                  </span>
+                  <dl className="source-card__spec">
+                    <div>
+                      <dt>Frame</dt>
+                      <dd>{video.width}x{video.height}</dd>
+                    </div>
+                    <div>
+                      <dt>Length</dt>
+                      <dd>{video.duration_s.toFixed(0)}s at {video.fps}fps</dd>
+                    </div>
+                    <div>
+                      <dt>Frames</dt>
+                      <dd>{video.frame_count}</dd>
+                    </div>
+                    <div>
+                      <dt>Tracks</dt>
+                      <dd className="is-accent">{tracks}</dd>
+                    </div>
+                  </dl>
                 </span>
               </button>
             );
@@ -121,7 +117,7 @@ export function SourceModal({
             <button className="ghost-button" onClick={() => setDraft([0, 1, 2, 3])} type="button">
               Select all
             </button>
-            <button className="ghost-button" onClick={() => setDraft([])} type="button">
+            <button className="ghost-button" disabled={draft.length === 0} onClick={() => setDraft([])} type="button">
               Clear
             </button>
           </div>
@@ -133,7 +129,7 @@ export function SourceModal({
               Cancel
             </button>
             <button
-              className="primary-button"
+              className="run-button run-button--compact"
               disabled={draft.length === 0}
               onClick={() => onConfirm(draft)}
               type="button"
@@ -143,6 +139,6 @@ export function SourceModal({
           </div>
         </footer>
       </div>
-    </div>
+    </dialog>
   );
 }

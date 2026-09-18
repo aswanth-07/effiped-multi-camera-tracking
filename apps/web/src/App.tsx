@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { Controls } from "./console/Controls";
-import { StatusBar, TopBar, VIEWS, type ViewId } from "./console/Chrome";
+import { Skeleton, StatusBar, TopBar, VIEWS, type ViewId } from "./console/Chrome";
 import { SourceModal } from "./console/SourceModal";
 import { DEFAULT_SETTINGS, runQuery, type RunResult, type Settings } from "./engine/pipeline";
 import { CrossCameraView } from "./views/CrossCameraView";
@@ -29,11 +29,14 @@ export default function App() {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [applied, setApplied] = useState<Settings | null>(null);
   const [result, setResult] = useState<RunResult | null>(null);
+  const [previous, setPrevious] = useState<RunResult | null>(null);
   const [view, setView] = useState<ViewId>("search");
   const [selected, setSelected] = useState<string | null>(null);
   const [modal, setModal] = useState(false);
   const [stageIndex, setStageIndex] = useState(-1);
   const timers = useRef<number[]>([]);
+  /** The run the status bar compares against, kept out of render state. */
+  const latest = useRef<RunResult | null>(null);
 
   const running = stageIndex >= 0 && stageIndex < STAGES.length - 1;
   const dirty = applied === null || JSON.stringify(applied) !== JSON.stringify(settings);
@@ -55,6 +58,8 @@ export default function App() {
             setStageIndex(index);
             if (index === STAGES.length - 1) {
               const computed = runQuery(next);
+              setPrevious(latest.current);
+              latest.current = computed;
               setResult(computed);
               setApplied(next);
               // Keep the open selection when it survived the new thresholds.
@@ -121,6 +126,10 @@ export default function App() {
             </div>
           ) : null}
 
+          {result === null ? (
+            <Skeleton kind={view} />
+          ) : (
+            <>
           {view === "sources" ? <SourcesView onOpenSources={() => setModal(true)} result={result} /> : null}
           {view === "detection" ? <DetectionView result={result} settings={applied ?? settings} /> : null}
           {view === "tracking" ? <TrackingView onInspect={inspect} result={result} /> : null}
@@ -131,10 +140,12 @@ export default function App() {
             <CrossCameraView onInspect={inspect} result={result} settings={applied ?? settings} />
           ) : null}
           {view === "model" ? <ModelView /> : null}
+            </>
+          )}
         </main>
       </div>
 
-      <StatusBar result={result} stage={stage} />
+      <StatusBar previous={previous} result={result} stage={stage} />
 
       <SourceModal
         onCancel={() => setModal(false)}

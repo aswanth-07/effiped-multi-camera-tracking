@@ -38,13 +38,33 @@
 
   --topbar-h: 3rem;
   --status-h: 1.75rem;
-  --rail-w: 17.5rem;
+  --rail-w: 18.5rem;
+
+  /* Depth carries an offset and a blur. The console is flat by design, so this
+     is reserved for what genuinely floats above it. */
+  --lift: 0 18px 44px -12px rgba(0, 0, 0, 0.9), 0 2px 8px -2px rgba(0, 0, 0, 0.8);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   color-scheme: dark;
   font-family: var(--body);
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
+
+  /* Figures are read in columns here, so digits have to share a width. */
+  font-variant-numeric: tabular-nums;
+  accent-color: var(--link);
+  caret-color: var(--link-strong);
+  scrollbar-color: var(--control-rule) transparent;
+  scrollbar-width: thin;
 }
+
+/* The scrollbar belongs to the design. Chromium ignores scrollbar-color when a
+   ::-webkit rule exists, so both are stated. */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--control-rule); border: 3px solid #000; }
+::-webkit-scrollbar-thumb:hover { background: #4a525c; }
+::-webkit-scrollbar-corner { background: transparent; }
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -69,7 +89,8 @@ a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--link-strong); text-decoration: underline; }
 
 ::selection { color: #000; background: var(--link); }
-:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+/* A 2px perimeter at 3:1 against both the black ground and the raised panels. */
+:focus-visible { outline: 2px solid var(--link-strong); outline-offset: 1px; }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;
@@ -144,6 +165,9 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 
 .tab {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   padding: 0 0.95rem;
   border-right: 1px solid var(--control-rule);
   color: var(--text-muted);
@@ -160,6 +184,16 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   position: absolute; inset: auto 0 0 0;
   height: 2px; background: var(--active); content: "";
 }
+.tab__key {
+  padding: 0.05rem 0.28rem;
+  border: 1px solid var(--control-rule);
+  color: var(--text-floor);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  line-height: 1.35;
+}
+.tab.is-on .tab__key { border-color: var(--rule); color: var(--text-muted); }
+@media (max-width: 62rem) { .tab__key { display: none; } }
 
 .topbar__right {
   display: flex;
@@ -212,23 +246,33 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   letter-spacing: 0.04em;
 }
 .statusbar__stage { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--comment); white-space: nowrap; }
-.statusbar__cells { display: flex; min-width: 0; overflow-x: auto; gap: 1rem; scrollbar-width: none; }
+.statusbar__cells { display: flex; min-width: 0; overflow-x: auto; gap: 0.9rem; scrollbar-width: none; }
 .statusbar__cells::-webkit-scrollbar { display: none; }
-.statusbar__cells b { color: var(--link-strong); font-weight: 500; }
+
+.cell { display: inline-flex; align-items: baseline; gap: 0.3rem; white-space: nowrap; }
+.cell__label { color: var(--text-floor); }
+.cell__value { color: var(--link-strong); font-weight: 500; }
+/* The delta is the readout's point: it says what the last change cost. */
+.cell__delta { font-size: 0.92em; }
+.cell__delta.is-up { color: var(--comment); }
+.cell__delta.is-down { color: var(--warning); }
 .statusbar__mode { display: inline-flex; margin-left: auto; align-items: center; gap: 0.35rem; white-space: nowrap; }
 
 /* --- Control rail --------------------------------------------------------- */
 
+/* The rail scrolls; the run action does not. A primary action that can be
+   scrolled out of reach is not a primary action. */
 .controls {
-  display: flex;
-  overflow-y: auto;
-  flex-direction: column;
+  display: grid;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
   border-right: 1px solid var(--rule);
   background: var(--surface-1);
 }
+.controls__scroll { overflow-y: auto; overscroll-behavior: contain; }
 .controls__section { padding: 0.85rem; border-bottom: 1px solid var(--control-rule); }
-.controls__section--grow { flex: 1; }
 .controls__section .panel-label { margin-bottom: 0.7rem; }
+.controls__dock { border-top: 1px solid var(--rule); background: var(--surface-2); }
 
 .source-button {
   display: flex;
@@ -249,15 +293,42 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .source-button svg { color: var(--link); }
 .source-button__count { margin-left: auto; color: var(--text-floor); }
 
-.control { margin-bottom: 1rem; }
+.control { margin-bottom: 1.15rem; }
 .control:last-child { margin-bottom: 0; }
 .control__head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
 .control__head label { color: var(--text-soft); font-size: 0.75rem; }
-.control__value { color: var(--link-strong); font-family: var(--mono); font-size: 0.75rem; }
+.control__value { color: var(--link-strong); font-family: var(--mono); font-size: 0.78rem; }
 .control__value.is-warn { color: var(--warning); }
-.control__hint { margin-top: 0.3rem; color: var(--text-floor); font-size: 0.64rem; line-height: 1.45; }
 
-.control__range { width: 100%; height: 1.1rem; margin-top: 0.4rem; appearance: none; background: transparent; cursor: pointer; }
+/* The distribution the threshold is cutting. Bars are the real stored values,
+   so this is the data the control acts on rather than an illustration of it. */
+.histogram {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 1.75rem;
+  margin-top: 0.45rem;
+  padding-bottom: 1px;
+  border-bottom: 1px solid var(--control-rule);
+}
+.histogram__bar { flex: 1; background: #21262d; transition: background-color 120ms var(--ease); }
+.histogram__bar.is-live { background: var(--link); }
+
+.control__note { display: grid; gap: 0.2rem; margin-top: 0.35rem; }
+.control__survivors { color: var(--text-muted); font-family: var(--mono); font-size: 0.63rem; }
+.control__survivors b { color: var(--comment); font-weight: 500; }
+.control__hint { color: var(--text-floor); font-size: 0.64rem; line-height: 1.45; }
+
+/* 40px of vertical hit area for touch, with the visible track kept thin and
+   clear of the histogram it sits under. */
+.control__range {
+  width: 100%;
+  height: 2.5rem;
+  margin: -0.55rem 0 -0.8rem;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
 .control__range::-webkit-slider-runnable-track { height: 2px; background: var(--control-rule); }
 .control__range::-moz-range-track { height: 2px; background: var(--control-rule); }
 .control__range::-webkit-slider-thumb {
@@ -268,7 +339,52 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .control__range:hover::-webkit-slider-thumb { background: var(--link-strong); }
 .control__range:hover::-moz-range-thumb { background: var(--link-strong); }
 
-.controls__actions { display: flex; gap: 0.5rem; padding: 0.85rem; border-top: 1px solid var(--control-rule); }
+.controls__actions { display: flex; gap: 0.5rem; padding: 0.7rem 0.85rem; }
+.controls__state {
+  padding: 0 0.85rem 0.7rem;
+  color: var(--text-floor);
+  font-family: var(--mono);
+  font-size: 0.59rem;
+  letter-spacing: 0.04em;
+}
+
+/* The console has exactly one primary action, so it is the only filled
+   control on the surface. Everything else is an outline or a bare label. */
+.run-button {
+  position: relative;
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border: 1px solid var(--link);
+  background: var(--link);
+  color: #000;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 160ms var(--ease), border-color 160ms var(--ease);
+}
+.run-button:hover:not(:disabled) { background: var(--link-strong); border-color: var(--link-strong); }
+.run-button:active:not(:disabled) { background: #4a90e2; }
+.run-button:disabled {
+  border-color: var(--control-rule);
+  background: transparent;
+  color: var(--text-floor);
+  cursor: not-allowed;
+}
+.run-button--compact { flex: 0 0 auto; min-height: 2.1rem; }
+/* Unapplied settings are marked on the control that would apply them. */
+.run-button__dot {
+  position: absolute; top: -3px; right: -3px;
+  width: 6px; height: 6px;
+  background: var(--comment);
+  box-shadow: 0 0 0 2px var(--surface-2);
+}
 
 .primary-button {
   display: inline-flex;
@@ -283,11 +399,10 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   font-size: 0.66rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: background-color 120ms ease, color 120ms ease;
+  transition: background-color 160ms var(--ease), color 160ms var(--ease);
 }
 .primary-button:hover:not(:disabled) { color: #000; background: var(--link); }
 .primary-button:disabled { border-color: var(--control-rule); color: var(--text-floor); cursor: not-allowed; }
-.primary-button--run { flex: 1; }
 
 .ghost-button {
   display: inline-flex;
@@ -302,7 +417,8 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
-.ghost-button:hover { border-color: var(--link); color: var(--link-strong); text-decoration: none; }
+.ghost-button:hover:not(:disabled) { border-color: var(--link); color: var(--link-strong); text-decoration: none; }
+.ghost-button:disabled { color: var(--text-floor); cursor: not-allowed; opacity: 0.55; }
 
 .icon-button {
   display: grid;
@@ -311,25 +427,21 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   border: 1px solid var(--control-rule);
   color: var(--text-muted);
 }
-.icon-button:hover { border-color: var(--link); color: var(--link-strong); }
+.icon-button:hover:not(:disabled) { border-color: var(--link); color: var(--link-strong); }
+.icon-button:disabled { color: var(--control-rule); cursor: not-allowed; }
 
-.controls__warn {
+/* Severity is carried by the icon and the text colour, not by a coloured slab
+   down one edge. */
+.notice {
   display: flex;
   gap: 0.45rem;
   padding: 0.6rem 0.85rem;
   border-top: 1px solid var(--control-rule);
-  color: var(--warning);
   font-size: 0.66rem;
   line-height: 1.45;
 }
-.controls__warn svg { flex: none; margin-top: 0.15rem; }
-.controls__dirty {
-  padding: 0 0.85rem 0.7rem;
-  color: var(--comment);
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.05em;
-}
+.notice svg { flex: none; margin-top: 0.15rem; }
+.notice--warn { color: var(--warning); }
 
 /* --- Viewport ------------------------------------------------------------- */
 
@@ -353,6 +465,20 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 }
 .runbar__spark { width: 0.4rem; height: 0.4rem; background: var(--comment); animation: pulse 700ms ease-in-out infinite; }
 
+/* First load holds the shape instead of blanking it. A re-run keeps the
+   previous output on screen, so this is only ever the cold start. */
+.skeleton { display: grid; gap: 0.5rem; padding: 1rem 1.1rem; }
+.skeleton--search { grid-template-columns: repeat(auto-fill, minmax(5.6rem, 1fr)); }
+.skeleton--cross, .skeleton--model, .skeleton--sources { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
+.skeleton__block {
+  height: 7.5rem;
+  background: linear-gradient(100deg, var(--surface-1) 30%, var(--surface-3) 50%, var(--surface-1) 70%);
+  background-size: 220% 100%;
+  animation: shimmer 1.4s var(--ease) infinite;
+}
+.skeleton--search .skeleton__block { aspect-ratio: 1 / 2; height: auto; }
+@keyframes shimmer { to { background-position: -120% 0; } }
+
 .view { padding: 1rem 1.1rem 2rem; }
 .view__head {
   display: flex;
@@ -367,7 +493,12 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .view__head h2 { color: var(--text-strong); font-size: 0.95rem; font-weight: 600; }
 .view__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.66rem; }
 .view__foot { margin-top: 1rem; max-width: 92ch; color: var(--text-floor); font-size: 0.7rem; line-height: 1.6; }
-.view__foot--warn { border-left: 2px solid var(--warning); padding-left: 0.7rem; color: var(--text-muted); }
+.view__foot--warn {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--control-rule);
+  background: var(--surface-1);
+  color: var(--text-muted);
+}
 .view__foot b { color: var(--link-strong); font-family: var(--mono); font-weight: 500; }
 
 .empty {
@@ -593,67 +724,99 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 }
 .panel__note a:hover, .bullets a:hover, .view__foot a:hover { color: var(--link-strong); }
 .bullets { display: grid; gap: 0.5rem; }
-.bullets li { padding-left: 0.8rem; border-left: 2px solid var(--control-rule); color: var(--text-muted); font-size: 0.72rem; line-height: 1.55; }
+.bullets li {
+  padding: 0.5rem 0 0.5rem 1.1rem;
+  border-bottom: 1px solid var(--control-rule);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1.55;
+  text-indent: -1.1rem;
+}
+.bullets li::before { color: var(--link); content: "\2022"; padding-right: 0.65rem; }
+.bullets li:last-child { border-bottom: 0; }
 .bullets b { color: var(--text-soft); }
 
 /* --- Modal ---------------------------------------------------------------- */
 
-.modal-scrim {
-  position: fixed;
-  z-index: 100;
-  inset: 0;
-  display: grid;
-  padding: 1rem;
-  place-items: center;
-  background: rgba(0, 0, 0, 0.8);
-}
+/* A native dialog: the top layer, the backdrop and the focus trap come from the
+   platform rather than from hand-rolled key handling. */
 .modal {
-  display: flex;
-  width: min(56rem, 100%);
-  max-height: 90vh;
-  flex-direction: column;
+  width: min(58rem, calc(100vw - 2rem));
+  max-height: min(88vh, 46rem);
+  padding: 0;
   border: 1px solid var(--rule);
   background: var(--surface-1);
+  color: var(--text);
+  box-shadow: var(--lift);
 }
+.modal::backdrop { background: rgba(0, 0, 0, 0.78); }
+/* The panel moves; it does not fade. Fading the panel renders its own text at
+   partial opacity for the length of the entrance, which drops small labels
+   under 4.5:1 while it lasts. The backdrop carries the fade instead. */
+.modal[open] { animation: dialog-in 180ms var(--ease); }
+.modal[open]::backdrop { animation: fade-in 180ms var(--ease); }
+@keyframes dialog-in { from { transform: translateY(8px) scale(0.994); } }
+@keyframes fade-in { from { opacity: 0; } }
+
+.modal__inner { display: flex; max-height: inherit; flex-direction: column; }
 .modal__head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
   padding: 0.85rem;
   border-bottom: 1px solid var(--control-rule);
 }
-.modal__eyebrow { color: var(--comment); font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.11em; text-transform: uppercase; }
-.modal__head h2 { margin-top: 0.25rem; color: var(--text-strong); font-size: 0.95rem; font-weight: 600; }
-.modal__note { padding: 0.7rem 0.85rem 0; color: var(--text-floor); font-size: 0.72rem; }
+.modal__head h2 { color: var(--text-strong); font-size: 1rem; font-weight: 600; }
+.modal__note { padding: 0.8rem 0.85rem 0; color: var(--text-floor); font-size: 0.72rem; }
 
-.source-grid { display: grid; overflow-y: auto; gap: 0.7rem; padding: 0.85rem; grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr)); }
-.source-card {
-  position: relative;
+.source-grid {
   display: grid;
-  gap: 0;
+  overflow-y: auto;
+  gap: 0.7rem;
+  padding: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+}
+.source-card {
+  display: grid;
+  align-content: start;
   border: 1px solid var(--control-rule);
   background: var(--surface-2);
   text-align: left;
-  transition: border-color 120ms ease;
+  transition: border-color 160ms var(--ease), background-color 160ms var(--ease);
 }
-.source-card:hover { border-color: var(--link); }
+.source-card:hover { border-color: var(--link); background: var(--surface-3); }
 .source-card.is-on { border-color: var(--comment); }
+
+.source-card__frame { position: relative; display: block; }
+.source-card__poster {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+  filter: saturate(0.55) brightness(0.72);
+  transition: filter 200ms var(--ease);
+}
+.source-card:hover .source-card__poster,
+.source-card.is-on .source-card__poster { filter: none; }
 .source-card__check {
-  position: absolute; z-index: 2; top: 0.4rem; left: 0.4rem;
-  display: grid; width: 1.1rem; height: 1.1rem;
+  position: absolute; top: 0.4rem; left: 0.4rem;
+  display: grid; width: 1.15rem; height: 1.15rem;
   place-items: center;
-  border: 1px solid var(--control-rule);
-  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--rule);
+  background: rgba(0, 0, 0, 0.72);
   color: #000;
 }
 .source-card.is-on .source-card__check { border-color: var(--comment); background: var(--comment); }
-.source-card__poster { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
-.source-card__body { display: grid; gap: 0.25rem; padding: 0.5rem 0.6rem 0.6rem; border-top: 1px solid var(--control-rule); }
-.source-card__body strong { color: var(--text-strong); font-size: 0.78rem; }
-.source-card__body code { color: var(--text-floor); font-size: 0.6rem; }
-.source-card__meta { display: flex; flex-wrap: wrap; gap: 0.15rem 0.6rem; color: var(--text-muted); font-family: var(--mono); font-size: 0.58rem; }
-.source-card__tracks { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 0.15rem; color: var(--link-strong); font-family: var(--mono); font-size: 0.58rem; }
+
+.source-card__body { display: grid; gap: 0.5rem; padding: 0.6rem; border-top: 1px solid var(--control-rule); }
+.source-card__title { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.source-card__title strong { color: var(--text-strong); font-size: 0.82rem; }
+.source-card__title code { color: var(--text-floor); font-size: 0.6rem; }
+.source-card__spec { display: grid; gap: 0.15rem; }
+.source-card__spec > div { display: flex; justify-content: space-between; gap: 0.6rem; }
+.source-card__spec dt { color: var(--text-floor); font-size: 0.62rem; }
+.source-card__spec dd { color: var(--text-muted); font-family: var(--mono); font-size: 0.62rem; }
 
 .modal__foot {
   display: flex;
@@ -661,8 +824,10 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   gap: 0.6rem 1rem;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
   padding: 0.7rem 0.85rem;
   border-top: 1px solid var(--control-rule);
+  background: var(--surface-2);
 }
 .modal__bulk, .modal__actions { display: flex; align-items: center; gap: 0.5rem; }
 .modal__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.62rem; }
@@ -679,8 +844,19 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   .topbar__nav { order: 3; width: 100%; border-top: 1px solid var(--control-rule); }
   .workspace { grid-template-columns: minmax(0, 1fr); }
   .controls { border-right: 0; border-bottom: 1px solid var(--rule); }
+  /* Six controls is a long scroll on a phone, and the run action cannot sit at
+     the bottom of it. Pin the dock while the rail is on screen. */
+  .controls__dock {
+    position: sticky;
+    z-index: 20;
+    bottom: 0;
+    box-shadow: 0 -12px 24px -12px rgba(0, 0, 0, 0.95);
+  }
   .controls__section--grow { flex: none; }
-  .statusbar { position: sticky; bottom: 0; height: auto; flex-wrap: wrap; padding-block: 0.4rem; }
+  /* Only one bar may be pinned, and on a phone it is the one carrying the run
+     action. The counters sit at the end of the document instead of fighting it
+     for the same edge. */
+  .statusbar { height: auto; flex-wrap: wrap; padding-block: 0.5rem; }
   /* Wrapping beats scrolling here: the counters are the job's readout, and a
      sideways scroller would hide half of them behind a gesture. */
   .statusbar__cells { flex-wrap: wrap; overflow: visible; gap: 0.2rem 0.8rem; }

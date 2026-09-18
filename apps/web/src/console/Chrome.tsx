@@ -57,7 +57,8 @@ export function TopBar({
             role="tab"
             type="button"
           >
-            {item.label}
+            <span className="tab__label">{item.label}</span>
+            <kbd className="tab__key">{item.key}</kbd>
           </button>
         ))}
       </nav>
@@ -67,13 +68,7 @@ export function TopBar({
           <CircleDot aria-hidden="true" size={11} />
           {running ? "Running" : "Replay"}
         </span>
-        <a
-          className="topbar__link"
-          href={repository}
-          rel="noreferrer"
-          target="_blank"
-          title="Source repository"
-        >
+        <a className="topbar__link" href={repository} rel="noreferrer" target="_blank">
           Source <ExternalLink aria-hidden="true" size={11} />
         </a>
       </div>
@@ -81,41 +76,89 @@ export function TopBar({
   );
 }
 
-export function StatusBar({ result, stage }: { result: RunResult | null; stage: string }) {
-  const stats = result?.stats;
+/**
+ * One counter, with how far it moved since the previous run. The delta is the
+ * point of the readout: it turns "190 detections" into "190, down 108", which
+ * is what a threshold change actually did.
+ */
+function Cell({ label, value, previous, format }: {
+  label: string;
+  value: number;
+  previous: number | null;
+  format?: (n: number) => string;
+}) {
+  const shown = format ? format(value) : value.toLocaleString();
+  const delta = previous === null ? 0 : value - previous;
+  const moved = Math.abs(delta) > (format ? 0.0005 : 0);
+  return (
+    <span className="cell">
+      <span className="cell__label">{label}</span>
+      <b className="cell__value">{shown}</b>
+      {moved ? (
+        <span className={delta > 0 ? "cell__delta is-up" : "cell__delta is-down"}>
+          {delta > 0 ? "+" : "-"}
+          {format ? format(Math.abs(delta)) : Math.abs(delta).toLocaleString()}
+        </span>
+      ) : null}
+    </span>
+  );
+}
+
+export function StatusBar({
+  result,
+  previous,
+  stage
+}: {
+  result: RunResult | null;
+  previous: RunResult | null;
+  stage: string;
+}) {
+  const s = result?.stats;
+  const p = previous?.stats ?? null;
+  const three = (n: number) => n.toFixed(3);
+
   return (
     <footer className="statusbar">
       <span className="statusbar__stage">
         <Activity aria-hidden="true" size={11} />
         {stage}
       </span>
+
       <span className="statusbar__cells">
-        <span>
-          clips <b>{stats?.clips ?? 0}</b>
-        </span>
-        <span>
-          frames <b>{stats?.framesProcessed ?? 0}</b>
-        </span>
-        <span>
-          detections <b>{stats?.detectionsKept ?? 0}</b>
-        </span>
-        <span>
-          people <b>{stats?.peopleIndexed ?? 0}</b>
-        </span>
-        <span>
-          links <b>{stats?.crossLinks ?? 0}</b>
-        </span>
-        <span>
-          mean conf <b>{stats ? stats.meanConfidence.toFixed(3) : "0.000"}</b>
-        </span>
-        <span>
-          descriptor <b>{stats?.descriptorDim ?? 256}D</b>
+        <Cell label="clips" previous={p?.clips ?? null} value={s?.clips ?? 0} />
+        <Cell label="frames" previous={p?.framesProcessed ?? null} value={s?.framesProcessed ?? 0} />
+        <Cell label="detections" previous={p?.detectionsKept ?? null} value={s?.detectionsKept ?? 0} />
+        <Cell label="people" previous={p?.peopleIndexed ?? null} value={s?.peopleIndexed ?? 0} />
+        <Cell label="links" previous={p?.crossLinks ?? null} value={s?.crossLinks ?? 0} />
+        <Cell
+          format={three}
+          label="mean conf"
+          previous={p?.meanConfidence ?? null}
+          value={s?.meanConfidence ?? 0}
+        />
+        <span className="cell">
+          <span className="cell__label">descriptor</span>
+          <b className="cell__value">{s?.descriptorDim ?? 256}D</b>
         </span>
       </span>
+
       <span className="statusbar__mode" title="No model runs in this browser">
         <Cpu aria-hidden="true" size={11} />
         no inference in browser
       </span>
     </footer>
+  );
+}
+
+/** Holds the viewport's shape while a run recomputes, instead of blanking it. */
+export function Skeleton({ kind }: { kind: ViewId }) {
+  const rows = kind === "search" ? 18 : kind === "cross" ? 8 : 6;
+  return (
+    <div aria-busy="true" aria-live="polite" className={`skeleton skeleton--${kind}`}>
+      <span className="sr-only">Applying thresholds</span>
+      {Array.from({ length: rows }, (_, index) => (
+        <span className="skeleton__block" key={index} style={{ animationDelay: `${index * 40}ms` }} />
+      ))}
+    </div>
   );
 }

@@ -143,6 +143,72 @@ function boxHeight(appearance: WorkbenchAppearance): number {
   return appearance.bbox[3] - appearance.bbox[1];
 }
 
+/**
+ * The distribution each threshold is cutting through.
+ *
+ * A slider that shows only its own number asks the operator to guess what
+ * moving it will cost. These are the real stored values behind each control, so
+ * the histogram under a slider is the data the threshold acts on, not a
+ * decoration of it: the operator can see that the mass of detections sits at
+ * 0.60 before deciding to cut at 0.65.
+ *
+ * Computed once. Nothing here depends on the current settings.
+ */
+function samplesFor(key: keyof Settings): number[] {
+  const appearances = Object.values(personSearch.details).flatMap((entry) => entry.appearances);
+  switch (key) {
+    case "detConf":
+      return appearances.map((appearance) => appearance.score);
+    case "trackActivation":
+      return personSearch.people.map((person) => person.best_score);
+    case "minBoxHeight":
+      return appearances.map(boxHeight);
+    case "frameLimit":
+      return appearances.map((appearance) => appearance.frame_index);
+    case "similarity":
+      return Object.values(personSearch.matches).flatMap((list) => list.map((m) => m.similarity));
+    default:
+      return [];
+  }
+}
+
+export type Distribution = {
+  /** Bin heights normalised to 0..1, left to right across the control's range. */
+  bins: number[];
+  total: number;
+};
+
+const BIN_COUNT = 28;
+
+export const DISTRIBUTIONS: Partial<Record<keyof Settings, Distribution>> = Object.fromEntries(
+  RANGES.map((range) => {
+    const samples = samplesFor(range.key);
+    if (samples.length === 0) return [range.key, undefined];
+    const bins = new Array(BIN_COUNT).fill(0);
+    const span = range.max - range.min || 1;
+    for (const value of samples) {
+      const slot = Math.round(((value - range.min) / span) * (BIN_COUNT - 1));
+      if (slot >= 0 && slot < BIN_COUNT) bins[slot] += 1;
+    }
+    const peak = Math.max(...bins, 1);
+    return [range.key, { bins: bins.map((count) => count / peak), total: samples.length }];
+  }).filter((entry): entry is [keyof Settings, Distribution] => entry[1] !== undefined)
+) as Partial<Record<keyof Settings, Distribution>>;
+
+/** How many stored values a threshold currently keeps, and out of how many. */
+export function survivorsFor(key: keyof Settings, value: number): { kept: number; total: number } | null {
+  const samples = samplesFor(key);
+  if (samples.length === 0) return null;
+  // Frame limit is an upper bound; every other control is a floor.
+  const kept =
+    key === "frameLimit"
+      ? value === 0
+        ? samples.length
+        : samples.filter((sample) => sample <= value).length
+      : samples.filter((sample) => sample >= value).length;
+  return { kept, total: samples.length };
+}
+
 export function runQuery(settings: Settings): RunResult {
   const selected = new Set(settings.sources);
   const sources = personSearch.videos.filter((video) => selected.has(video.id));
