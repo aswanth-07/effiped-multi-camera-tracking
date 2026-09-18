@@ -7,19 +7,30 @@ Dates are the dates of the commits that made each change.
 
 ## [Unreleased]
 
-### Removed
-
-- The GitHub Actions workflow. Lint, tests, the three release validators, the
-  web typecheck, build, audit and end-to-end suite, and the secret scan are no
-  longer run automatically on push. Every one of those commands is listed in
-  [CONTRIBUTING.md](CONTRIBUTING.md) and still fails the same way when run.
-
 ### Changed
 
-- The demo workbench replaces the earlier single-pane demo console with six panels:
-  Single Camera, Cross Camera, Person Search, Image Detection, Model Status and
-  Research Context, mirroring the original PedestrianTracker application layout.
-  Four P-DESTRE session `12-11-2019_3` clips ship pre-attached (2026-08-06).
+- The web interface is an identity review console: fixed chrome, one viewport, six
+  workspaces on the number keys (Person Search, Detection, Tracking, Cross Camera,
+  Sources, Model), thresholds in a panel that drops from the bar instead of a rail
+  that spends a fifth of the window on controls touched once a session, and a status
+  bar that prints what each threshold change cost. It replaces the six-panel demo
+  workbench that mirrored the original PedestrianTracker layout (2026-09-18).
+- Person search is a review workflow rather than a grid of results: one source clip
+  with that camera's gallery beside it, a time window over the clip, and the ranked
+  candidates for whoever is selected, each shown with the full frame it was cropped
+  from and that frame's provenance (2026-09-18).
+- Each threshold shows the distribution it is cutting, so a slider says how many
+  detections, tracks or links survive the position it is in (2026-09-18).
+- The viewport carries structure with distance and hairline rings instead of a border
+  around every group. Content sits on a measure with a gutter that opens with the
+  window, media stops at its native 960px rather than being upscaled into a
+  full-window slab, and a camera's gallery reads as photographs of people rather than
+  as a lattice of cards (2026-09-19).
+- The six-panel demo workbench, which the console above replaced, had itself replaced
+  the earlier single-pane demo console: Single Camera, Cross Camera, Person Search,
+  Image Detection, Model Status and Research Context, mirroring the original
+  PedestrianTracker application layout. Four P-DESTRE session `12-11-2019_3` clips
+  ship pre-attached (2026-08-06).
 - The architecture diagram was rebuilt from a clean deck; the SVG, PNG and editable
   PPTX under `docs/architecture/` are regenerated from that source (2026-08-06).
 - Full-frame views for a single appearance are redrawn in the browser by seeking the
@@ -28,6 +39,10 @@ Dates are the dates of the commits that made each change.
 
 ### Removed
 
+- The GitHub Actions workflow. Lint, tests, the three release validators, the
+  web typecheck, build, audit and end-to-end suite, and the secret scan are no
+  longer run automatically on push. Every one of those commands is listed in
+  [CONTRIBUTING.md](CONTRIBUTING.md) and still fails the same way when run.
 - Dead code with no reachable caller: `EventOut` (declared but never applied, since
   the WebSocket route sends plain dicts), `SEBlock` (the fusion path uses BiFPN-style
   learned weights and referenced it nowhere), and five helpers in

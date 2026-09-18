@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowDown, Clock, Search, Video } from "lucide-react";
+import { ArrowLeft, ArrowUp, Clock, Search, Video } from "lucide-react";
 
 import { drawFrame } from "../components/frameGrabber";
 import { clipDuration, provenanceFor, type PersonRow, type RunResult, type Settings } from "../engine/pipeline";
@@ -383,7 +383,7 @@ export function SearchView({
 
         {!row ? (
           <p className="matches__prompt">
-            <ArrowDown aria-hidden="true" size={13} />
+            <ArrowUp aria-hidden="true" size={13} />
             Select anyone in the gallery above to see who they may match in the other cameras.
           </p>
         ) : matches.length === 0 ? (
@@ -433,7 +433,7 @@ export function SearchView({
                 <MatchFrame personId={active.person.id} similarity={active.similarity} />
               ) : (
                 <p className="matches__prompt">
-                  <ArrowDown aria-hidden="true" size={13} />
+                  <ArrowLeft aria-hidden="true" className="matches__prompt-arrow" size={13} />
                   Select a candidate to see the full frame it was cropped from.
                 </p>
               )}

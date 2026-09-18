@@ -1,11 +1,17 @@
 /* ---------------------------------------------------------------------------
    EffiPed Identity Review Console.
 
-   An application, not a document. Fixed chrome, a control rail, one viewport,
-   and a status bar that reports the job. Pure black ground, hairline rules,
-   Segoe UI or IBM Plex Sans for the interface, Consolas or IBM Plex Mono for
-   every figure, identifier and label. Blue carries data, green carries state,
-   amber warns, red is only the active indicator. Square corners throughout.
+   An application, not a document. Fixed chrome, a drop-down control panel, one
+   viewport, and a status bar that reports the job. Pure black ground, Segoe UI
+   or IBM Plex Sans for the interface, Consolas or IBM Plex Mono for every
+   figure, identifier and label. Blue carries data, green carries state, amber
+   warns, red is only the active indicator.
+
+   The viewport is composed rather than filled. Content sits on a measure with
+   a gutter that opens with the window, groups are separated by distance
+   instead of by a border drawn around each one, and a hairline ring is spent
+   only on the things a reviewer can pick up. Outlining every group is what
+   made the middle of this console read as a lattice of boxes.
    --------------------------------------------------------------------------- */
 
 :root {
@@ -47,12 +53,43 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* A small, consistent radius. Every panel used to be a hard rectangle with a
-     hairline on all four sides, which stacked into a grid of boxes. */
-  --r-sm: 4px;
-  --r-md: 6px;
-  --r-lg: 10px;
+  --r-sm: 5px;
+  --r-md: 9px;
+  --r-lg: 14px;
   --r-pill: 999px;
+
+  /* One spacing scale. Grouping is carried by distance here, so the steps have
+     to be far enough apart to be read as different: an item, a group, a
+     section. A single 1rem gap everywhere says nothing about structure. */
+  --s-1: 0.35rem;
+  --s-2: 0.6rem;
+  --s-3: 1rem;
+  --s-4: 1.65rem;
+  --s-5: 2.6rem;
+
+  /* The work has a measure and a gutter that opens with the window, so a wide
+     monitor gives it air instead of stretching a table across a metre of
+     glass. */
+  --gutter: clamp(1.05rem, 3.6vw, 3.5rem);
+  --measure: 102rem;
+
+  /* A ring is an inset hairline. It takes no part in layout, so a picked object
+     can gain and lose its edge without shifting anything beside it, and an edge
+     can be spent on the one thing that has been selected rather than on all of
+     its neighbours at once. */
+  --ring-soft: inset 0 0 0 1px rgba(230, 237, 243, 0.045);
+  --ring: inset 0 0 0 1px rgba(230, 237, 243, 0.07);
+  --ring-live: inset 0 0 0 1px rgba(89, 165, 252, 0.55);
+  --ring-on: inset 0 0 0 1px var(--comment);
+  --halo-on: 0 0 0 3px rgba(134, 255, 107, 0.16);
+
+  /* A plane is a surface lit slightly from above rather than outlined. */
+  --plane:
+    linear-gradient(180deg, rgba(230, 237, 243, 0.035), rgba(230, 237, 243, 0) 4.5rem),
+    var(--surface-1);
+
+  /* A separator inside one object, as opposed to a rule between two of them. */
+  --seam: 1px solid rgba(230, 237, 243, 0.05);
 
   --t-fast: 130ms;
   --t-base: 220ms;
@@ -385,7 +422,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 }
 
 .controls__scroll { overflow-y: auto; overscroll-behavior: contain; }
-.controls__section { padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--control-rule); }
+.controls__section { padding: var(--s-3) var(--gutter); border-bottom: 1px solid var(--control-rule); }
 .controls__section--grid {
   display: grid;
   gap: 1rem 1.6rem;
@@ -396,7 +433,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   flex-wrap: wrap;
   gap: 0.6rem 1rem;
   align-items: center;
-  padding: 0.7rem 1.1rem;
+  padding: 0.7rem var(--gutter);
   border-top: 1px solid var(--rule);
   background: var(--surface-2);
 }
@@ -608,6 +645,16 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 
 .viewport { position: relative; overflow-y: auto; background: var(--black); }
 
+/* Every workspace lays itself out on the same measure, so switching tabs never
+   moves the left edge of the work, and a wide window opens the gutter instead
+   of stretching the content into it. */
+.view, .search, .skeleton {
+  width: 100%;
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding: var(--s-4) var(--gutter) var(--s-5);
+}
+
 .runbar {
   position: sticky;
   z-index: 5;
@@ -615,7 +662,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.9rem;
+  padding: 0.4rem var(--gutter);
   border-bottom: 1px solid var(--control-rule);
   background: var(--surface-2);
   color: var(--comment);
@@ -628,12 +675,12 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 
 /* First load holds the shape instead of blanking it. A re-run keeps the
    previous output on screen, so this is only ever the cold start. */
-.skeleton { display: grid; gap: 0.5rem; padding: 1rem 1.1rem; }
-.skeleton--search { grid-template-columns: repeat(auto-fill, minmax(5.6rem, 1fr)); }
+.skeleton { display: grid; gap: var(--s-2); }
+.skeleton--search { grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); }
 .skeleton--cross, .skeleton--model, .skeleton--sources { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
 .skeleton__block {
   height: 7.5rem;
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: linear-gradient(100deg, var(--surface-1) 30%, var(--surface-3) 50%, var(--surface-1) 70%);
   background-size: 220% 100%;
   animation: shimmer 1.4s var(--ease) infinite;
@@ -641,24 +688,28 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .skeleton--search .skeleton__block { aspect-ratio: 1 / 2; height: auto; }
 @keyframes shimmer { to { background-position: -120% 0; } }
 
-.view { padding: 1rem 1.1rem 2rem; }
+.view { display: grid; align-content: start; gap: var(--s-4); }
+/* The heading owns the space above the work. A full-width rule under every
+   heading was one more horizontal line in a view that already had too many. */
 .view__head {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.7rem 1rem;
-  align-items: center;
+  gap: var(--s-2) var(--s-3);
+  align-items: baseline;
   justify-content: space-between;
-  padding-bottom: 0.7rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--control-rule);
 }
-.view__head h2 { color: var(--text-strong); font-size: 0.95rem; font-weight: 600; }
+.view__head h2 {
+  color: var(--text-strong);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
 .view__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.66rem; }
-.view__foot { margin-top: 1rem; max-width: 92ch; color: var(--text-floor); font-size: 0.7rem; line-height: 1.6; }
+.view__foot { max-width: 88ch; color: var(--text-floor); font-size: 0.72rem; line-height: 1.65; }
+/* An aside is marked by the rule it hangs off, not by a box drawn round it. */
 .view__foot--warn {
-  padding: 0.6rem 0.75rem;
-  border: 1px solid var(--control-rule);
-  background: var(--surface-1);
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 2px solid var(--control-rule);
   color: var(--text-muted);
 }
 .view__foot b { color: var(--link-strong); font-family: var(--mono); font-weight: 500; }
@@ -668,30 +719,52 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   min-height: 60%;
   align-content: center;
   justify-items: center;
-  gap: 0.8rem;
+  gap: var(--s-3);
+  padding: var(--s-5) var(--gutter);
   color: var(--text-floor);
   text-align: center;
 }
 .empty svg { color: var(--control-rule); }
 
-.seg { display: flex; overflow: hidden; border: 1px solid var(--control-rule); border-radius: var(--r-sm); }
+/* One control carrying a selection, rather than four walled cells. */
+.seg {
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.15rem;
+  border-radius: var(--r-pill);
+  background: var(--surface-1);
+  box-shadow: var(--ring-soft);
+}
 .seg__item {
-  padding: 0.35rem 0.7rem;
-  border-right: 1px solid var(--control-rule);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--r-pill);
   color: var(--text-muted);
   font-family: var(--mono);
   font-size: 0.62rem;
   letter-spacing: 0.05em;
+  transition: color var(--t-base) var(--ease), background-color var(--t-base) var(--ease);
 }
-.seg__item:last-child { border-right: 0; }
-.seg__item:hover { color: var(--link-strong); background: var(--surface-1); }
+.seg__item:hover { color: var(--link-strong); background: var(--hover); }
 .seg__item.is-on { color: #000; background: var(--link); }
+.seg__item.is-on:hover { color: #000; background: var(--link-strong); }
 
 /* --- Stage and media ------------------------------------------------------ */
 
-.stage { position: relative; overflow: hidden; border: 1px solid var(--rule); border-radius: var(--r-md); background: var(--surface-1); }
+/* The source clips are 960x540. Letting the stage fill a desk-width window
+   upscaled one of them into a slab that was the whole middle of the screen, so
+   it stops at the resolution it actually has and centres what is left. */
+.stage {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 60rem;
+  margin-inline: auto;
+  border-radius: var(--r-lg);
+  background: var(--surface-1);
+  box-shadow: var(--ring);
+}
 .stage__canvas, .stage video { width: 100%; height: auto; background: #000; }
-.stage--flush { display: flex; flex-direction: column; }
+.stage--flush { display: flex; max-width: none; flex-direction: column; }
 .stage__status {
   position: absolute; top: 0.5rem; left: 0.5rem;
   padding: 0.2rem 0.45rem;
@@ -703,8 +776,8 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .stage__hud {
   display: flex;
   gap: 1rem;
-  padding: 0.45rem 0.7rem;
-  border-top: 1px solid var(--control-rule);
+  padding: 0.5rem 0.85rem;
+  border-top: var(--seam);
   color: var(--text-floor);
   font-family: var(--mono);
   font-size: 0.62rem;
@@ -713,47 +786,68 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 
 .scrubber {
   display: grid;
-  gap: 0.4rem 0.8rem;
+  width: 100%;
+  max-width: 60rem;
+  gap: 0.4rem 0.9rem;
   align-items: center;
-  margin-top: 0.8rem;
+  margin-inline: auto;
   grid-template-columns: auto minmax(0, 1fr) auto;
 }
 .scrubber label { color: var(--text-muted); font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; }
 .scrubber input { width: 100%; height: 1.1rem; appearance: none; background: transparent; cursor: pointer; }
-.scrubber input::-webkit-slider-runnable-track { height: 2px; background: var(--control-rule); }
-.scrubber input::-moz-range-track { height: 2px; background: var(--control-rule); }
-.scrubber input::-webkit-slider-thumb { width: 0.7rem; height: 0.85rem; margin-top: -0.4rem; appearance: none; background: var(--comment); border: 0; }
-.scrubber input::-moz-range-thumb { width: 0.7rem; height: 0.85rem; background: var(--comment); border: 0; border-radius: 0; }
+/* A round handle on a round rail. A rectangular thumb was one more square in a
+   view that had too many already. */
+.scrubber input::-webkit-slider-runnable-track { height: 2px; border-radius: var(--r-pill); background: var(--control-rule); }
+.scrubber input::-moz-range-track { height: 2px; border-radius: var(--r-pill); background: var(--control-rule); }
+.scrubber input::-webkit-slider-thumb {
+  width: 0.8rem; height: 0.8rem; margin-top: -0.39rem;
+  appearance: none; background: var(--comment); border: 0; border-radius: 50%;
+}
+.scrubber input::-moz-range-thumb { width: 0.8rem; height: 0.8rem; background: var(--comment); border: 0; border-radius: 50%; }
 .scrubber__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.62rem; white-space: nowrap; }
 
-.split { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+.split { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 62rem) {
-  .split { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
+  .split { gap: var(--s-5); grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
   .split--matrix { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
+.split--matrix > div { display: grid; align-content: start; gap: var(--s-3); }
 
-.clip-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
-.clip { overflow: hidden; border: 1px solid var(--rule); border-radius: var(--r-md); background: var(--surface-1); }
+.clip-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
+.clip {
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  background: var(--plane);
+  box-shadow: var(--ring);
+  transition: box-shadow var(--t-base) var(--ease);
+}
+.clip:hover { box-shadow: var(--ring-live); }
 .clip video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.clip figcaption { padding: 0.7rem 0.8rem; border-top: 1px solid var(--control-rule); }
+.clip figcaption { padding: 0.85rem 0.95rem; }
 .clip__title { display: flex; gap: 0.5rem; align-items: baseline; justify-content: space-between; margin-bottom: 0.5rem; }
 .clip__title strong { color: var(--text-strong); font-size: 0.82rem; }
 .clip__title code { color: var(--text-floor); font-size: 0.66rem; }
 
-.kv { display: grid; gap: 0.3rem 1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.kv { display: grid; gap: 0.4rem 1.4rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .kv--wide { grid-template-columns: minmax(0, 1fr); }
-.kv > div { display: flex; gap: 0.6rem; justify-content: space-between; padding-bottom: 0.2rem; border-bottom: 1px dotted var(--control-rule); }
+.kv > div { display: flex; gap: 0.6rem; justify-content: space-between; padding-bottom: 0.3rem; border-bottom: var(--seam); }
+.kv > div:last-child { border-bottom: 0; }
 .kv dt { color: var(--text-floor); font-size: 0.68rem; }
 .kv dd { color: var(--text-soft); font-family: var(--mono); font-size: 0.68rem; text-align: right; }
 
 /* --- Tables --------------------------------------------------------------- */
 
-.table-pane { overflow: auto; max-height: 30rem; border: 1px solid var(--rule); border-radius: var(--r-md); }
-.grid-table { font-size: 0.72rem; }
-.grid-table th, .grid-table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--control-rule); text-align: left; }
+.table-pane {
+  overflow: auto;
+  max-height: clamp(16rem, 52vh, 34rem);
+  border-radius: var(--r-lg);
+  background: var(--plane);
+  box-shadow: var(--ring-soft);
+}
+.grid-table { font-size: 0.73rem; }
+.grid-table th, .grid-table td { padding: 0.5rem 0.8rem; border-bottom: var(--seam); text-align: left; }
 .grid-table thead th {
-  position: sticky; top: 0;
-  background: var(--surface-2);
+  background: var(--black);
   color: var(--text-floor);
   font-family: var(--mono);
   font-size: 0.58rem;
@@ -761,117 +855,159 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
+/* Only a table inside its own scroller has a head worth pinning. Sticking the
+   head of a table that scrolls with the page pins it to the top of the
+   viewport, over whatever else happens to be up there. */
+.table-pane .grid-table thead th { position: sticky; top: 0; z-index: 1; background: var(--surface-2); }
 .grid-table tbody th { color: var(--text-soft); font-weight: 500; }
 .grid-table tbody td { color: var(--text-muted); }
-.grid-table tbody tr:hover { background: var(--surface-1); }
+.grid-table tbody tr:last-child th, .grid-table tbody tr:last-child td { border-bottom: 0; }
+.grid-table tbody tr { transition: background-color var(--t-fast) var(--ease); }
+.grid-table tbody tr:hover { background: var(--hover); }
 .table-pane tbody tr { cursor: pointer; }
+/* A table with no scroller of its own still needs a measure. Five columns
+   spread across a metre of glass stop being a table and become five lists that
+   happen to share a row. */
+.archive .grid-table, .panel .grid-table { max-width: 72rem; }
 .grid-table tr.is-good td.is-num, .grid-table tr.is-good th { color: var(--comment); }
 .grid-table tr.is-weak td.is-num { color: var(--warning); }
 
-.matrix { overflow: hidden; border: 1px solid var(--rule); border-radius: var(--r-md); font-family: var(--mono); font-size: 0.72rem; }
-.matrix th, .matrix td { padding: 0.5rem; border: 1px solid var(--control-rule); text-align: center; }
+/* The cells are the grid. Drawing a border around all sixteen of them as well
+   made the matrix the heaviest object on the screen, for sixteen numbers. */
+.matrix {
+  border-collapse: separate;
+  border-spacing: 3px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+/* Sized to its figures, so the association counts read as one compact grid
+   instead of a banner with sixteen numbers spaced out across it. */
+.matrix { width: auto; justify-self: start; }
+.matrix th, .matrix td { min-width: 4rem; padding: 0.8rem 0.5rem; text-align: center; }
+.matrix td { border-radius: var(--r-sm); background: var(--surface-1); }
 .matrix thead th { color: var(--text-floor); font-weight: 400; }
 .matrix tbody th { color: var(--text-floor); font-weight: 400; }
 .matrix__cell { color: var(--text-strong); }
-.matrix__self { color: var(--control-rule); }
+.matrix__self { color: var(--control-rule); background: transparent; box-shadow: var(--ring-soft); }
 
-.linklist { overflow: hidden; border: 1px solid var(--rule); border-radius: var(--r-md); }
-.linklist li { border-bottom: 1px solid var(--control-rule); }
-.linklist li:last-child { border-bottom: 0; }
-.linklist button { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.45rem 0.7rem; }
-.linklist button:hover { background: var(--surface-1); }
+.linklist { overflow: hidden; border-radius: var(--r-lg); background: var(--plane); box-shadow: var(--ring-soft); }
+.linklist li + li { border-top: var(--seam); }
+.linklist button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.9rem;
+  transition: background-color var(--t-fast) var(--ease);
+}
+.linklist button:hover { background: var(--hover); }
 .linklist__pair { display: flex; align-items: center; gap: 0.5rem; color: var(--text-soft); font-size: 0.7rem; }
 .linklist__pair span { color: var(--text-floor); }
 .linklist__score { color: var(--link-strong); font-family: var(--mono); font-size: 0.7rem; }
-.linklist__none { padding: 0.6rem 0.7rem; color: var(--text-floor); font-size: 0.7rem; }
+.linklist__none { padding: 0.6rem 0.9rem; color: var(--text-floor); font-size: 0.7rem; }
 
-.archive { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--control-rule); }
-.archive .panel-label { margin-bottom: 0.6rem; }
+/* A real section break: space first, then one rule across the measure. */
+.archive {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  margin-top: var(--s-2);
+  border-top: 1px solid var(--control-rule);
+}
 
 /* --- Person search ------------------------------------------------------- */
 
 /* Source on the left with its picker under it, that source's gallery on the
    right, and the candidates for whoever is selected below both. */
-.search { display: grid; gap: 1rem; padding: 1rem 1.1rem 2rem; }
-.search__top { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+/* The workspace claims the viewport: source and gallery take the height they
+   need, the candidates take what is left. Sizing the candidates to their own
+   content left a third of the screen as dead black underneath them. */
+.search {
+  display: grid;
+  min-height: 100%;
+  gap: var(--s-4);
+  grid-template-rows: auto 1fr;
+}
+.search__top { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 66rem) {
-  .search__top { grid-template-columns: minmax(20rem, 27rem) minmax(0, 1fr); align-items: start; }
+  .search__top { gap: var(--s-5); grid-template-columns: minmax(17.5rem, 22rem) minmax(0, 1fr); align-items: start; }
 }
 
-.pane { display: grid; align-content: start; gap: 0.7rem; }
+.pane { display: grid; align-content: start; gap: var(--s-3); }
 .pane__head {
   display: flex;
   flex-wrap: wrap;
   gap: 0.3rem 0.8rem;
   align-items: baseline;
   justify-content: space-between;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--control-rule);
 }
-.pane__title { color: var(--text-strong); font-size: 0.9rem; font-weight: 600; }
-.pane__title code { color: var(--link-strong); }
+.pane__title {
+  color: var(--text-strong);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+.pane__title code { color: var(--link-strong); font-size: 0.86em; }
 .pane__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.66rem; }
 .pane__empty {
-  padding: 1rem;
-  border: 1px solid var(--control-rule);
-  border-radius: var(--r-md);
-  background: var(--surface-1);
+  max-width: 62ch;
+  padding: 0.2rem 0 0.2rem 0.95rem;
+  border-left: 2px solid var(--control-rule);
   color: var(--text-muted);
-  font-size: 0.75rem;
-  line-height: 1.6;
+  font-size: 0.78rem;
+  line-height: 1.7;
 }
 
 .pane__video {
   width: 100%;
   aspect-ratio: 16 / 9;
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: #000;
+  box-shadow: var(--ring);
   object-fit: cover;
 }
 
-/* Posters, because a reviewer recognises the scene faster than the label. */
-.picker { display: grid; gap: 0.4rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+/* Posters, because a reviewer recognises the scene faster than the label. The
+   poster is the control: a card drawn round each one turned a row of four
+   scenes into a row of four boxes that happened to have pictures in them. */
+.picker { display: grid; gap: var(--s-2); grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .picker__item {
   display: grid;
-  gap: 0.2rem;
-  padding: 0.25rem;
-  border: 1px solid var(--control-rule);
-  border-radius: var(--r-md);
-  background: var(--surface-1);
   text-align: left;
-  transition:
-    border-color var(--t-base) var(--ease),
-    background-color var(--t-base) var(--ease),
-    transform var(--t-fast) var(--ease);
+  transition: transform var(--t-fast) var(--ease);
 }
 .picker__item img {
   width: 100%;
   aspect-ratio: 16 / 9;
+  margin-bottom: 0.32rem;
   object-fit: cover;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   background: #000;
-  filter: saturate(0.5) brightness(0.7);
-  transition: filter var(--t-base) var(--ease);
+  box-shadow: var(--ring-soft);
+  filter: saturate(0.45) brightness(0.62);
+  transition: filter var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
 }
-.picker__item:hover { border-color: var(--link); background: var(--surface-2); transform: translateY(-1px); }
+.picker__item:hover { transform: translateY(-2px); }
+.picker__item:hover img { box-shadow: var(--ring-live); }
 .picker__item:hover img, .picker__item.is-on img { filter: none; }
-.picker__item.is-on { border-color: var(--comment); box-shadow: 0 0 0 1px var(--comment); }
-.picker__name { color: var(--text-soft); font-size: 0.62rem; }
-.picker__n { color: var(--text-floor); font-family: var(--mono); font-size: 0.58rem; }
+.picker__item.is-on img { box-shadow: var(--ring-on), var(--halo-on); }
+.picker__name { color: var(--text-muted); font-size: 0.64rem; transition: color var(--t-base) var(--ease); }
+.picker__item:hover .picker__name, .picker__item.is-on .picker__name { color: var(--text-strong); }
+.picker__n { color: var(--text-floor); font-family: var(--mono); font-size: 0.58rem; line-height: 1.4; }
 
 .ghost-button--wide { justify-content: center; width: 100%; }
 .ghost-button--mini { min-height: 1.6rem; padding: 0 0.45rem; font-size: 0.56rem; }
 
+/* A row of controls sitting on the ground, not a bar boxed off from the very
+   gallery it filters. */
 .timefilter {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.9rem;
+  gap: var(--s-2) var(--s-4);
   align-items: center;
-  padding: 0.55rem 0.7rem;
-  border: 1px solid var(--control-rule);
-  border-radius: var(--r-md);
-  background: var(--surface-1);
+  padding-bottom: var(--s-3);
+  border-bottom: var(--seam);
 }
 .timefilter__icon { flex: none; color: var(--link); }
 .timefilter__leg { display: flex; flex: 1 1 11rem; align-items: center; gap: 0.45rem; min-width: 0; }
@@ -891,13 +1027,13 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   background: transparent;
   cursor: pointer;
 }
-.timefilter__leg input::-webkit-slider-runnable-track { height: 2px; background: var(--control-rule); }
-.timefilter__leg input::-moz-range-track { height: 2px; background: var(--control-rule); }
+.timefilter__leg input::-webkit-slider-runnable-track { height: 2px; border-radius: var(--r-pill); background: var(--control-rule); }
+.timefilter__leg input::-moz-range-track { height: 2px; border-radius: var(--r-pill); background: var(--control-rule); }
 .timefilter__leg input::-webkit-slider-thumb {
-  width: 0.6rem; height: 0.8rem; margin-top: -0.39rem;
-  appearance: none; background: var(--link); border: 0;
+  width: 0.75rem; height: 0.75rem; margin-top: -0.36rem;
+  appearance: none; background: var(--link); border: 0; border-radius: 50%;
 }
-.timefilter__leg input::-moz-range-thumb { width: 0.6rem; height: 0.8rem; background: var(--link); border: 0; border-radius: 0; }
+.timefilter__leg input::-moz-range-thumb { width: 0.75rem; height: 0.75rem; background: var(--link); border: 0; border-radius: 50%; }
 .timefilter__leg output {
   min-width: 2.7rem;
   color: var(--link-strong);
@@ -906,43 +1042,34 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   text-align: right;
 }
 
-.gallery { display: grid; gap: 0.45rem; grid-template-columns: repeat(auto-fill, minmax(6.2rem, 1fr)); }
+/* Narrow enough that a camera's whole gallery is normally one row, because the
+   reviewer compares across it and a second row puts half the people below the
+   candidates they would be compared against. */
+.gallery { display: grid; gap: var(--s-3) var(--s-2); grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr)); }
+/* The crop is the object and the lines under it are its caption. The card that
+   used to be drawn around each one put a rectangle on every person in the
+   gallery, so nine people read as nine boxes. */
 .tile {
   display: grid;
-  gap: 0.2rem;
-  padding: 0.3rem;
-  border: 1px solid var(--control-rule);
-  border-radius: var(--r-md);
-  background: var(--surface-1);
   text-align: left;
-  transition:
-    border-color var(--t-base) var(--ease),
-    background-color var(--t-base) var(--ease),
-    box-shadow var(--t-base) var(--ease),
-    transform var(--t-fast) var(--ease);
+  transition: transform var(--t-fast) var(--ease);
 }
-.tile:hover {
-  border-color: var(--link);
-  background: var(--surface-2);
-  box-shadow: var(--lift-sm);
-  transform: translateY(-2px);
-}
-.tile:active { transform: translateY(0); }
-.tile.is-on {
-  border-color: var(--comment);
-  background: var(--surface-3);
-  box-shadow: 0 0 0 1px var(--comment);
-}
+.tile:hover { transform: translateY(-3px); }
+.tile:active { transform: translateY(-1px); }
 .tile__crop {
   width: 100%;
   aspect-ratio: 1 / 2;
+  margin-bottom: 0.4rem;
   object-fit: cover;
-  border-radius: var(--r-sm);
+  border-radius: var(--r-md);
   background: #000;
-  transition: filter var(--t-base) var(--ease);
-  filter: saturate(0.85);
+  box-shadow: var(--ring-soft);
+  filter: saturate(0.8) brightness(0.86);
+  transition: filter var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
 }
+.tile:hover .tile__crop { box-shadow: var(--ring-live), var(--lift-sm); }
 .tile:hover .tile__crop, .tile.is-on .tile__crop { filter: none; }
+.tile.is-on .tile__crop { box-shadow: var(--ring-on), var(--halo-on); }
 .tile__crop--none { display: block; background: var(--surface-3); }
 /* The gallery is a result, so it arrives rather than appearing fully formed. */
 .gallery .tile { animation: rise var(--t-base) var(--ease-out) backwards; }
@@ -953,60 +1080,84 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .gallery .tile:nth-child(5) { animation-delay: 80ms; }
 .gallery .tile:nth-child(n + 6) { animation-delay: 100ms; }
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
-.tile__meta { display: flex; align-items: center; justify-content: space-between; gap: 0.3rem; }
-.tile__meta code { color: var(--text-muted); font-size: 0.6rem; }
-.tile__score { font-family: var(--mono); font-size: 0.63rem; }
-.tile__sub { color: var(--text-floor); font-family: var(--mono); font-size: 0.55rem; }
+.tile__meta { display: flex; align-items: baseline; justify-content: space-between; gap: 0.3rem; }
+.tile__meta code { color: var(--text-muted); font-size: 0.62rem; }
+.tile__score { font-family: var(--mono); font-size: 0.68rem; }
+.tile__sub { color: var(--text-floor); font-family: var(--mono); font-size: 0.56rem; line-height: 1.45; }
 .tile__sub--links { color: var(--link); }
 
 /* --- Candidates ----------------------------------------------------------- */
 
-.matches { display: grid; gap: 0.7rem; scroll-margin-top: 1rem; }
+/* The candidates are the second half of the workspace, so the break above them
+   is space and one rule rather than another panel edge. */
+.matches {
+  display: grid;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--control-rule);
+  scroll-margin-top: var(--s-3);
+  grid-template-rows: auto 1fr;
+}
+/* With nothing selected the invitation sits in the middle of the space it is
+   inviting the reviewer into, rather than being a dashed rectangle pinned to
+   the top of an empty third of the screen. */
 .matches__prompt {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.55rem;
   align-items: center;
-  padding: 1rem;
-  border: 1px dashed var(--control-rule);
-  border-radius: var(--r-md);
-  color: var(--text-muted);
-  font-size: 0.75rem;
+  justify-content: center;
+  min-height: 7rem;
+  padding: var(--s-4) var(--s-3);
+  color: var(--text-floor);
+  font-size: 0.8rem;
+}
+/* The empty frame slot is a stage waiting for a frame, so it is drawn as one.
+   This is the one placeholder in the console that earns a surface: it says
+   where the decoded frame will land, at roughly the size it will land at. */
+.matches__frame .matches__prompt {
+  min-height: 13rem;
+  border-radius: var(--r-lg);
+  background: var(--plane);
+  box-shadow: var(--ring-soft);
 }
 .matches__prompt svg { flex: none; color: var(--link); }
-.matches__body { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
+.matches__body { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 66rem) {
-  .matches__body { grid-template-columns: minmax(17rem, 21rem) minmax(0, 1fr); align-items: start; }
+  .matches__body { gap: var(--s-5); grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr); align-items: start; }
+}
+/* Below that breakpoint the ranked list stacks above the frame instead of
+   sitting beside it, so the arrow that points at it turns with the layout. */
+@media (max-width: 65.9rem) {
+  .matches__prompt-arrow { transform: rotate(90deg); }
 }
 
-.ranked { display: grid; gap: 0.35rem; align-content: start; }
+.ranked { display: grid; gap: 0.2rem; align-content: start; }
+/* One ranked column. An outline on each row made a stack of eight candidates
+   look like eight separate panels that happened to be touching. */
 .ranked__item {
   display: grid;
   width: 100%;
-  gap: 0.55rem;
+  gap: 0.7rem;
   align-items: center;
-  padding: 0.4rem 0.55rem;
-  border: 1px solid var(--control-rule);
+  padding: 0.45rem 0.6rem;
   border-radius: var(--r-md);
-  background: var(--surface-1);
   text-align: left;
   grid-template-columns: 1.1rem 2.3rem minmax(0, 1fr) auto;
   transition:
-    border-color var(--t-base) var(--ease),
     background-color var(--t-base) var(--ease),
     box-shadow var(--t-base) var(--ease),
     transform var(--t-fast) var(--ease);
 }
 .ranked__item:hover {
-  border-color: var(--link);
-  background: var(--surface-2);
-  box-shadow: var(--lift-sm);
+  background: var(--hover);
+  box-shadow: var(--ring-live);
   transform: translateX(2px);
 }
 .ranked__item.is-on {
-  border-color: var(--comment);
   background: var(--surface-3);
-  box-shadow: 0 0 0 1px var(--comment);
+  box-shadow: var(--ring-on);
 }
+.ranked__item.is-on .ranked__rank { color: var(--comment); }
 /* Candidates are the answer to the click that revealed them, so they arrive. */
 .ranked li { animation: slide-in var(--t-base) var(--ease-out) backwards; }
 .ranked li:nth-child(1) { animation-delay: 0ms; }
@@ -1015,7 +1166,14 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .ranked li:nth-child(n + 4) { animation-delay: 130ms; }
 @keyframes slide-in { from { opacity: 0; transform: translateX(-10px); } }
 .ranked__rank { color: var(--text-floor); font-family: var(--mono); font-size: 0.62rem; text-align: center; }
-.ranked__crop { width: 2.3rem; aspect-ratio: 1 / 2; object-fit: cover; border-radius: var(--r-sm); background: #000; }
+.ranked__crop {
+  width: 2.3rem;
+  aspect-ratio: 1 / 2;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  background: #000;
+  box-shadow: var(--ring-soft);
+}
 .ranked__crop--none { display: block; background: var(--surface-3); }
 .ranked__body { display: grid; gap: 0.22rem; min-width: 0; }
 .ranked__where { color: var(--text-soft); font-size: 0.66rem; }
@@ -1034,12 +1192,12 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .ranked__score { color: var(--link-strong); font-family: var(--mono); font-size: 0.7rem; }
 
 /* The frame a candidate was cropped from, with its provenance beside it. */
-.matches__frame { display: grid; gap: 0.7rem; align-content: start; }
-.frame { display: grid; gap: 0.7rem; grid-template-columns: minmax(0, 1fr); }
+.matches__frame { display: grid; gap: var(--s-3); align-content: start; }
+.frame { display: grid; gap: var(--s-3); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 52rem) {
-  .frame { grid-template-columns: minmax(0, 1fr) minmax(10rem, 13rem); align-items: start; }
+  .frame { gap: var(--s-4); grid-template-columns: minmax(0, 1fr) minmax(10rem, 13rem); align-items: start; }
 }
-.frame__stage { position: relative; overflow: hidden; border: 1px solid var(--rule); border-radius: var(--r-md); background: #000; }
+.frame__stage { position: relative; overflow: hidden; border-radius: var(--r-lg); background: #000; box-shadow: var(--ring); }
 .frame__stage canvas {
   display: block;
   width: 100%;
@@ -1048,52 +1206,67 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 }
 @keyframes frame-in { from { opacity: 0; transform: scale(1.01); } }
 .frame__status {
-  position: absolute; top: 0.5rem; left: 0.5rem;
-  padding: 0.2rem 0.45rem;
+  position: absolute; top: 0.55rem; left: 0.55rem;
+  padding: 0.22rem 0.5rem;
+  border-radius: var(--r-pill);
   background: rgba(0, 0, 0, 0.8);
   color: var(--comment);
   font-family: var(--mono);
   font-size: 0.6rem;
 }
 .frame__status.is-warn { color: var(--warning); }
-.frame__meta { display: grid; gap: 0.2rem; align-content: start; }
+.frame__meta { display: grid; gap: 0.3rem; align-content: start; }
 .frame__meta > div {
   display: flex;
   gap: 0.6rem;
   justify-content: space-between;
-  padding-bottom: 0.22rem;
-  border-bottom: 1px dotted var(--control-rule);
+  padding-bottom: 0.3rem;
+  border-bottom: var(--seam);
 }
+.frame__meta > div:last-child { border-bottom: 0; }
 .frame__meta dt { color: var(--text-floor); font-size: 0.66rem; }
 .frame__meta dd { color: var(--text-soft); font-family: var(--mono); font-size: 0.66rem; text-align: right; }
 
+/* The one caution a reviewer must not miss, marked by an amber rule rather than
+   a grey box that reads as one more panel to skip. */
 .matches__caution {
-  padding: 0.6rem 0.75rem;
-  border: 1px solid var(--control-rule);
-  border-radius: var(--r-md);
-  background: var(--surface-1);
+  max-width: 78ch;
+  padding: 0.1rem 0 0.1rem 0.9rem;
+  border-left: 2px solid var(--warning);
   color: var(--text-muted);
-  font-size: 0.7rem;
-  line-height: 1.6;
+  font-size: 0.72rem;
+  line-height: 1.7;
 }
 
 /* --- Model panels --------------------------------------------------------- */
 
-.panels { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
-.panel { padding: 0.95rem; border: 1px solid var(--rule); border-radius: var(--r-md); background: var(--surface-1); }
+/* Two halves and a full width, stated. auto-fit resolved to four tracks on a
+   desk monitor and then filled two of them, which left the artifact and the
+   replay crammed into the left half with the right half empty. */
+.panels { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 62rem) {
+  .panels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.panel {
+  display: grid;
+  align-content: start;
+  gap: var(--s-3);
+  padding: 1.2rem 1.25rem;
+  border-radius: var(--r-lg);
+  background: var(--plane);
+  box-shadow: var(--ring-soft);
+}
 .panel--wide { grid-column: 1 / -1; }
-.panel .panel-label { margin-bottom: 0.7rem; }
 .panel__note {
   display: flex;
-  gap: 0.45rem;
-  margin-top: 0.8rem;
-  padding-top: 0.7rem;
-  border-top: 1px solid var(--control-rule);
+  gap: 0.5rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--control-rule);
   color: var(--text-floor);
-  font-size: 0.68rem;
-  line-height: 1.55;
+  font-size: 0.7rem;
+  line-height: 1.65;
 }
-.panel__note svg { flex: none; margin-top: 0.15rem; color: var(--warning); }
+.panel__note svg { flex: none; margin-top: 0.12rem; color: var(--warning); }
 /* A link sitting inside prose cannot be told apart by colour alone: blue on
    muted grey is about 1.2:1, well under the 3:1 that would allow it. */
 .panel__note a, .bullets a, .view__foot a {
@@ -1102,14 +1275,14 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   text-decoration-thickness: 1px;
 }
 .panel__note a:hover, .bullets a:hover, .view__foot a:hover { color: var(--link-strong); }
-.bullets { display: grid; gap: 0.5rem; }
+.bullets { display: grid; }
 .bullets li {
-  padding: 0.5rem 0 0.5rem 1.1rem;
-  border-bottom: 1px solid var(--control-rule);
+  padding: 0.6rem 0 0.6rem 1.15rem;
+  border-bottom: var(--seam);
   color: var(--text-muted);
-  font-size: 0.72rem;
-  line-height: 1.55;
-  text-indent: -1.1rem;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  text-indent: -1.15rem;
 }
 .bullets li::before { color: var(--link); content: "\2022"; padding-right: 0.65rem; }
 .bullets li:last-child { border-bottom: 0; }
@@ -1161,23 +1334,21 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   display: grid;
   overflow: hidden;
   align-content: start;
-  border: 1px solid var(--control-rule);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   background: var(--surface-2);
+  box-shadow: var(--ring-soft);
   text-align: left;
   transition:
-    border-color var(--t-base) var(--ease),
     background-color var(--t-base) var(--ease),
     box-shadow var(--t-base) var(--ease),
     transform var(--t-fast) var(--ease);
 }
 .source-card:hover {
-  border-color: var(--link);
   background: var(--surface-3);
-  box-shadow: var(--lift-sm);
+  box-shadow: var(--ring-live), var(--lift-sm);
   transform: translateY(-2px);
 }
-.source-card.is-on { border-color: var(--comment); box-shadow: 0 0 0 1px var(--comment); }
+.source-card.is-on { box-shadow: var(--ring-on), var(--halo-on); }
 
 .source-card__frame { position: relative; display: block; }
 .source-card__poster {
@@ -1202,7 +1373,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 }
 .source-card.is-on .source-card__check { border-color: var(--comment); background: var(--comment); }
 
-.source-card__body { display: grid; gap: 0.5rem; padding: 0.6rem; border-top: 1px solid var(--control-rule); }
+.source-card__body { display: grid; gap: 0.5rem; padding: 0.7rem; border-top: var(--seam); }
 .source-card__title { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
 .source-card__title strong { color: var(--text-strong); font-size: 0.82rem; }
 .source-card__title code { color: var(--text-floor); font-size: 0.6rem; }
@@ -1253,6 +1424,11 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   }
   .tool-button { padding-inline: 0.55rem; }
   .workspace { grid-template-columns: minmax(0, 1fr); }
+  /* The console scrolls as a document here, so the search view has no viewport
+     height to claim: the candidates follow the gallery instead of filling what
+     is left of a screen. */
+  .search { min-height: 0; grid-template-rows: none; }
+  .matches__prompt { min-height: 0; justify-content: flex-start; padding-inline: 0; }
   .controls { border-right: 0; border-bottom: 1px solid var(--rule); }
   /* Six controls is a long scroll on a phone, and the run action cannot sit at
      the bottom of it. Pin the dock while the rail is on screen. */

@@ -26,18 +26,28 @@ connect to local FastAPI/CUDA inference when an authorized checkpoint is availab
 > experience is a precomputed, non-commercial research demonstration. Public model weights
 > remain withheld while training-data redistribution terms are unresolved.
 
-## Try the demo workbench
+## Try the identity review console
 
-The hosted UI mirrors the original PedestrianTracker application layout, with four
-P-DESTRE session `12-11-2019_3` clips already attached as though you had uploaded them.
-Six panels:
+The hosted UI is an application console: a fixed top bar, one viewport, a thresholds
+panel that drops from the bar when it is asked for, and a status bar that reports the
+job. Four P-DESTRE session `12-11-2019_3` clips are already attached, as though you had
+uploaded them. Six workspaces, switchable with the number keys:
 
-- **Single Camera** — per-camera tracked output and run summary;
-- **Cross Camera** — four-view association replay plus the per-pair precision table;
-- **Person Search** — the main feature: build the index, pick any detected person, and
-  review their stored appearances and ranked cross-video candidates;
-- **Image Detection** — a single-frame detection pass;
-- **Model Status** and **Research Context** — runtime and protocol notes.
+- **Person Search** (`1`), the workspace the console exists for. Pick a camera, pick
+  anyone the pipeline found in it, and review the ranked candidates from the other
+  cameras beside the full frame each one was cropped from.
+- **Detection** (`2`), one frame with its stored detections redrawn at the current
+  confidence and box-height floors.
+- **Tracking** (`3`), a clip's tracked render beside a live table of the tracks in it.
+- **Cross Camera** (`4`), the camera-pair link matrix, the strongest links at the
+  current threshold, and the archived per-pair precision diagnostic.
+- **Sources** (`5`), the attached clips and their specifications.
+- **Model** (`6`), the loaded artifact, the settings this replay's index was built
+  with, the benchmarks by protocol, and the boundaries.
+
+A threshold moves the whole job rather than one panel: raising the confidence floor
+drops detections, which drops tracks, which drops links, and the status bar prints what
+each change cost.
 
 ```bash
 cd apps/web
@@ -149,6 +159,16 @@ Written from what this repository can and cannot show, not from modesty.
   appearance evidence for a person to review. The demo fixture makes the reason visible:
   non-matches score 0.997–0.998 against matches at 0.998–0.999, so the *ranking* is useful
   and the absolute score is not. There is no calibration and no decision threshold.
+- **The shipped service ranks cross-camera candidates by cosine similarity alone.**
+  `PersonSearchManager.matches` in
+  [`apps/api/person_search_service.py`](apps/api/person_search_service.py) compares the
+  query descriptor against every other person, drops anyone from the query's own clip,
+  sorts, and truncates. The `cross_camera:` policy in
+  [`configs/system/effiped-tier1.yaml`](configs/system/effiped-tier1.yaml), which sets a
+  match threshold, gallery size, temporal window, transition weight and a global identity
+  cap, belongs to `CrossCameraAssociator`, and nothing outside `tests/test_tracker.py`
+  reaches that class. The configured policy and the running behaviour are not the same
+  thing, on the capability this project is named for.
 - **No published weights, so nothing here reproduces the numbers.** Publication is on hold
   pending a dataset-rights review ([DATA_LICENSES.md](DATA_LICENSES.md)). `pip install`
   succeeds, `effiped-app` starts, and every model reports `available: false`. The reported
