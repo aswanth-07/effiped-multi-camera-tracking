@@ -1,3 +1,8 @@
+**EffiPed detects pedestrians across several fixed cameras and ranks which observations
+plausibly show the same person, so that a human can review them.** For engineers and
+researchers evaluating compact multi-camera re-identification — and for anyone who wants to
+try that workflow in a browser, with nothing to install.
+
 <div align="center">
   <img src="docs/social-preview.png" alt="EffiPed multi-camera pedestrian tracking and identity-review system" width="100%">
 
@@ -12,10 +17,10 @@
   [![Media: CC BY-NC-SA 4.0](https://img.shields.io/badge/P--DESTRE_media-CC_BY--NC--SA_4.0-70b8ff)](docs/media/LICENSE.md)
 </div>
 
-EffiPed is a compact video-intelligence system that detects pedestrians, maintains
-camera-local tracks, and ranks cross-camera identity candidates for human review. Its
-React investigation console is available as a precomputed browser demo; the same workflow
-can connect to local FastAPI/CUDA inference when an authorized checkpoint is available.
+EffiPed is a compact video-intelligence system that detects pedestrians, maintains camera-local
+tracks, and ranks cross-camera identity candidates for human review. Its React
+investigation console is available as a precomputed browser demo; the same workflow can
+connect to local FastAPI/CUDA inference when an authorized checkpoint is available.
 
 > [!IMPORTANT]
 > Ranked matches are reviewable appearance evidence, not proof of identity. The hosted
@@ -137,6 +142,37 @@ effiped-demo
 
 Deleting a job removes uploaded video and generated assets.
 
+## Limitations
+
+Written from what this repository can and cannot show, not from modesty.
+
+- **A ranked match is not an identification.** Cross-camera similarity orders candidate
+  appearance evidence for a person to review. The demo fixture makes the reason visible:
+  non-matches score 0.997–0.998 against matches at 0.998–0.999, so the *ranking* is useful
+  and the absolute score is not. There is no calibration and no decision threshold.
+- **No published weights, so nothing here reproduces the numbers.** Publication is on hold
+  pending a dataset-rights review ([DATA_LICENSES.md](DATA_LICENSES.md)). `pip install`
+  succeeds, `effiped-app` starts, and every model reports `available: false`. The reported
+  results are attested by `research/results/summary.json` and defended against drift by
+  `tools/validate_results.py`; they are not re-derivable from this repository alone.
+- **Every published number is a single measurement on one fold.** No variance, interval,
+  seed policy or significance test is reported for any value, and the FPS figure is
+  approximate, from one device at one resolution.
+- **Evaluated only on P-DESTRE fold 0 and MOT17 val-half.** Nothing here establishes
+  behaviour for another site, population, camera network, or operating condition.
+- **No fairness or subgroup analysis**, on a system that ranks people by appearance.
+- **Nothing measures the review loop the system exists for.** There is no study of whether
+  ranked candidates make a reviewer faster or more accurate.
+- **The hosted demo performs no inference.** It replays archived output from the original
+  PedestrianTracker application; the controls are live, but Run returns a stored result.
+- **The local API has no authentication**, which is safe only because it binds `127.0.0.1`.
+  The container image binds `0.0.0.0`, so publishing that port is a decision requiring its
+  own review.
+- **Two-thirds of the Python is neither linted nor tested.** `train.py`, `loss.py` and
+  `dataset.py` are research code carried forward from the training workspace and are
+  excluded from ruff; the inference path itself cannot be tested end to end without a
+  checkpoint.
+
 ## Research connections
 
 The later [BoxJDE Person Search](https://github.com/aswanth-07/boxjde-person-search)
@@ -148,7 +184,7 @@ here.
 
 Original software is © 2026 Aswanth Raj and licensed under Apache-2.0. P-DESTRE-derived
 media under `docs/media/pdestre/` is separately licensed as a CC BY-NC-SA 4.0 adaptation
-for this non-commercial showcase. The
+for this non-commercial demonstration. The
 [asset manifest](docs/media/ASSET_MANIFEST.json) records the source, transformations,
 hash, purpose, and license for every derived asset.
 

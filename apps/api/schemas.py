@@ -131,11 +131,3 @@ class DetectionMatchOut(BaseModel):
     person: PersonSummaryOut
     similarity: float
     band: str
-
-
-class EventOut(BaseModel):
-    seq: int
-    type: str
-    job_id: str
-    timestamp: float
-    payload: Dict[str, Any]

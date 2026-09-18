@@ -89,7 +89,8 @@ class JDENet(nn.Module):
     Architecture:
       - Backbone: ConvNeXt V2 Tiny with out_indices=(0,1,2) for P2-P4
       - Neck: BiFPN on P3-P4 only (P2 bypasses BiFPN, P5 excluded)
-      - Fusion: Adaptive P2 + BiFPN fusion at stride 4 via ECA/SE + 1x1 conv
+      - Fusion: Adaptive P2 + BiFPN fusion at stride 4 via BiFPN-style
+        fast-normalized learned weights (see models/fusion.py)
       - Head: CenterNet (heatmap + WH + offset + IoU + ReID embedding) at stride 4
       - Optional: decoupled ReID, DCNv2, IoU quality branch
     """

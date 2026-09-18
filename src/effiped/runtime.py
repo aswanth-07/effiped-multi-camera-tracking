@@ -5,11 +5,10 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 import cv2
 import torch
-import torch.nn.functional as F
 import yaml
 
 from .checkpoint_meta import build_model_meta, ensure_checkpoint_compatibility
@@ -40,7 +39,7 @@ class RuntimePreset:
 
 
 def default_presets(settings: RuntimeSettings | None = None) -> Dict[str, RuntimePreset]:
-    """Resolve the two release artifacts without exposing local paths."""
+    """Resolve the manifest's release artifacts without exposing local paths."""
     settings = settings or RuntimeSettings.from_env()
     _manifest, artifacts = load_manifest()
     return {
@@ -58,23 +57,6 @@ def default_presets(settings: RuntimeSettings | None = None) -> Dict[str, Runtim
         )
         for key, artifact in artifacts.items()
     }
-
-
-def available_model_choices(presets: Dict[str, RuntimePreset]) -> List[str]:
-    """Return dropdown labels, marking missing optional checkpoints clearly."""
-    labels = []
-    for preset in presets.values():
-        suffix = "" if preset.available else " (checkpoint missing)"
-        labels.append(f"{preset.label}{suffix}")
-    return labels
-
-
-def preset_from_label(presets: Dict[str, RuntimePreset], label: str) -> RuntimePreset:
-    clean_label = label.replace(" (checkpoint missing)", "")
-    for preset in presets.values():
-        if preset.label == clean_label:
-            return preset
-    raise KeyError(f"Unknown model preset: {label}")
 
 
 def preset_from_key(presets: Dict[str, RuntimePreset], key: str) -> RuntimePreset:
@@ -302,29 +284,3 @@ class EffiPedRuntime:
                 dets["boxes"] = scale_coords(input_shape, dets["boxes"], orig_shape, (ratio, pad))
             result[cam_id] = (dets, elapsed)
         return result
-
-
-def detection_count(dets: dict) -> int:
-    scores = dets.get("scores")
-    return int(len(scores)) if scores is not None else 0
-
-
-def iter_detection_rows(dets: dict) -> Iterable[Tuple[float, float, float, float, float]]:
-    boxes = dets.get("boxes")
-    scores = dets.get("scores")
-    if boxes is None or scores is None or len(scores) == 0:
-        return []
-    if hasattr(boxes, "detach"):
-        boxes = boxes.detach().cpu().numpy()
-    if hasattr(scores, "detach"):
-        scores = scores.detach().cpu().numpy()
-    return [
-        (float(x1), float(y1), float(x2), float(y2), float(score))
-        for (x1, y1, x2, y2), score in zip(boxes, scores)
-    ]
-
-
-def normalize_embedding_array(x):
-    if x is None:
-        return None
-    return F.normalize(x, p=2, dim=-1, eps=1e-6)

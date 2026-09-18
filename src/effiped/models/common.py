@@ -5,7 +5,6 @@ Contains reusable modules used across backbone, neck, fusion, and head.
 """
 
 import torch
-import torch.nn as nn
 import torch.nn.functional as F
 
 
@@ -77,37 +76,5 @@ def sample_feature_map_bilinear(
         sampled_features[mask] = sampled.squeeze(0).squeeze(1).transpose(0, 1)
 
     return sampled_features
-
-
-class SEBlock(nn.Module):
-    """
-    Squeeze-and-Excitation channel attention with FC bottleneck.
-
-    Unlike ECA's local 1D conv (k=9 sees only 9 neighbors), SE's FC layers
-    model global cross-channel dependencies — critical when the channel
-    dimension concatenates features from heterogeneous sources (P2+P3+P4).
-
-    Reference: Hu et al., "Squeeze-and-Excitation Networks", CVPR 2018.
-    """
-
-    def __init__(self, channels: int, reduction: int = 32):
-        super().__init__()
-        mid = max(channels // reduction, 8)
-        self.pool = nn.AdaptiveAvgPool2d(1)
-        self.fc = nn.Sequential(
-            nn.Linear(channels, mid, bias=False),
-            nn.ReLU(inplace=True),
-            nn.Linear(mid, channels, bias=False),
-            nn.Sigmoid()
-        )
-        # Xavier init: sigmoid output ≈ 0.5 on average at start (near-identity scaling)
-        nn.init.xavier_uniform_(self.fc[0].weight)
-        nn.init.xavier_uniform_(self.fc[2].weight)
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        B, C, _, _ = x.shape
-        w = self.pool(x).view(B, C)
-        w = self.fc(w).view(B, C, 1, 1)
-        return x * w
 
 
