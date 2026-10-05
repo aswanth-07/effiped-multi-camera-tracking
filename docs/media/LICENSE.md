@@ -9,3 +9,10 @@ Attribution: P-DESTRE dataset creators; adaptations by Aswanth Raj. Source conte
 You must give appropriate credit, use the adaptations only for non-commercial purposes, and
 license further adaptations under the same terms. Apache-2.0 does not cover these assets.
 No raw P-DESTRE video or dataset is redistributed.
+
+The Person Search UI walkthrough and its poster contain adapted P-DESTRE media
+and retain the same non-commercial, attribution, and share-alike terms. Its
+captions identify the precomputed BoxJDE research replay. The walkthrough uses
+captured application states with transitions; it is not a live inference run.
+Any MP4 export of this walkthrough carries the same media license. Source,
+transformations, and hashes are recorded in `ASSET_MANIFEST.json`.

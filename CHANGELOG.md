@@ -7,8 +7,18 @@ Dates are the dates of the commits that made each change.
 
 ## [Unreleased]
 
+### Added
+
+- A Person Search UI walkthrough with source selection, ranked candidates, and
+  full-frame review, plus attribution for the derived demonstration media (2026-10-05).
+
 ### Changed
 
+- The README links directly to the hosted console and distinguishes its stored
+  replay from the separate local inference API and archived benchmark results
+  (2026-10-05).
+- The contributor checklist includes the result, media, release, and browser
+  verification commands (2026-10-05).
 - The web interface is an identity review console: fixed chrome, one viewport, six
   workspaces on the number keys (Person Search, Detection, Tracking, Cross Camera,
   Sources, Model), thresholds in a panel that drops from the bar instead of a rail
@@ -51,6 +61,14 @@ Dates are the dates of the commits that made each change.
   `iter_detection_rows` and `normalize_embedding_array`. No public behaviour changed.
 
 ### Fixed
+
+- The build backend requires setuptools 77.0.3 or newer to support the declared
+  SPDX license expression and license-file metadata (2026-10-05).
+- The frontend test runner uses the patched Vitest release for
+  GHSA-82fw-gwwq-j7x9 (2026-10-05).
+- Browser tests start their own preview server on a dedicated port and fail if
+  it is occupied, preventing checks from running against another application
+  (2026-10-05).
 
 - Two docstrings that no longer described the code: `runtime.default_presets` said
   "the two release artifacts" where the manifest declares one, and `model.py`

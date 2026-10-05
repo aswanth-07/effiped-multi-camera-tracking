@@ -1910,6 +1910,20 @@
       "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
       "purpose": "Detected-person thumbnail in the person-search gallery",
       "sha256": "b48744b4a6d0fdc162be2624eb2165259e3d4434ca580359505949467f2541a7"
+    },
+    {
+      "path": "pdestre/person-search-ui.webm",
+      "source": "EffiPed Person Search console rendered with the P-DESTRE session 12-11-2019_3 precomputed BoxJDE fixture and attributed demonstration media",
+      "transformations": "Five verified application screenshots composed into a 25-second 1440x1080, 30 FPS captioned UI walkthrough with short crossfades; VP9 CRF 32; no audio; precomputed BoxJDE result boundary and CC BY-NC-SA attribution remain visible",
+      "purpose": "Portfolio walkthrough of camera selection, person selection, ranked candidates, and full-frame evidence review",
+      "sha256": "52b4de7677bad52a3e4a6df0b776f70f0e44314394ce7bbde45908a93f959439"
+    },
+    {
+      "path": "pdestre/person-search-ui-poster.webp",
+      "source": "EffiPed Person Search console rendered with the P-DESTRE session 12-11-2019_3 precomputed BoxJDE fixture and attributed demonstration media",
+      "transformations": "Frame selected at 17 seconds from the captioned walkthrough; 1440x1080; WebP quality 86",
+      "purpose": "Preview of the Person Search UI walkthrough",
+      "sha256": "08e0e71c815e8093810e99dd5d3e70f8d4a87c653ffb5585eececc0a5864fd10"
     }
   ]
 }
