@@ -1,12 +1,14 @@
 import { Video } from "lucide-react";
 
-import type { RunResult } from "../engine/pipeline";
+import { tracksFor, type RunResult, type Settings } from "../engine/pipeline";
 
 export function SourcesView({
   result,
+  settings,
   onOpenSources
 }: {
   result: RunResult | null;
+  settings: Settings;
   onOpenSources: () => void;
 }) {
   if (!result || result.sources.length === 0) {
@@ -32,8 +34,9 @@ export function SourcesView({
 
       <div className="clip-grid">
         {result.sources.map((video) => {
-          const rows = result.people.filter((row) => row.person.video_index === video.id);
-          const detections = rows.reduce((total, row) => total + row.detections.length, 0);
+          const tracks = tracksFor(video.id, settings, result);
+          const indexed = new Set(tracks.flatMap((t) => (t.person ? [t.person.person.id] : []))).size;
+          const detections = tracks.reduce((total, track) => total + track.detections, 0);
           return (
             <figure className="clip" key={video.id}>
               <video
@@ -61,11 +64,11 @@ export function SourcesView({
                     <dd>{video.frame_count} at {video.fps} fps</dd>
                   </div>
                   <div>
-                    <dt>Tracks kept</dt>
-                    <dd>{rows.length}</dd>
+                    <dt>Tracks</dt>
+                    <dd>{tracks.length}, {indexed} indexed people</dd>
                   </div>
                   <div>
-                    <dt>Detections</dt>
+                    <dt>Tracked detections</dt>
                     <dd>{detections}</dd>
                   </div>
                 </dl>
@@ -76,8 +79,8 @@ export function SourcesView({
       </div>
 
       <p className="view__foot">
-        P-DESTRE session 12-11-2019_3, adapted under CC BY-NC-SA 4.0. The boxes burned into the
-        tracked renders were drawn by the original pipeline, not by this interface.
+        P-DESTRE session 12-11-2019_3, adapted under CC BY-NC-SA 4.0. The clips play unannotated
+        here; the Detection and Tracking workspaces draw the model's stored boxes over them.
       </p>
     </div>
   );

@@ -18,7 +18,16 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
-    sourcemap: false
+    sourcemap: false,
+    rolldownOptions: {
+      output: {
+        // The replay fixtures are data, not code: ship them as their own chunk
+        // so the app bundle stays small and they cache independently.
+        codeSplitting: {
+          groups: [{ name: "fixtures", test: /[\\/]src[\\/]data[\\/].+\.json$/ }]
+        }
+      }
+    }
   }
 });
 

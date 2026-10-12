@@ -40,9 +40,12 @@ uploaded them. Six workspaces, switchable with the number keys:
 - **Person Search** (`1`), the workspace the console exists for. Pick a camera, pick
   anyone the pipeline found in it, and review the ranked candidates from the other
   cameras beside the full frame each one was cropped from.
-- **Detection** (`2`), one frame with its stored detections redrawn at the current
-  confidence and box-height floors.
-- **Tracking** (`3`), a clip's tracked render beside a live table of the tracks in it.
+- **Detection** (`2`), one frame with every box the detector returned on it, redrawn at
+  the current confidence and box-height floors, with the people in the search index
+  marked.
+- **Tracking** (`3`), the source clip playing with every local track from the indexing
+  run drawn over it, beside a table of those tracks with the same ids, and which of them
+  made it into the person index.
 - **Cross Camera** (`4`), the camera-pair link matrix, the strongest links at the
   current threshold, and the archived per-pair precision diagnostic.
 - **Sources** (`5`), the attached clips and their specifications.
@@ -61,17 +64,18 @@ npm run dev
 
 The controls are live, but the hosted build performs no inference: each **Run** replays a
 precomputed result. Full-frame views are redrawn in the browser by seeking the shipped
-clip to the appearance's timestamp and stroking its stored box, so no per-appearance
-scene images ship.
-
-No synthetic browser boxes are drawn over the footage. The boxes baked into the replay
-videos are the annotations rendered by the original tracking pipeline.
+clip to the frame and stroking the detector's stored boxes, so no per-appearance scene
+images ship. Every box drawn is one the model produced; none is synthesised in the
+browser. The boxes baked into the tracked replay videos are the annotations rendered by
+the original tracking pipeline.
 
 > [!NOTE]
 > The person-search index was computed offline with the BoxJDE research checkpoint,
 > because the EffiPed Tier-1 weights are withheld pending dataset rights review. The
 > Model workspace states this. Regenerate it with
-> [`tools/build_person_search_fixture.py`](tools/build_person_search_fixture.py).
+> [`tools/build_person_search_fixture.py`](tools/build_person_search_fixture.py), and the
+> per-frame detections behind the Detection and Tracking workspaces with
+> [`tools/build_detection_fixture.py`](tools/build_detection_fixture.py).
 
 ## System
 

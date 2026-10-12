@@ -9,11 +9,28 @@ Dates are the dates of the commits that made each change.
 
 ### Added
 
+- Every detection the detector returned on each processed frame, replayed from the
+  same run as the person-search index (`tools/build_detection_fixture.py`), so the
+  Detection workspace draws everyone in a frame rather than only the few stored views
+  of indexed people, and the Tracking and Sources workspaces count every local track
+  (2026-10-12).
+- The Tracking workspace plays the source clip with every local track from the
+  indexing run drawn over it, using the same ids as its table and the person index.
+  Selecting a row jumps to where that track starts and emphasises it (2026-10-12).
 - A Person Search UI walkthrough with source selection, ranked candidates, and
   full-frame review, plus attribution for the derived demonstration media (2026-10-05).
 
 ### Changed
 
+- The default confidence floor is 0.35, the threshold the archived tracking results
+  were run at; 0.45 hid the nearest pedestrians in camera 2. Drawn frames apply hard
+  NMS over the decoder's soft-NMS output, seek to the middle of a frame so boxes land
+  on the right image, and the strongest cross-camera links list each pair once
+  (2026-10-12).
+- Clip posters are the first frame of the clean source clip, not a frame from the
+  archived tracked render, and the candidate caution quotes this session's archived
+  pairwise precision instead of similarity figures from a different run. The Person
+  Search walkthrough was re-recorded to match (2026-10-12).
 - The README links directly to the hosted console and distinguishes its stored
   replay from the separate local inference API and archived benchmark results
   (2026-10-05).
@@ -49,6 +66,9 @@ Dates are the dates of the commits that made each change.
 
 ### Removed
 
+- The archived per-camera tracked renders (8.4 MB), which the Tracking workspace no
+  longer uses and whose track numbers matched nothing else in the console
+  (2026-10-12).
 - The GitHub Actions workflow. Lint, tests, the three release validators, the
   web typecheck, build, audit and end-to-end suite, and the secret scan are no
   longer run automatically on push. Every one of those commands is listed in

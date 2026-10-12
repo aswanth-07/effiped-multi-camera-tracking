@@ -153,9 +153,9 @@ export default function App() {
             <Skeleton kind={view} />
           ) : (
             <>
-          {view === "sources" ? <SourcesView onOpenSources={() => setModal(true)} result={result} /> : null}
+          {view === "sources" ? <SourcesView onOpenSources={() => setModal(true)} result={result} settings={applied ?? settings} /> : null}
           {view === "detection" ? <DetectionView result={result} settings={applied ?? settings} /> : null}
-          {view === "tracking" ? <TrackingView onInspect={inspect} result={result} /> : null}
+          {view === "tracking" ? <TrackingView onInspect={inspect} result={result} settings={applied ?? settings} /> : null}
           {view === "search" ? (
             <SearchView
               onOpenSources={() => setModal(true)}

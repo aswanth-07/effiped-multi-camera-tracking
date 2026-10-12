@@ -141,6 +141,20 @@
       "sha256": "488c95b844f831c55705644c27accd3adc1906d9b54421d7cb4d1c0b21eacfa2"
     },
     {
+      "path": "pdestre/person-search-ui.webm",
+      "source": "EffiPed Person Search console rendered with the P-DESTRE session 12-11-2019_3 precomputed BoxJDE fixture and attributed demonstration media",
+      "transformations": "Five verified application screenshots composed into a 25-second 1440x1080, 30 FPS captioned UI walkthrough with short crossfades; VP9 CRF 32; no audio; precomputed BoxJDE result boundary and CC BY-NC-SA attribution remain visible",
+      "purpose": "Portfolio walkthrough of camera selection, person selection, ranked candidates, and full-frame evidence review",
+      "sha256": "73a95f1eca255fbcaeb624c20b04b5a584ebdf240329f158b11fcaa206f35011"
+    },
+    {
+      "path": "pdestre/person-search-ui-poster.webp",
+      "source": "EffiPed Person Search console rendered with the P-DESTRE session 12-11-2019_3 precomputed BoxJDE fixture and attributed demonstration media",
+      "transformations": "Frame selected at 17 seconds from the captioned walkthrough; 1440x1080; WebP quality 86",
+      "purpose": "Preview of the Person Search UI walkthrough",
+      "sha256": "3405bdd5b160cdc7b43fb883383303d80631902984f7bccfb4e29203c2f80db9"
+    },
+    {
       "path": "pdestre/session3/cam1-source.webm",
       "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
       "transformations": "Unaltered 15-second 960x540 10 FPS view re-encoded to VP9 CRF 50; audio removed",
@@ -148,18 +162,11 @@
       "sha256": "1a4cee55870a8fc65df257d96e61c7c88a66511c78fe56441ca58b3b5396d47e"
     },
     {
-      "path": "pdestre/session3/cam1-tracked.webm",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Cropped the 960x540 quadrant for sequence 1 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
-      "purpose": "Single-camera tracked output for camera 1",
-      "sha256": "af56e2e54bfebf45aef29174710c45273895da032236c652faad6125082b8b02"
-    },
-    {
       "path": "pdestre/session3/cam1-poster.webp",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Frame at 00:06 from the sequence 1 quadrant, resized to 640 px wide and encoded as WebP",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam1.mp4)",
+      "transformations": "First frame of cam1-source.webm, so the poster matches the clip it stands in for; resized to 640 px wide and encoded as WebP quality 82; no annotations",
       "purpose": "Poster frame for the camera 1 clips",
-      "sha256": "31f649d5883c0dbe3d95778131497c403894f5bd1b90db837a048805730dc893"
+      "sha256": "6c4f100f69895945e2a6d1cb870613ad9c3ae2833ed948dc1f3ae9429b9fcce2"
     },
     {
       "path": "pdestre/session3/cam2-source.webm",
@@ -169,18 +176,11 @@
       "sha256": "36a06d6de43180d50cbd33e0368c179413d231786c73794176c949057cefe518"
     },
     {
-      "path": "pdestre/session3/cam2-tracked.webm",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Cropped the 960x540 quadrant for sequence 2 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
-      "purpose": "Single-camera tracked output for camera 2",
-      "sha256": "8be8913648d42d424408833ed63bc61283e7576a5a62b78edb3fbb76e3fa00a5"
-    },
-    {
       "path": "pdestre/session3/cam2-poster.webp",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Frame at 00:06 from the sequence 2 quadrant, resized to 640 px wide and encoded as WebP",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam2.mp4)",
+      "transformations": "First frame of cam2-source.webm, so the poster matches the clip it stands in for; resized to 640 px wide and encoded as WebP quality 82; no annotations",
       "purpose": "Poster frame for the camera 2 clips",
-      "sha256": "d85d136e69008b7755e7e30649f1bbe1c49829d4e55dd4f603e8f327924b5873"
+      "sha256": "9f445e2e7cd0bf4af94e5c757b311d634d7702e9de45b35f7051c0166c354ff0"
     },
     {
       "path": "pdestre/session3/cam3-source.webm",
@@ -190,18 +190,11 @@
       "sha256": "5584fe150c599bb63b8dc9cd6847765285a7061e0a37a0665d9d5c5e7cea3c2e"
     },
     {
-      "path": "pdestre/session3/cam3-tracked.webm",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Cropped the 960x540 quadrant for sequence 3 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
-      "purpose": "Single-camera tracked output for camera 3",
-      "sha256": "0b5b114ce115bebb20910d3a719a159fb2201f5b5f68c1f71941cb4673074695"
-    },
-    {
       "path": "pdestre/session3/cam3-poster.webp",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Frame at 00:06 from the sequence 3 quadrant, resized to 640 px wide and encoded as WebP",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam3.mp4)",
+      "transformations": "First frame of cam3-source.webm, so the poster matches the clip it stands in for; resized to 640 px wide and encoded as WebP quality 82; no annotations",
       "purpose": "Poster frame for the camera 3 clips",
-      "sha256": "db05ed3f9df91259a42ba805ed948b2351f486e8fe53452130e61bc5410b1de4"
+      "sha256": "59fb8b50ec1389b33f7e92ac5bd6e144face9d73259f247c14d277a8d881f7dc"
     },
     {
       "path": "pdestre/session3/cam4-source.webm",
@@ -211,18 +204,11 @@
       "sha256": "1a642bf664b87ec58b6445bd008612bb610178c985451a14bb64ff26c237f2df"
     },
     {
-      "path": "pdestre/session3/cam4-tracked.webm",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Cropped the 960x540 quadrant for sequence 4 out of the 1920x1080 2x2 grid and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; audio removed",
-      "purpose": "Single-camera tracked output for camera 4",
-      "sha256": "0eef983ba4f7c2a7c4aab3aa1b348b88f4cac65fa813688731c781d63a9ceada"
-    },
-    {
       "path": "pdestre/session3/cam4-poster.webp",
-      "source": "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output (cross_camera_demo.mp4)",
-      "transformations": "Frame at 00:06 from the sequence 4 quadrant, resized to 640 px wide and encoded as WebP",
+      "source": "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage (cam4.mp4)",
+      "transformations": "First frame of cam4-source.webm, so the poster matches the clip it stands in for; resized to 640 px wide and encoded as WebP quality 82; no annotations",
       "purpose": "Poster frame for the camera 4 clips",
-      "sha256": "bc7bdd0d44add3bf58da671d4c378237e56967affb268952b033609ec9210b3c"
+      "sha256": "f69a766bb19dac1546ba4e83fbbe3ede3a40ad189a026dad3c2dc740c8d09b53"
     },
     {
       "path": "pdestre/session3/detection-input.webp",
@@ -1910,20 +1896,6 @@
       "transformations": "Person bounding-box crop resized to 192 px tall and encoded as WebP quality 82; Person-search index computed offline with the BoxJDE research checkpoint (paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld pending dataset rights review",
       "purpose": "Detected-person thumbnail in the person-search gallery",
       "sha256": "b48744b4a6d0fdc162be2624eb2165259e3d4434ca580359505949467f2541a7"
-    },
-    {
-      "path": "pdestre/person-search-ui.webm",
-      "source": "EffiPed Person Search console rendered with the P-DESTRE session 12-11-2019_3 precomputed BoxJDE fixture and attributed demonstration media",
-      "transformations": "Five verified application screenshots composed into a 25-second 1440x1080, 30 FPS captioned UI walkthrough with short crossfades; VP9 CRF 32; no audio; precomputed BoxJDE result boundary and CC BY-NC-SA attribution remain visible",
-      "purpose": "Portfolio walkthrough of camera selection, person selection, ranked candidates, and full-frame evidence review",
-      "sha256": "52b4de7677bad52a3e4a6df0b776f70f0e44314394ce7bbde45908a93f959439"
-    },
-    {
-      "path": "pdestre/person-search-ui-poster.webp",
-      "source": "EffiPed Person Search console rendered with the P-DESTRE session 12-11-2019_3 precomputed BoxJDE fixture and attributed demonstration media",
-      "transformations": "Frame selected at 17 seconds from the captioned walkthrough; 1440x1080; WebP quality 86",
-      "purpose": "Preview of the Person Search UI walkthrough",
-      "sha256": "08e0e71c815e8093810e99dd5d3e70f8d4a87c653ffb5585eececc0a5864fd10"
     }
   ]
 }

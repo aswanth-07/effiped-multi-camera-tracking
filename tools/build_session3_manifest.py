@@ -51,23 +51,11 @@ def rows() -> list[dict]:
         )
         out.append(
             {
-                "path": f"pdestre/session3/{cam}-tracked.webm",
-                "source": f"{SOURCE_RENDER} (cross_camera_demo.mp4)",
-                "transformations": (
-                    f"Cropped the 960x540 quadrant for sequence {index} out of the 1920x1080 2x2 grid "
-                    "and re-encoded to VP9 CRF 50; original detector and tracker overlays retained; "
-                    "audio removed"
-                ),
-                "purpose": f"Single-camera tracked output for camera {index}",
-            }
-        )
-        out.append(
-            {
                 "path": f"pdestre/session3/{cam}-poster.webp",
-                "source": f"{SOURCE_RENDER} (cross_camera_demo.mp4)",
+                "source": f"{SOURCE_CLIPS} ({cam}.mp4)",
                 "transformations": (
-                    f"Frame at 00:06 from the sequence {index} quadrant, resized to 640 px wide and "
-                    "encoded as WebP"
+                    f"First frame of {cam}-source.webm, so the poster matches the clip it stands in "
+                    "for; resized to 640 px wide and encoded as WebP quality 82; no annotations"
                 ),
                 "purpose": f"Poster frame for the camera {index} clips",
             }

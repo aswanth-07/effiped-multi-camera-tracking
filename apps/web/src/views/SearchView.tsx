@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowUp, Clock, Search, Video } from "lucide-react";
 
-import { drawFrame } from "../components/frameGrabber";
+import { drawFrame, frameTime } from "../components/frameGrabber";
+import { sessionStats } from "../data/personSearch";
 import { clipDuration, provenanceFor, type PersonRow, type RunResult, type Settings } from "../engine/pipeline";
 
 /**
@@ -56,7 +57,7 @@ function MatchFrame({ personId, similarity }: { personId: string; similarity: nu
     if (!element || !provenance) return;
     let cancelled = false;
     setState("loading");
-    drawFrame(element, provenance.video.source, provenance.appearance.time_s, {
+    drawFrame(element, provenance.video.source, frameTime(provenance.appearance.frame_index, provenance.video.fps), {
       box: provenance.appearance.bbox,
       boxLabel: `t${provenance.appearance.track_id}`,
       dim: true,
@@ -439,8 +440,9 @@ export function SearchView({
               )}
               <p className="matches__caution">
                 Ranked candidates are reviewable appearance evidence. They are not an identification,
-                and the score is not calibrated: in this session non-matches reach 0.998 against
-                matches at 0.999.
+                and the score is not calibrated: in the archived run of this session,{" "}
+                {sessionStats.wrongMatches} of {sessionStats.correctMatches + sessionStats.wrongMatches}{" "}
+                cross-camera links were wrong (pairwise precision {sessionStats.precision.toFixed(2)}).
               </p>
             </div>
           </div>

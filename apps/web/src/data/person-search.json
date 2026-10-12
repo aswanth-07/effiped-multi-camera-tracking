@@ -37,7 +37,6 @@
       "label": "Camera 1",
       "file_name": "cam1.mp4",
       "source": "/media/pdestre/session3/cam1-source.webm",
-      "tracked": "/media/pdestre/session3/cam1-tracked.webm",
       "poster": "/media/pdestre/session3/cam1-poster.webp"
     },
     {
@@ -52,7 +51,6 @@
       "label": "Camera 2",
       "file_name": "cam2.mp4",
       "source": "/media/pdestre/session3/cam2-source.webm",
-      "tracked": "/media/pdestre/session3/cam2-tracked.webm",
       "poster": "/media/pdestre/session3/cam2-poster.webp"
     },
     {
@@ -67,7 +65,6 @@
       "label": "Camera 3",
       "file_name": "cam3.mp4",
       "source": "/media/pdestre/session3/cam3-source.webm",
-      "tracked": "/media/pdestre/session3/cam3-tracked.webm",
       "poster": "/media/pdestre/session3/cam3-poster.webp"
     },
     {
@@ -82,7 +79,6 @@
       "label": "Camera 4",
       "file_name": "cam4.mp4",
       "source": "/media/pdestre/session3/cam4-source.webm",
-      "tracked": "/media/pdestre/session3/cam4-tracked.webm",
       "poster": "/media/pdestre/session3/cam4-poster.webp"
     }
   ],

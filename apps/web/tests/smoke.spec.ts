@@ -5,8 +5,9 @@ import { expect, test, type Page } from "@playwright/test";
 async function counters(page: Page) {
   const text = await page.locator(".statusbar__cells").innerText();
   const read = (name: string) => {
-    const match = text.match(new RegExp(`${name}\\s+([0-9.]+)`));
-    return match ? Number(match[1]) : Number.NaN;
+    // Counts are printed with thousands separators ("4,051").
+    const match = text.match(new RegExp(`${name}\\s+([0-9.,]+)`));
+    return match ? Number(match[1].replace(/,/g, "")) : Number.NaN;
   };
   return {
     clips: read("clips"),
@@ -196,6 +197,42 @@ test("every workspace renders and number keys switch between them", async ({ pag
   }
   await page.keyboard.press("1");
   await expect(page.locator("#src-heading")).toBeVisible();
+});
+
+test("a detection frame shows everyone the detector found, not only indexed people", async ({ page }) => {
+  await page.keyboard.press("2");
+  await page.getByRole("button", { name: "Camera 2" }).click();
+  const hud = page.locator(".view--detection .stage__hud");
+  await expect(hud).toContainText(/frame 0/);
+  const count = async () => Number((await hud.innerText()).match(/(\d+) detections/)?.[1] ?? 0);
+  const indexed = async () => Number((await hud.innerText()).match(/(\d+) indexed/)?.[1] ?? 0);
+  // The crowd at the start of camera 2: the index alone holds three of them.
+  expect(await count()).toBeGreaterThanOrEqual(20);
+  expect(await indexed()).toBeLessThan(await count());
+});
+
+test("the tracking overlay draws the table's tracks and jumps to a selected one", async ({ page }) => {
+  await page.keyboard.press("3");
+  const video = page.locator(".player video");
+  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState), { timeout: 15000 }).toBeGreaterThanOrEqual(2);
+
+  const inked = () =>
+    page.locator(".player__overlay").evaluate((canvas: HTMLCanvasElement) => {
+      const data = canvas.getContext("2d")!.getImageData(0, 0, canvas.width, canvas.height).data;
+      let painted = 0;
+      for (let i = 3; i < data.length; i += 4) if (data[i] > 0) painted += 1;
+      return painted;
+    });
+  await expect.poll(inked, { timeout: 15000 }).toBeGreaterThan(0);
+
+  const rows = page.locator(".view--tracking tbody tr");
+  expect(await rows.count()).toBeGreaterThan(10);
+  const row = rows.filter({ hasText: "t73" });
+  const first = Number((await row.locator("td").first().innerText()).split(" ")[0]);
+  await row.click();
+  await expect(row).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator(".view--tracking .stage__hud")).toContainText(`frame ${first}`);
+  expect(await video.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
 });
 
 test("no layout overflows at desktop or phone width", async ({ page }) => {

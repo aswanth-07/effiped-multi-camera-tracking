@@ -214,7 +214,6 @@ def main() -> int:
                 "label": f"Camera {index + 1}",
                 "file_name": row["name"],
                 "source": f"{SESSION_BASE}/{cam}-source.webm",
-                "tracked": f"{SESSION_BASE}/{cam}-tracked.webm",
                 "poster": f"{SESSION_BASE}/{cam}-poster.webp",
             }
         )

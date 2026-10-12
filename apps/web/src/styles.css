@@ -764,7 +764,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   box-shadow: var(--ring);
 }
 .stage__canvas, .stage video { width: 100%; height: auto; background: #000; }
-.stage--flush { display: flex; max-width: none; flex-direction: column; }
+.stage--flush { display: flex; align-self: start; max-width: none; flex-direction: column; }
 .stage__status {
   position: absolute; top: 0.5rem; left: 0.5rem;
   padding: 0.2rem 0.45rem;
@@ -864,6 +864,27 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .grid-table tbody tr:last-child th, .grid-table tbody tr:last-child td { border-bottom: 0; }
 .grid-table tbody tr { transition: background-color var(--t-fast) var(--ease); }
 .grid-table tbody tr:hover { background: var(--hover); }
+.grid-table tbody tr.is-muted { color: var(--text-muted); }
+.grid-table tbody tr.is-on { background: var(--hover); box-shadow: inset 2px 0 0 var(--comment); }
+
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--comment);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--comment) 45%, transparent);
+  text-underline-offset: 0.2em;
+}
+.link-button:hover { text-decoration-color: currentColor; }
+
+/* The tracked boxes are drawn on a canvas laid exactly over the video, so they
+   scale with it; it never takes a click, so the native controls stay usable. */
+.player { position: relative; line-height: 0; }
+.player video { display: block; width: 100%; height: auto; background: #000; }
+.player__overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .table-pane tbody tr { cursor: pointer; }
 /* A table with no scroller of its own still needs a measure. Five columns
    spread across a metre of glass stop being a table and become five lists that

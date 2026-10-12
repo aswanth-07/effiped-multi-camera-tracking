@@ -20,7 +20,6 @@ export type WorkbenchVideo = {
   height: number;
   status: string;
   source: string;
-  tracked: string;
   poster: string;
 };
 

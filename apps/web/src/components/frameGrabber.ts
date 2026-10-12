@@ -79,6 +79,15 @@ function enqueue<T>(src: string, task: () => Promise<T>): Promise<T> {
   return next;
 }
 
+/**
+ * The time to seek to for a frame index. Seeking to exactly frame / fps can
+ * resolve to the previous frame after float rounding, which would stroke the
+ * boxes onto the wrong image; the middle of the frame's interval cannot.
+ */
+export function frameTime(frameIndex: number, fps: number): number {
+  return (frameIndex + 0.5) / fps;
+}
+
 export type Overlay = { box: Box; label?: string; color?: string };
 
 export type DrawFrameOptions = {

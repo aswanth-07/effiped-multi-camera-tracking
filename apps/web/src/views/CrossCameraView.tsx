@@ -26,9 +26,17 @@ export function CrossCameraView({
     }
   }
 
+  // Similarity is symmetric, so A to B and B to A are one link: list it once.
+  const seen = new Set<string>();
   const strongest = [...result.people]
     .flatMap((row) => row.matches.filter((m) => !m.same_video).map((match) => ({ row, match })))
     .sort((a, b) => b.match.similarity - a.match.similarity)
+    .filter(({ row, match }) => {
+      const key = [row.person.id, match.person.id].sort().join("|");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
     .slice(0, 12);
 
   return (

@@ -14,7 +14,6 @@ describe("precomputed person-search fixture", () => {
     for (const [index, video] of personSearch.videos.entries()) {
       expect(video.file_name).toBe(`cam${index + 1}.mp4`);
       expect(video.source).toBe(`/media/pdestre/session3/cam${index + 1}-source.webm`);
-      expect(video.tracked).toBe(`/media/pdestre/session3/cam${index + 1}-tracked.webm`);
       expect(video.width).toBe(960);
       expect(video.height).toBe(540);
     }

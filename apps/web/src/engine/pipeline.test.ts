@@ -1,6 +1,18 @@
 import { describe, expect, it } from "vitest";
 
-import { DEFAULT_SETTINGS, RANGES, belowIndexFloor, runQuery, type Settings } from "./pipeline";
+import {
+  DEFAULT_SETTINGS,
+  RANGES,
+  belowIndexFloor,
+  DETECTION_STRIDE,
+  detectionFrames,
+  detectionsAt,
+  runQuery,
+  trackBoxesAt,
+  trackBoxesForFrame,
+  tracksFor,
+  type Settings
+} from "./pipeline";
 
 const base: Settings = { ...DEFAULT_SETTINGS };
 
@@ -85,5 +97,75 @@ describe("replay engine", () => {
       expect(value).toBeGreaterThanOrEqual(range.min);
       expect(value).toBeLessThanOrEqual(range.max);
     }
+  });
+
+  it("draws every detection on a frame, not only the indexed people", () => {
+    const result = runQuery(base);
+    for (const video of result.sources) {
+      const frames = detectionFrames(video.id, base);
+      expect(frames.length).toBeGreaterThan(0);
+      let fromIndex = 0;
+      let drawn = 0;
+      for (const frame of frames) {
+        const boxes = detectionsAt(video.id, frame, base, result);
+        drawn += boxes.length;
+        for (const row of result.people) {
+          if (row.person.video_index !== video.id) continue;
+          const views = row.detections.filter((d) => d.frame_index === frame);
+          fromIndex += views.length;
+          // Every stored index view is one of the boxes drawn on its frame.
+          for (const view of views) {
+            expect(boxes.some((box) => box.personId === row.person.id)).toBe(true);
+          }
+        }
+        for (const box of boxes) {
+          expect(box.score).toBeGreaterThanOrEqual(base.detConf);
+          expect(box.bbox[3] - box.bbox[1]).toBeGreaterThanOrEqual(base.minBoxHeight);
+        }
+      }
+      expect(drawn).toBeGreaterThan(fromIndex * 2);
+    }
+  });
+
+  it("draws the same tracks, with the same ids, as the tracking table counts", () => {
+    const result = runQuery(base);
+    for (const video of result.sources) {
+      const tracks = new Map(tracksFor(video.id, base, result).map((track) => [track.trackId, track]));
+      const seen = new Map<number, number>();
+      for (let frame = 0; frame < video.frame_count; frame += DETECTION_STRIDE) {
+        for (const box of trackBoxesAt(video.id, frame, base)) {
+          seen.set(box.trackId, (seen.get(box.trackId) ?? 0) + 1);
+        }
+      }
+      expect(seen.size).toBe(tracks.size);
+      for (const [trackId, count] of seen) expect(tracks.get(trackId)?.detections).toBe(count);
+    }
+  });
+
+  it("places an in-between frame's box halfway between its two observations", () => {
+    const video = runQuery(base).sources[0];
+    let checked = 0;
+    for (let frame = 0; frame + DETECTION_STRIDE < video.frame_count; frame += DETECTION_STRIDE) {
+      const before = new Map(trackBoxesAt(video.id, frame, base).map((box) => [box.trackId, box]));
+      const after = new Map(trackBoxesAt(video.id, frame + DETECTION_STRIDE, base).map((box) => [box.trackId, box]));
+      for (const box of trackBoxesForFrame(video.id, frame + 1, base)) {
+        const a = before.get(box.trackId)!;
+        const b = after.get(box.trackId);
+        // Only tracks seen on the frame before are drawn; nothing is invented.
+        expect(a).toBeDefined();
+        const expected = b ? a.bbox.map((value, i) => (value + b.bbox[i]) / 2) : a.bbox;
+        box.bbox.forEach((value, i) => expect(value).toBeCloseTo(expected[i], 6));
+        checked += 1;
+      }
+    }
+    expect(checked).toBeGreaterThan(100);
+  });
+
+  it("stops drawing tracks past the frame limit", () => {
+    const limited = { ...base, frameLimit: 30 };
+    const video = runQuery(limited).sources[0];
+    expect(trackBoxesAt(video.id, 32, limited)).toHaveLength(0);
+    expect(trackBoxesForFrame(video.id, 31, limited)).toHaveLength(0);
+    expect(trackBoxesAt(video.id, 30, limited).length).toBeGreaterThan(0);
   });
 });
