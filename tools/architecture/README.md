@@ -1,47 +1,35 @@
 # Architecture diagram
 
-`docs/architecture/effiped-architecture.{pptx,svg,png}` are generated, not hand-edited.
-The PowerPoint is the source of truth; the SVG and PNG are exported from it.
+`docs/architecture/effiped-architecture.svg` and `.png` are generated, not
+hand-edited. `build_diagram.py` is the source: it lays out every block, arrow
+and label explicitly and writes the SVG on the console's black ground, so the
+Architecture tab can show it unchanged.
 
 ## Rebuild
 
 ```bash
-npm install pptxgenjs                     # ad-hoc; not a repo dependency
-node tools/architecture/build_architecture.mjs docs/architecture/effiped-architecture.pptx
-
-# PNG (2560 x 1440)
-soffice --headless --convert-to pdf --outdir /tmp docs/architecture/effiped-architecture.pptx
-pdftoppm -png -r 192 /tmp/effiped-architecture.pdf /tmp/arch
-cp /tmp/arch-1.png docs/architecture/effiped-architecture.png
-
-# SVG
-soffice --headless --convert-to svg --outdir /tmp docs/architecture/effiped-architecture.pptx
-python tools/architecture/clean_svg.py /tmp/effiped-architecture.svg docs/architecture/effiped-architecture.svg
+python tools/architecture/build_diagram.py   # writes the SVG
+node tools/architecture/export_png.mjs        # 2x PNG, using the web app's Playwright Chromium
+python tools/validate_release.py              # the SVG must keep its <title> and <desc>
 ```
 
-Then `python tools/validate_release.py`.
+`export_png.mjs` needs `npm ci --prefix apps/web` and, once,
+`npx --prefix apps/web playwright install chromium`.
 
-## Why `clean_svg.py` exists
+## Conventions
 
-LibreOffice's SVG export is built for its slideshow player, and three of its
-habits break a static diagram:
+- Data flows from the bottom up. A grey group is one module; its caption names it.
+- Block colour is the kind of operation: blue convolution, purple projection or
+  sampling, amber attention or deformable convolution, yellow normalisation, green
+  output, grey a fixed operation, rose the input stem. The legend in the corner
+  repeats this.
+- Dashed `L_det` and `L_id` tags mark where the training losses attach; the
+  Architecture tab lists every term and weight.
 
-1. It bundles a ~450 KB touch-gesture script — dead weight here, and blocked by
-   the site's `script-src 'self'` policy anyway.
-2. **It wraps the real slide in `<g visibility="hidden">` and relies on that
-   script to reveal it.** Removing the script without unhiding the wrapper ships
-   an SVG that renders completely blank. The script raises an error rather than
-   emitting a silently invisible file if that wrapper ever stops matching.
-3. It emits a viewBox in 1/100 mm with no `width`/`height`, leaving the image
-   with no intrinsic size — Chrome then rasterises it as blank in `<img>` and
-   `<canvas>`.
+## Keeping it true
 
-It also adds the `<title>`/`<desc>` pair that `tools/validate_release.py`
-requires for accessibility.
-
-## Verifying a rebuild
-
-Rasterise the SVG and the PNG at the same size and compare. A correct export
-lands within a mean absolute difference of roughly 15/255 — that residual is
-text antialiasing between the two rasterisers. A blank SVG shows up immediately
-as a near-total difference against the dark background.
+Every layer and number is taken from `configs/system/effiped.yaml` and
+`src/effiped`. `apps/web/src/data/architecture.test.ts` checks the configuration
+values the tab prints and fails if the diagram ever shows a stride-16 or
+stride-32 stage, which this compact two-scale trunk does not have. Change the
+model, then change `build_diagram.py` and rebuild.

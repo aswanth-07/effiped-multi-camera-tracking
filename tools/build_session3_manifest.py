@@ -18,11 +18,10 @@ MANIFEST = MEDIA / "ASSET_MANIFEST.json"
 SESSION = MEDIA / "pdestre" / "session3"
 
 SOURCE_CLIPS = "P-DESTRE-derived PedestrianTracker demo_clips/session_3 source footage"
-SOURCE_RENDER = "P-DESTRE-derived PedestrianTracker cross_camera_demo/session_3_4cam application output"
 INDEX_NOTE = (
-    "Person-search index computed offline with the BoxJDE research checkpoint "
-    "(paper/runs_boxjde/boxjde_fold0_full_roi); EffiPed Tier-1 weights are withheld "
-    "pending dataset rights review"
+    "Person-search index computed offline with a research version of EffiPed "
+    "using full-person descriptors; final EffiPed weights are withheld pending "
+    "dataset rights review"
 )
 
 
@@ -60,26 +59,6 @@ def rows() -> list[dict]:
                 "purpose": f"Poster frame for the camera {index} clips",
             }
         )
-
-    out.append(
-        {
-            "path": "pdestre/session3/detection-input.webp",
-            "source": f"{SOURCE_CLIPS} (cam1.mp4)",
-            "transformations": "Frame at 00:06 encoded as WebP quality 85; no annotations",
-            "purpose": "Input image for the image-detection panel",
-        }
-    )
-    out.append(
-        {
-            "path": "pdestre/session3/detection-output.webp",
-            "source": f"{SOURCE_RENDER} (cross_camera_demo.mp4)",
-            "transformations": (
-                "Frame at 00:06 from the sequence 1 quadrant encoded as WebP quality 85; original "
-                "detector annotations retained"
-            ),
-            "purpose": "Annotated result for the image-detection panel",
-        }
-    )
 
     for crop in sorted((SESSION / "crops").glob("*.webp")):
         stem = crop.stem.replace("_crop", "")

@@ -1,27 +1,25 @@
-import { Activity, ChevronDown, Cpu, ExternalLink, SlidersHorizontal } from "lucide-react";
+import { Activity, ChevronDown, ExternalLink, SlidersHorizontal } from "lucide-react";
 
 import type { RunResult } from "../engine/pipeline";
 import { repository } from "../lib/site";
 
-export type ViewId = "sources" | "detection" | "tracking" | "search" | "cross" | "model";
+export type ViewId = "sources" | "detection" | "tracking" | "search" | "architecture";
 
 export const VIEWS: { id: ViewId; label: string; key: string }[] = [
   { id: "search", label: "Person Search", key: "1" },
   { id: "detection", label: "Detection", key: "2" },
   { id: "tracking", label: "Tracking", key: "3" },
-  { id: "cross", label: "Cross Camera", key: "4" },
-  { id: "sources", label: "Sources", key: "5" },
-  { id: "model", label: "Model", key: "6" }
+  { id: "sources", label: "Sources", key: "4" },
+  { id: "architecture", label: "Architecture", key: "5" }
 ];
 
 function Mark() {
   return (
     <svg aria-hidden="true" className="mark" viewBox="0 0 48 48">
       <rect height="47" width="47" x="0.5" y="0.5" />
-      <path d="M12 33 L20.5 15 L27.5 33" />
-      <path d="M15.6 27.4 H24.9" />
-      <path d="M31 33 V15 H36 a5 5 0 0 1 0 10 H31" />
-      <path d="M34.4 25 L38.5 33" />
+      <path d="M22.5 15 H13 V33 H22.5" />
+      <path d="M13 24 H20.5" />
+      <path d="M27.5 33 V15 H32.5 a5 5 0 0 1 0 10 H27.5" />
     </svg>
   );
 }
@@ -142,19 +140,24 @@ export function StatusBar({
         <Cell label="frames" previous={p?.framesProcessed ?? null} value={s?.framesProcessed ?? 0} />
         <Cell label="detections" previous={p?.detectionsKept ?? null} value={s?.detectionsKept ?? 0} />
         <Cell label="people" previous={p?.peopleIndexed ?? null} value={s?.peopleIndexed ?? 0} />
-        <Cell label="links" previous={p?.crossLinks ?? null} value={s?.crossLinks ?? 0} />
+        <Cell label="matches" previous={p?.crossLinks ?? null} value={s?.crossLinks ?? 0} />
         <Cell
           format={three}
-          label="mean conf"
+          label="avg confidence"
           previous={p?.meanConfidence ?? null}
           value={s?.meanConfidence ?? 0}
         />
       </span>
 
-      <span className="statusbar__mode" title="No model runs in this browser">
-        <Cpu aria-hidden="true" size={11} />
-        no inference in browser
-      </span>
+      <a
+        className="statusbar__mode"
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        rel="noreferrer"
+        target="_blank"
+        title="Demo footage from the P-DESTRE dataset, adapted under CC BY-NC-SA 4.0"
+      >
+        Footage: P-DESTRE, CC BY-NC-SA 4.0
+      </a>
     </footer>
   );
 }

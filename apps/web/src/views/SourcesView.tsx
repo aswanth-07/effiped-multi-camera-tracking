@@ -65,10 +65,10 @@ export function SourcesView({
                   </div>
                   <div>
                     <dt>Tracks</dt>
-                    <dd>{tracks.length}, {indexed} indexed people</dd>
+                    <dd>{tracks.length}, {indexed} searchable people</dd>
                   </div>
                   <div>
-                    <dt>Tracked detections</dt>
+                    <dt>Detections</dt>
                     <dd>{detections}</dd>
                   </div>
                 </dl>
@@ -77,11 +77,6 @@ export function SourcesView({
           );
         })}
       </div>
-
-      <p className="view__foot">
-        P-DESTRE session 12-11-2019_3, adapted under CC BY-NC-SA 4.0. The clips play unannotated
-        here; the Detection and Tracking workspaces draw the model's stored boxes over them.
-      </p>
     </div>
   );
 }

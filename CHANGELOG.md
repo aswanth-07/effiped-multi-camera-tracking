@@ -9,6 +9,18 @@ Dates are the dates of the commits that made each change.
 
 ### Added
 
+- An Architecture tab (key `5`): the system diagram beside the training objective,
+  every detection and identity loss term with its weight, the training and inference
+  settings, and the reported results. A unit test checks each printed value against
+  `configs/system/effiped.yaml` and reads the results from `research/results/summary.json`
+  (2026-10-14).
+- `ARCHITECTURE.md`, a plain description of the model, the losses, training,
+  inference, and how the repository fits together (2026-10-14).
+- The architecture diagram is drawn by `tools/architecture/build_diagram.py` as a
+  paper-style block diagram on the console's black ground, with a PNG export through
+  the web app's Playwright Chromium. It now shows the compact two-scale trunk the
+  configuration actually builds (stem and first two ConvNeXt V2 stages, stride 4 and 8)
+  rather than four stages to stride 32 (2026-10-14).
 - Every detection the detector returned on each processed frame, replayed from the
   same run as the person-search index (`tools/build_detection_fixture.py`), so the
   Detection workspace draws everyone in a frame rather than only the few stored views
@@ -22,6 +34,12 @@ Dates are the dates of the commits that made each change.
 
 ### Changed
 
+- The console has five tabs: Person Search, Detection, Tracking, Sources, and
+  Architecture. An EP mark, shorter labels, and removal of explanatory footnotes
+  simplify the interface. Public documentation, model metadata, the configuration
+  (`configs/system/effiped.yaml`, model key `effiped`), and the report use the EffiPed
+  name consistently. The README preview image is a current screenshot of the console
+  (2026-10-14).
 - The default confidence floor is 0.35, the threshold the archived tracking results
   were run at; 0.45 hid the nearest pedestrians in camera 2. Drawn frames apply hard
   NMS over the decoder's soft-NMS output, seek to the middle of a frame so boxes land
@@ -66,6 +84,11 @@ Dates are the dates of the commits that made each change.
 
 ### Removed
 
+- The Cross Camera and Model tabs, their unused styles and data, the separate
+  descriptor-study configuration, and 23 media files the current demo no longer uses,
+  including the Person Search walkthrough video, which showed the retired six-tab
+  console. The PowerPoint diagram source and its LibreOffice export scripts are
+  replaced by the SVG generator (2026-10-14).
 - The archived per-camera tracked renders (8.4 MB), which the Tracking workspace no
   longer uses and whose track numbers matched nothing else in the console
   (2026-10-12).
@@ -122,7 +145,7 @@ demo, and the evidence and licensing record that governs what may be published.
   checkpoint-publication HOLD, `MODEL_CARD.md`, `SECURITY.md`, `CITATION.cff` and
   `THIRD_PARTY_NOTICES.md` (2026-07-30).
 - Versioned model manifest (`src/effiped/model_manifest.json`) describing
-  `effiped-tier1-v1.pt`, and a checksum-verified download path (2026-07-30).
+  `effiped-v1.pt`, and a checksum-verified download path (2026-07-30).
 
 ### Known limitations at this release
 

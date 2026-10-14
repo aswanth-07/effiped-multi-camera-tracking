@@ -5,6 +5,8 @@ COPY apps/web/package*.json ./
 RUN npm ci
 COPY apps/web ./
 COPY docs /build/docs
+# The Architecture tab reads the published results at build time.
+COPY research/results /build/research/results
 RUN npm run build
 
 FROM python:3.11-slim AS runtime

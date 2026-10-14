@@ -58,8 +58,8 @@ describe("precomputed person-search fixture", () => {
   });
 
   it("records how the index was produced", () => {
-    expect(personSearch.generated_with.checkpoint).toBeTruthy();
-    expect(personSearch.generated_with.note.toLowerCase()).toContain("boxjde");
+    expect(personSearch.generated_with.model).toMatch(/^EffiPed/);
+    expect(personSearch.generated_with.note.toLowerCase()).toContain("research version");
     expect(personSearch.job.status).toBe("complete");
   });
 

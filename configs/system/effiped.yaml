@@ -1,4 +1,4 @@
-# Canonical EffiPed Tier-1 system configuration.
+# EffiPed system configuration.
 # Dataset paths are repository-relative placeholders; users must obtain each source separately.
 
 model:
@@ -183,5 +183,5 @@ cross_camera:
   merge_thresh: 0.990
 
 experiment:
-  name: effiped-tier1
-  save_dir: runs/effiped-tier1
+  name: effiped
+  save_dir: runs/effiped

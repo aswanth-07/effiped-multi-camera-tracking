@@ -314,11 +314,11 @@ class STrack:
         self.features = deque([], maxlen=buffer_size)
         self.alpha = STrack.ema_alpha  # EMA decay for appearance (configurable via tracker config)
         
-        # Part-based ReID features (6 part embeddings + attention weights)
-        self.smooth_part_feats = None   # [6, C] EMA of part embeddings
-        self.curr_part_feats = None     # [6, C] latest detection parts
-        self.curr_attn_weights = None   # [6]    latest attention weights
-        self.smooth_attn_weights = None # [6]    EMA attention weights
+        # Part-based ReID features (P strip embeddings + attention weights; P = 4)
+        self.smooth_part_feats = None   # [P, C] EMA of part embeddings
+        self.curr_part_feats = None     # [P, C] latest detection parts
+        self.curr_attn_weights = None   # [P]    latest attention weights
+        self.smooth_attn_weights = None # [P]    EMA attention weights
         
         # Diversity-aware gallery for multi-view matching
         self.gallery = EmbeddingGallery(max_size=10, min_diversity=0.005)
@@ -347,8 +347,8 @@ class STrack:
         
         Args:
             feat: [C] fused embedding (L2-normalized)
-            part_feats: [6, C] part embeddings (optional, for part-aware matching)
-            attn_weights: [6] attention weights (optional)
+            part_feats: [P, C] part embeddings (optional, for part-aware matching)
+            attn_weights: [P] attention weights (optional)
             score: detection confidence — higher score → more weight to new feat
         """
         if feat is None:
@@ -612,7 +612,7 @@ def embedding_distance(
       3) Gallery distance: min over gallery entries of cosine(entry, det.curr_feat)
     
     Part-aware matching (when available):
-      For each of 6 body parts, computes cosine distance weighted by mutual visibility.
+      For each body strip, computes cosine distance weighted by mutual visibility.
       mutual_vis[i] = min(track_attn[i], det_attn[i]) — ignores parts occluded in either.
       Combined: (1-α) * fused_distance + α * part_distance
     
@@ -641,14 +641,14 @@ def embedding_distance(
                     part_cost[i, j] = ema_cost[i, j]  # Fallback to fused
                     continue
                 # Per-part cosine similarity: dot product of L2-normalized part vectors
-                part_sims = np.sum(track.smooth_part_feats * det.curr_part_feats, axis=1)  # [6]
+                part_sims = np.sum(track.smooth_part_feats * det.curr_part_feats, axis=1)  # [P]
                 # Mutual visibility: min of attention weights (ignore parts occluded in either)
-                mutual_vis = np.minimum(track.smooth_attn_weights, det.curr_attn_weights)  # [6]
+                mutual_vis = np.minimum(track.smooth_attn_weights, det.curr_attn_weights)  # [P]
                 vis_sum = mutual_vis.sum()
                 if vis_sum > 1e-8:
                     part_sim = np.sum(mutual_vis * part_sims) / vis_sum
                 else:
-                    part_sim = np.sum(part_sims) / 6.0  # Fallback: equal weights
+                    part_sim = float(np.mean(part_sims))  # Fallback: equal weights
                 part_cost[i, j] = 1.0 - part_sim  # Convert similarity → distance
         # Combine fused and part-aware distances
         ema_cost = (1 - part_aware_alpha) * ema_cost + part_aware_alpha * part_cost

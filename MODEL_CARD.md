@@ -1,45 +1,35 @@
-# EffiPed Model Card
+# EffiPed model card
 
-## Summary
-
-EffiPed Tier-1 is a compact joint detection and embedding model built around ConvNeXt V2,
-P2/P3 fusion, CenterNet outputs, RoIAlign, four body strips, Coordinate Attention, and a
-256-D normalized descriptor. BoT-SORT handles camera-local temporal association; a bounded
-gallery ranks cross-camera candidates.
+EffiPed detects pedestrians and describes their appearance using one ConvNeXt V2 backbone (7.78M parameters). Its detection branch uses CenterNet outputs. Its appearance branch uses RoIAlign, four body strips, Coordinate Attention, and a normalized 256-dimensional descriptor. A BoT-SORT-style tracker follows people within a camera. [ARCHITECTURE.md](ARCHITECTURE.md) gives the layers, losses and training settings.
 
 ## Intended use
 
 - Non-commercial research and education.
-- Reproduction of the documented system and matched descriptor evaluations.
-- Local, human-in-the-loop review of user-authorized camera video.
-- Portfolio demonstration using precomputed, attributed media.
+- Study of the documented model and evaluation methods.
+- Human review of camera video the user is authorized to process.
+- A portfolio demonstration using saved, attributed results.
 
-## Out-of-scope use
+## Uses outside this scope
 
-- Automated identity decisions or claims of identity.
+- Automated identity decisions or claims that two observations prove identity.
 - Face recognition or biometric identification.
-- Public or covert surveillance without a purpose-specific legal, privacy, consent,
-  security, retention, bias, and human-review assessment.
+- Surveillance without a specific assessment of legality, privacy, consent, security, retention, bias, and human review.
 - Commercial use while training-data terms remain non-commercial or unresolved.
 
-## Evidence boundary
+## Evidence
 
-Published system evidence includes 62.8% validation and 61.3% test cross-camera Rank-1 on
-P-DESTRE, plus 64.08 MOTA, 74.24 IDF1, and 61.34 HOTA on MOT17 val-half. See
-`RESULTS.md` for the complete protocol ledger.
+Archived measurements report 62.8% validation and 61.3% test cross-camera Rank-1 on P-DESTRE, plus 64.08 MOTA, 74.24 IDF1, and 61.34 HOTA on MOT17 validation half. See [RESULTS.md](RESULTS.md) for the conditions and evidence limits.
+
+The browser demo uses a research version with full-person descriptors. Its saved output is separate from the part-based model measurements above. The local API ranks cross-camera candidates by cosine similarity; the library's bounded gallery policy is not connected to that API.
 
 ## Limitations
 
-Scores are sensitive to occlusion, detector localization, pose, clothing ambiguity,
-illumination, camera calibration, time gaps, domain shift, and crowd density. A high cosine
-similarity is candidate evidence, not proof that two observations depict the same person.
-The published evaluation does not establish performance for other locations, populations,
-or camera networks.
+Occlusion, inaccurate boxes, pose, similar clothing, lighting, camera layout, time gaps, crowd density, and changes in the video source can affect scores. A high similarity is a candidate for review, not proof of identity. Scores are not calibrated probabilities.
 
-## Artifact status
+No fairness analysis, repeated-run uncertainty, or study of reviewer accuracy is included. Evaluation on the recorded datasets does not establish performance elsewhere. Public weights and raw evaluation records are unavailable, which prevents independent reproduction from this repository.
 
-The versioned manifest describes `effiped-tier1-v1.pt`, but public checkpoint distribution
-is on hold. Runtime construction always uses `pretrained=false` when loading a checkpoint,
-avoiding an unnecessary backbone download.
+## Model weights
 
-Maintainer: [Aswanth Raj](https://github.com/aswanth-07)
+The manifest names `effiped-v1.pt`. Public distribution is on hold pending review of training-data redistribution rights. Loading an authorized checkpoint uses `pretrained=false` to avoid downloading a separate backbone.
+
+Maintainer: [Aswanth Raj](https://github.com/aswanth-07).

@@ -60,11 +60,6 @@ export function SourceModal({
           </button>
         </header>
 
-        <p className="modal__note">
-          Four synchronized clips from P-DESTRE session 12-11-2019_3 are attached to this job. Pick
-          the ones the pipeline should process.
-        </p>
-
         <div className="source-grid">
           {personSearch.videos.map((video) => {
             const checked = draft.includes(video.id);

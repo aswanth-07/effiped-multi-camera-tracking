@@ -31,9 +31,6 @@ runs/
 *.mov
 *.mkv
 *.webm
-!docs/media/pdestre/multi-camera-tracking.webm
-!docs/media/pdestre/cross-camera-matches.webm
-!docs/media/pdestre/person-search-ui.webm
 !docs/media/pdestre/session3/*.webm
 tmp/
 *.log

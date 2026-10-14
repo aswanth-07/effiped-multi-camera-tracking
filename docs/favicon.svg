@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#071311"/>
-  <path d="M18 15h31v9H28v7h18v8H28v7h22v9H18z" fill="#24e6bd"/>
-  <circle cx="49" cy="15" r="6" fill="#e8a94d"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <title>EffiPed</title>
+  <rect width="48" height="48" rx="10" fill="#000"/>
+  <g fill="none" stroke="#e6edf3" stroke-width="3.4" stroke-linecap="square">
+    <path d="M22.5 14 H12 V34 H22.5"/>
+    <path d="M12 24 H20.5"/>
+    <path d="M27.5 34 V14 H32.5 a5.5 5.5 0 0 1 0 11 H27.5"/>
+  </g>
 </svg>

@@ -1,11 +1,9 @@
 {
   "schema_version": 1,
   "generated_with": {
-    "checkpoint": "BoxJDE-Full fold-0",
-    "checkpoint_key": "boxjde_full_fold0",
-    "note": "Person-search index computed offline with the BoxJDE research checkpoint over the four session_3 clips; EffiPed Tier-1 weights are withheld pending dataset rights review.",
+    "model": "EffiPed research version",
+    "note": "Precomputed offline over the four demo clips with a research version of the EffiPed model; the final EffiPed weights are not public yet.",
     "settings": {
-      "model_key": "boxjde_full_fold0",
       "decode_thresh": 0.05,
       "track_thresh": 0.3,
       "max_frames": 0,
@@ -13070,9 +13068,5 @@
         }
       }
     ]
-  },
-  "detection": {
-    "input": "/media/pdestre/session3/detection-input.webp",
-    "output": "/media/pdestre/session3/detection-output.webp"
   }
 }

@@ -15,12 +15,12 @@ Prerequisites
    ``PaperRuntime`` and ``preset_from_key``) and ``src.tracker``.
 2. Its ``backend/person_search_service.py`` — the ``PersonSearchManager`` used
    here. ``apps/api/person_search_service.py`` in this repo is the same class
-   wired to ``effiped.runtime`` instead; that path needs the EffiPed Tier-1
-   weights, which are withheld pending dataset rights review. The published
-   fixture was therefore generated with the BoxJDE research checkpoint
-   (``paper/runs_boxjde/boxjde_fold0_full_roi/best_model.pth``), and every
-   surface that shows it says so.
-3. ``BOXJDE_PAPER_ROOT`` pointing at the research ``paper/`` tree.
+   wired to ``effiped.runtime`` instead; that path needs the EffiPed weights,
+   which are withheld pending dataset rights review. The published fixture
+   uses a research version with full-person descriptors, separate from the
+   benchmarked part-based model.
+3. An explicit preset key, configuration, and matching authorized checkpoint
+   from that research checkout. Paths are relative to ``--paper-root``.
 
 Usage
 -----
@@ -28,8 +28,11 @@ Point PYTHONPATH at the PedestrianTracker checkout (for ``src.*``) and at the
 directory holding the ``backend`` package, then::
 
     PYTHONPATH=/path/to/PedestrianTracker:/path/to/checkout \
-    BOXJDE_PAPER_ROOT=/path/to/paper \
     python tools/build_person_search_fixture.py \
+        --paper-root /path/to/paper \
+        --model-key <research-preset> \
+        --config <relative-config.yaml> \
+        --checkpoint <relative-checkpoint.pth> \
         --clips /path/to/demo_clips/session_3 \
         --out apps/web/src/data/person-search.json \
         --assets docs/media/pdestre/session3/crops
@@ -49,6 +52,7 @@ Design notes
 from __future__ import annotations
 
 import argparse
+import dataclasses
 import json
 import shutil
 import sys
@@ -64,7 +68,10 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--clips", required=True, type=Path)
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--assets", required=True, type=Path)
-    ap.add_argument("--model-key", default="boxjde_full_fold0")
+    ap.add_argument("--paper-root", required=True, type=Path)
+    ap.add_argument("--model-key", required=True)
+    ap.add_argument("--config", required=True, type=Path)
+    ap.add_argument("--checkpoint", required=True, type=Path)
     ap.add_argument("--decode-thresh", type=float, default=0.05)
     ap.add_argument("--track-thresh", type=float, default=0.30)
     ap.add_argument("--frame-stride", type=int, default=2)
@@ -86,6 +93,7 @@ def main() -> int:
             PersonSearchManager,
             _normalize_settings,
         )
+        from src.paper_runtime import preset_from_key  # type: ignore[import-not-found]
     except ImportError as exc:  # pragma: no cover - operator guidance
         print(
             f"{exc}\n\n"
@@ -110,6 +118,11 @@ def main() -> int:
     if runtime_root.exists():
         shutil.rmtree(runtime_root)
     manager = PersonSearchManager(runtime_root)
+    manager.presets[args.model_key] = dataclasses.replace(
+        preset_from_key(manager.presets, args.model_key),
+        config_path=str(args.paper_root.resolve() / args.config),
+        checkpoint_path=str(args.paper_root.resolve() / args.checkpoint),
+    )
 
     available = [preset for preset in manager.model_presets() if preset["available"]]
     if not any(preset["key"] == args.model_key for preset in available):
@@ -222,24 +235,18 @@ def main() -> int:
     fixture = {
         "schema_version": 1,
         "generated_with": {
-            "checkpoint": next(p for p in available if p["key"] == args.model_key)["label"],
-            "checkpoint_key": args.model_key,
+            "model": "EffiPed research version",
             "note": (
-                "Person-search index computed offline with the BoxJDE research checkpoint "
-                "over the four session_3 clips; EffiPed Tier-1 weights are withheld pending "
-                "dataset rights review."
+                "Precomputed offline over the four demo clips with a research version of "
+                "the EffiPed model; the final EffiPed weights are not public yet."
             ),
-            "settings": settings,
+            "settings": {key: value for key, value in settings.items() if key != "model_key"},
         },
         "job": people_out.job.model_dump(),
         "videos": videos,
         "people": people,
         "details": details,
         "matches": matches,
-        "detection": {
-            "input": f"{SESSION_BASE}/detection-input.webp",
-            "output": f"{SESSION_BASE}/detection-output.webp",
-        },
     }
 
     args.out.resolve().write_text(json.dumps(fixture, indent=2), encoding="utf-8")

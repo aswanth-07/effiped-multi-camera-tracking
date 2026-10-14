@@ -13,10 +13,12 @@ async function counters(page: Page) {
     clips: read("clips"),
     detections: read("detections"),
     people: read("people"),
-    links: read("links"),
-    meanConf: read("mean conf")
+    links: read("matches"),
+    meanConf: read("avg confidence")
   };
 }
+
+const TABS = ["Person Search", "Detection", "Tracking", "Sources", "Architecture"];
 
 async function openThresholds(page: Page) {
   const toggle = page.getByRole("button", { name: /thresholds/i });
@@ -162,8 +164,6 @@ test("a candidate reveals the full frame it was cropped from", async ({ page }) 
       { timeout: 20000 }
     )
     .toBeGreaterThan(30);
-
-  await expect(page.locator(".matches__caution")).toContainText(/not an identification/i);
 });
 
 test("the source picker attaches a subset and the job narrows", async ({ page }) => {
@@ -188,9 +188,8 @@ test("every workspace renders and number keys switch between them", async ({ pag
   for (const [key, heading] of [
     ["2", /single frame detection/i],
     ["3", /camera local tracking/i],
-    ["4", /cross camera association/i],
-    ["5", /attached sources/i],
-    ["6", /model and runtime/i]
+    ["4", /attached sources/i],
+    ["5", /architecture/i]
   ] as const) {
     await page.keyboard.press(key);
     await expect(page.locator(".viewport").getByRole("heading", { level: 2 }).first()).toHaveText(heading);
@@ -199,13 +198,29 @@ test("every workspace renders and number keys switch between them", async ({ pag
   await expect(page.locator("#src-heading")).toBeVisible();
 });
 
+test("the architecture tab shows the diagram and every training loss", async ({ page }) => {
+  await page.getByRole("tab", { name: "Architecture" }).click();
+  const diagram = page.getByRole("img", { name: /EffiPed architecture/i });
+  await expect(diagram).toBeVisible();
+  // The figure is a real file the build ships, not a broken image.
+  await expect
+    .poll(() => diagram.evaluate((image: HTMLImageElement) => image.naturalWidth))
+    .toBeGreaterThan(0);
+
+  // Five detection terms and five identity terms, each with a weight.
+  await expect(page.locator(".arch-loss tbody td.is-num")).toHaveCount(10);
+  await expect(page.locator(".arch-loss").first()).toContainText("Gaussian focal loss");
+  await expect(page.locator(".arch-loss").nth(1)).toContainText("ArcFace");
+  await expect(page.locator(".arch-facts").filter({ has: page.locator("#arch-results") })).toContainText("62.8%");
+});
+
 test("a detection frame shows everyone the detector found, not only indexed people", async ({ page }) => {
   await page.keyboard.press("2");
   await page.getByRole("button", { name: "Camera 2" }).click();
   const hud = page.locator(".view--detection .stage__hud");
   await expect(hud).toContainText(/frame 0/);
   const count = async () => Number((await hud.innerText()).match(/(\d+) detections/)?.[1] ?? 0);
-  const indexed = async () => Number((await hud.innerText()).match(/(\d+) indexed/)?.[1] ?? 0);
+  const indexed = async () => Number((await hud.innerText()).match(/(\d+) searchable/)?.[1] ?? 0);
   // The crowd at the start of camera 2: the index alone holds three of them.
   expect(await count()).toBeGreaterThanOrEqual(20);
   expect(await indexed()).toBeLessThan(await count());
@@ -238,7 +253,7 @@ test("the tracking overlay draws the table's tracks and jumps to a selected one"
 test("no layout overflows at desktop or phone width", async ({ page }) => {
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
-    for (const tab of ["Person Search", "Detection", "Tracking", "Cross Camera", "Sources", "Model"]) {
+    for (const tab of TABS) {
       await page.getByRole("tab", { name: tab }).click();
       const size = await page.evaluate(() => ({
         client: document.documentElement.clientWidth,
@@ -250,7 +265,7 @@ test("no layout overflows at desktop or phone width", async ({ page }) => {
 });
 
 test("has no serious automated accessibility violations", async ({ page }) => {
-  for (const tab of ["Person Search", "Detection", "Tracking", "Cross Camera", "Sources", "Model"]) {
+  for (const tab of TABS) {
     await page.getByRole("tab", { name: tab }).click();
     const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
     const serious = results.violations.filter((violation) =>

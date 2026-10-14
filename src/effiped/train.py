@@ -1529,7 +1529,13 @@ def train(config):
     distill_weight = loss_cfg.get('distillation_weight', 0.0)
     if distill_weight > 0:
         osnet_path = loss_cfg.get('teacher_weights', 'osnet_x0_25_msmt17.pt')
-        from .osnet_teacher import build_osnet_teacher
+        try:
+            from .osnet_teacher import build_osnet_teacher
+        except ImportError as exc:  # the OSNet teacher stayed in the research workspace
+            raise SystemExit(
+                "loss.distillation_weight > 0 needs the OSNet teacher module, which is not part "
+                "of this repository. Set loss.distillation_weight to 0 (the released configuration does)."
+            ) from exc
         teacher_model = build_osnet_teacher(osnet_path, device)
 
     # ArcFace warm-up config: ramp id_weight from 0 to id_weight over N epochs

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowUp, Clock, Search, Video } from "lucide-react";
 
 import { drawFrame, frameTime } from "../components/frameGrabber";
-import { sessionStats } from "../data/personSearch";
 import { clipDuration, provenanceFor, type PersonRow, type RunResult, type Settings } from "../engine/pipeline";
 
 /**
@@ -108,7 +107,7 @@ function MatchFrame({ personId, similarity }: { personId: string; similarity: nu
           <dd><code>t{appearance.track_id}</code></dd>
         </div>
         <div>
-          <dt>Detection</dt>
+          <dt>Confidence</dt>
           <dd className={tone(appearance.score)}>{appearance.score.toFixed(3)}</dd>
         </div>
         <div>
@@ -212,7 +211,7 @@ export function SearchView({
     return (
       <div className="empty">
         <Search aria-hidden="true" size={22} />
-        <p>Run the pipeline to build the person index.</p>
+        <p>Run the pipeline to find people.</p>
       </div>
     );
   }
@@ -221,7 +220,7 @@ export function SearchView({
     return (
       <div className="empty">
         <Video aria-hidden="true" size={22} />
-        <p>No clip is attached to this job.</p>
+        <p>No clip is selected.</p>
         <button className="primary-button" onClick={onOpenSources} type="button">
           Select video sources
         </button>
@@ -326,7 +325,7 @@ export function SearchView({
           {gallery.length === 0 ? (
             <p className="pane__empty">
               No track in {source.label} is present between {from.toFixed(1)}s and {to.toFixed(1)}s at
-              the current thresholds. Widen the window, or lower the activation floor.
+              the current thresholds. Widen the time window, or lower the person threshold.
             </p>
           ) : (
             <div aria-label={`People detected in ${source.label}`} className="gallery" role="listbox">
@@ -389,8 +388,8 @@ export function SearchView({
           </p>
         ) : matches.length === 0 ? (
           <p className="pane__empty">
-            Nothing clears a similarity of {settings.similarity.toFixed(2)} for this track. Lower the
-            match threshold to widen the candidate set.
+            No one in the other cameras looks similar enough (above {settings.similarity.toFixed(2)}).
+            Lower the match similarity threshold to see more.
           </p>
         ) : (
           <div className="matches__body">
@@ -438,12 +437,6 @@ export function SearchView({
                   Select a candidate to see the full frame it was cropped from.
                 </p>
               )}
-              <p className="matches__caution">
-                Ranked candidates are reviewable appearance evidence. They are not an identification,
-                and the score is not calibrated: in the archived run of this session,{" "}
-                {sessionStats.wrongMatches} of {sessionStats.correctMatches + sessionStats.wrongMatches}{" "}
-                cross-camera links were wrong (pairwise precision {sessionStats.precision.toFixed(2)}).
-              </p>
             </div>
           </div>
         )}

@@ -20,13 +20,6 @@ EXPECTED = {
     ("system_benchmarks", "mot17", "hota"): 61.34,
     ("system_benchmarks", "footprint", "parameters_m"): 7.78,
     ("system_benchmarks", "footprint", "pipeline_fps_approx"): 18,
-    ("research_extensions", "partjde", "matched_part_readout_gain_pp"): 6.66,
-    ("research_extensions", "boxjde", "source_detected_rank1_gain_pp"): 13.64,
-    ("research_extensions", "boxjde", "source_detected_map_gain_pp"): 12.94,
-    ("research_extensions", "boxjde", "natural_predicted_rank1_gain_pp"): 13.31,
-    ("research_extensions", "boxjde", "natural_predicted_map_gain_pp"): 12.29,
-    ("research_extensions", "boxjde", "natural_e2e_rank1_gain_pp"): 13.01,
-    ("research_extensions", "boxjde", "natural_e2e_map_gain_pp"): 12.0,
 }
 
 def public_surfaces() -> list[Path]:
@@ -41,9 +34,23 @@ def public_surfaces() -> list[Path]:
     web = ROOT / "apps" / "web"
     paths = [
         ROOT / "README.md",
+        ROOT / "ARCHITECTURE.md",
         ROOT / "RESULTS.md",
         ROOT / "MODEL_CARD.md",
+        ROOT / "DATA_LICENSES.md",
+        ROOT / "THIRD_PARTY_NOTICES.md",
+        ROOT / "CONTRIBUTING.md",
+        ROOT / "CHANGELOG.md",
+        ROOT / "CITATION.cff",
+        ROOT / "pyproject.toml",
+        ROOT / "docs" / "media" / "LICENSE.md",
+        ROOT / "docs" / "media" / "ASSET_MANIFEST.json",
+        ROOT / "src" / "effiped" / "model_manifest.json",
+        ROOT / "research" / "report" / "generate_report.py",
+        FIXTURE,
         web / "index.html",
+        web / "src" / "data" / "person-search.json",
+        web / "src" / "data" / "frame-detections.json",
     ]
     paths += sorted(
         path
@@ -64,8 +71,8 @@ def validate(config: Path | None = None) -> list[str]:
     errors: list[str] = []
     data = json.loads(FIXTURE.read_text(encoding="utf-8"))
 
-    if data.get("schema_version") != 2:
-        errors.append("Evidence fixture must use schema version 2.")
+    if data.get("schema_version") != 3:
+        errors.append("Evidence fixture must use schema version 3.")
 
     for keys, expected in EXPECTED.items():
         actual = nested(data, keys)
@@ -79,14 +86,9 @@ def validate(config: Path | None = None) -> list[str]:
     )
     if title != expected_title:
         errors.append("The public project title changed.")
-    if "not official Task 4" not in data["research_extensions"]["boxjde"]["protocol"]:
-        errors.append("BoxJDE protocol boundary is missing.")
-
-    videos = data["demo_case"]["videos"]
-    if len(videos) != 2 or {video["id"] for video in videos} != {"tracking", "cross-camera"}:
-        errors.append("The hosted demo must expose both archived replay variants.")
-    if any(len(subject["candidates"]) != 4 for subject in data["demo_case"]["subjects"]):
-        errors.append("Every demo subject must include four ranked candidates.")
+    session = data["demo_session"]
+    if session.get("cameras") != 4 or session.get("frames") != 150:
+        errors.append("The demo session must describe the four 150-frame clips the site replays.")
 
     public_text = "\n".join(path.read_text(encoding="utf-8") for path in public_surfaces())
     event_terms = ["con" + "test", "compe" + "tition", "pr" + "ize", "aw" + "ard", "SI" + "PC"]
@@ -96,6 +98,10 @@ def validate(config: Path | None = None) -> list[str]:
         (r"\banonymous embeddings cannot be reversed\b", "unsupported irreversibility claim"),
         (rf"\b(?:{'|'.join(event_terms)})\b", "non-standalone event framing"),
         (r"canonical.{0,80}\b22\s*FPS\b", "stale canonical 22 FPS headline"),
+        # Internal model numbering means nothing to a visitor; the public name is EffiPed.
+        (r"\bTier[- ]?1\b|\bG_tier1\b", "internal model tier label"),
+        (r"\bfold[- _]?\d+\b", "internal fold number"),
+        (r"\b(?:Box|Part)JDE\b", "internal research variant name"),
     ]
     for pattern, label in forbidden:
         if re.search(pattern, public_text, re.IGNORECASE | re.DOTALL):

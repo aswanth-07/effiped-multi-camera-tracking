@@ -154,14 +154,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .is-mid { color: var(--link-strong); }
 .is-low { color: var(--warning); }
 
-.panel-label {
-  color: var(--text-floor);
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-}
-
 /* --- Frame ---------------------------------------------------------------- */
 
 .console {
@@ -490,7 +482,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .control__note { display: grid; gap: 0.2rem; margin-top: 0.35rem; }
 .control__survivors { color: var(--text-muted); font-family: var(--mono); font-size: 0.63rem; }
 .control__survivors b { color: var(--comment); font-weight: 500; }
-.control__hint { color: var(--text-floor); font-size: 0.64rem; line-height: 1.45; }
 
 /* 40px of vertical hit area for touch, with the visible track kept thin and
    clear of the histogram it sits under. */
@@ -677,7 +668,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
    previous output on screen, so this is only ever the cold start. */
 .skeleton { display: grid; gap: var(--s-2); }
 .skeleton--search { grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); }
-.skeleton--cross, .skeleton--model, .skeleton--sources { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
+.skeleton--sources { grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
 .skeleton__block {
   height: 7.5rem;
   border-radius: var(--r-lg);
@@ -704,16 +695,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   font-weight: 600;
   letter-spacing: -0.012em;
 }
-.view__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.66rem; }
-.view__foot { max-width: 88ch; color: var(--text-floor); font-size: 0.72rem; line-height: 1.65; }
-/* An aside is marked by the rule it hangs off, not by a box drawn round it. */
-.view__foot--warn {
-  padding: 0.15rem 0 0.15rem 0.9rem;
-  border-left: 2px solid var(--control-rule);
-  color: var(--text-muted);
-}
-.view__foot b { color: var(--link-strong); font-family: var(--mono); font-weight: 500; }
-
 .empty {
   display: grid;
   min-height: 60%;
@@ -809,9 +790,7 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .split { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 62rem) {
   .split { gap: var(--s-5); grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
-  .split--matrix { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
-.split--matrix > div { display: grid; align-content: start; gap: var(--s-3); }
 
 .clip-grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); }
 .clip {
@@ -829,7 +808,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .clip__title code { color: var(--text-floor); font-size: 0.66rem; }
 
 .kv { display: grid; gap: 0.4rem 1.4rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.kv--wide { grid-template-columns: minmax(0, 1fr); }
 .kv > div { display: flex; gap: 0.6rem; justify-content: space-between; padding-bottom: 0.3rem; border-bottom: var(--seam); }
 .kv > div:last-child { border-bottom: 0; }
 .kv dt { color: var(--text-floor); font-size: 0.68rem; }
@@ -889,53 +867,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 /* A table with no scroller of its own still needs a measure. Five columns
    spread across a metre of glass stop being a table and become five lists that
    happen to share a row. */
-.archive .grid-table, .panel .grid-table { max-width: 72rem; }
-.grid-table tr.is-good td.is-num, .grid-table tr.is-good th { color: var(--comment); }
-.grid-table tr.is-weak td.is-num { color: var(--warning); }
-
-/* The cells are the grid. Drawing a border around all sixteen of them as well
-   made the matrix the heaviest object on the screen, for sixteen numbers. */
-.matrix {
-  border-collapse: separate;
-  border-spacing: 3px;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-}
-/* Sized to its figures, so the association counts read as one compact grid
-   instead of a banner with sixteen numbers spaced out across it. */
-.matrix { width: auto; justify-self: start; }
-.matrix th, .matrix td { min-width: 4rem; padding: 0.8rem 0.5rem; text-align: center; }
-.matrix td { border-radius: var(--r-sm); background: var(--surface-1); }
-.matrix thead th { color: var(--text-floor); font-weight: 400; }
-.matrix tbody th { color: var(--text-floor); font-weight: 400; }
-.matrix__cell { color: var(--text-strong); }
-.matrix__self { color: var(--control-rule); background: transparent; box-shadow: var(--ring-soft); }
-
-.linklist { overflow: hidden; border-radius: var(--r-lg); background: var(--plane); box-shadow: var(--ring-soft); }
-.linklist li + li { border-top: var(--seam); }
-.linklist button {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0.9rem;
-  transition: background-color var(--t-fast) var(--ease);
-}
-.linklist button:hover { background: var(--hover); }
-.linklist__pair { display: flex; align-items: center; gap: 0.5rem; color: var(--text-soft); font-size: 0.7rem; }
-.linklist__pair span { color: var(--text-floor); }
-.linklist__score { color: var(--link-strong); font-family: var(--mono); font-size: 0.7rem; }
-.linklist__none { padding: 0.6rem 0.9rem; color: var(--text-floor); font-size: 0.7rem; }
-
-/* A real section break: space first, then one rule across the measure. */
-.archive {
-  display: grid;
-  gap: var(--s-3);
-  padding-top: var(--s-4);
-  margin-top: var(--s-2);
-  border-top: 1px solid var(--control-rule);
-}
 
 /* --- Person search ------------------------------------------------------- */
 
@@ -1248,67 +1179,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 .frame__meta dt { color: var(--text-floor); font-size: 0.66rem; }
 .frame__meta dd { color: var(--text-soft); font-family: var(--mono); font-size: 0.66rem; text-align: right; }
 
-/* The one caution a reviewer must not miss, marked by an amber rule rather than
-   a grey box that reads as one more panel to skip. */
-.matches__caution {
-  max-width: 78ch;
-  padding: 0.1rem 0 0.1rem 0.9rem;
-  border-left: 2px solid var(--warning);
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  line-height: 1.7;
-}
-
-/* --- Model panels --------------------------------------------------------- */
-
-/* Two halves and a full width, stated. auto-fit resolved to four tracks on a
-   desk monitor and then filled two of them, which left the artifact and the
-   replay crammed into the left half with the right half empty. */
-.panels { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 62rem) {
-  .panels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-.panel {
-  display: grid;
-  align-content: start;
-  gap: var(--s-3);
-  padding: 1.2rem 1.25rem;
-  border-radius: var(--r-lg);
-  background: var(--plane);
-  box-shadow: var(--ring-soft);
-}
-.panel--wide { grid-column: 1 / -1; }
-.panel__note {
-  display: flex;
-  gap: 0.5rem;
-  padding-left: 0.85rem;
-  border-left: 2px solid var(--control-rule);
-  color: var(--text-floor);
-  font-size: 0.7rem;
-  line-height: 1.65;
-}
-.panel__note svg { flex: none; margin-top: 0.12rem; color: var(--warning); }
-/* A link sitting inside prose cannot be told apart by colour alone: blue on
-   muted grey is about 1.2:1, well under the 3:1 that would allow it. */
-.panel__note a, .bullets a, .view__foot a {
-  color: var(--link);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-}
-.panel__note a:hover, .bullets a:hover, .view__foot a:hover { color: var(--link-strong); }
-.bullets { display: grid; }
-.bullets li {
-  padding: 0.6rem 0 0.6rem 1.15rem;
-  border-bottom: var(--seam);
-  color: var(--text-muted);
-  font-size: 0.74rem;
-  line-height: 1.6;
-  text-indent: -1.15rem;
-}
-.bullets li::before { color: var(--link); content: "\2022"; padding-right: 0.65rem; }
-.bullets li:last-child { border-bottom: 0; }
-.bullets b { color: var(--text-soft); }
-
 /* --- Modal ---------------------------------------------------------------- */
 
 /* A native dialog: the top layer, the backdrop and the focus trap come from the
@@ -1342,7 +1212,6 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   border-bottom: 1px solid var(--control-rule);
 }
 .modal__head h2 { color: var(--text-strong); font-size: 1rem; font-weight: 600; }
-.modal__note { padding: 0.8rem 0.85rem 0; color: var(--text-floor); font-size: 0.72rem; }
 
 .source-grid {
   display: grid;
@@ -1416,6 +1285,74 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
 }
 .modal__bulk, .modal__actions { display: flex; align-items: center; gap: 0.5rem; }
 .modal__count { color: var(--text-floor); font-family: var(--mono); font-size: 0.62rem; }
+
+/* --- Architecture ---------------------------------------------------------- */
+
+.arch-spec { color: var(--text-floor); font-family: var(--mono); font-size: 0.64rem; }
+
+/* The diagram is the figure the tab exists for. On a desk it keeps its drawn
+   size beside the objective; on a phone it keeps a readable size and scrolls
+   sideways inside its own frame instead of shrinking to illegible type. */
+.arch-layout { display: grid; gap: var(--s-4); grid-template-columns: minmax(0, 1fr); align-items: start; }
+.arch-figure { display: grid; gap: var(--s-2); }
+.arch-figure__scroll {
+  overflow-x: auto;
+  border-radius: var(--r-lg);
+  background: var(--black);
+  box-shadow: var(--ring-soft);
+}
+.arch-figure img { display: block; width: 100%; min-width: 34rem; height: auto; }
+.arch-figure figcaption { display: flex; justify-content: flex-end; }
+.arch-figure figcaption a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-floor);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+}
+.arch-figure figcaption a:hover { color: var(--link-strong); }
+@media (min-width: 75rem) {
+  .arch-layout { grid-template-columns: minmax(0, 48.75rem) minmax(21rem, 1fr); gap: var(--s-5); }
+  .arch-figure img { min-width: 0; }
+}
+
+.arch-side { display: grid; align-content: start; gap: var(--s-5); }
+.arch-objective { display: grid; align-content: start; gap: var(--s-3); }
+.arch-objective h3, .arch-facts h3 { color: var(--text-strong); font-size: 0.9rem; font-weight: 600; }
+.arch-formula { color: var(--text); font-family: var(--mono); font-size: 0.78rem; }
+.arch-formula sub, .arch-formula sup, .arch-formula__key sub, .arch-loss caption sub { font-size: 0.72em; line-height: 0; }
+.arch-formula__key { margin-top: calc(-1 * var(--s-2)); color: var(--text-floor); font-size: 0.66rem; }
+.arch-loss { overflow-x: auto; border-radius: var(--r-lg); background: var(--plane); box-shadow: var(--ring-soft); }
+.arch-loss caption {
+  padding: 0.75rem 0.8rem 0.3rem;
+  color: var(--text-soft);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-align: left;
+}
+.arch-loss .grid-table thead th { background: transparent; }
+.arch-loss .grid-table th, .arch-loss .grid-table td { vertical-align: top; line-height: 1.45; }
+.arch-loss .grid-table tbody th { white-space: nowrap; }
+.arch-loss .grid-table .is-num { color: var(--link-strong); }
+
+.arch-columns {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+}
+.arch-facts { display: grid; align-content: start; gap: var(--s-2); }
+.arch-facts dl > div {
+  display: grid;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: var(--seam);
+  grid-template-columns: 7.2rem minmax(0, 1fr);
+}
+.arch-facts dl > div:last-child { border-bottom: 0; }
+.arch-facts dt { color: var(--text-floor); font-size: 0.68rem; line-height: 1.45; }
+.arch-facts dd { color: var(--text-soft); font-size: 0.7rem; line-height: 1.45; }
 
 /* --- Narrow --------------------------------------------------------------- */
 

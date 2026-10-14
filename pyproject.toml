@@ -37,6 +37,9 @@ dev = [
   "pytest>=8.3",
   "ruff>=0.9",
 ]
+report = [
+  "reportlab>=4.0",
+]
 
 [project.scripts]
 effiped-app = "effiped.cli:app"
@@ -47,7 +50,6 @@ effiped-demo = "effiped.cli:demo"
 [project.urls]
 Homepage = "https://effiped-multi-camera-tracking.vercel.app"
 Repository = "https://github.com/aswanth-07/effiped-multi-camera-tracking"
-Research = "https://github.com/aswanth-07/boxjde-person-search"
 
 [tool.setuptools]
 include-package-data = true

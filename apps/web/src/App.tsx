@@ -4,9 +4,8 @@ import { Controls } from "./console/Controls";
 import { Skeleton, StatusBar, TopBar, VIEWS, type ViewId } from "./console/Chrome";
 import { SourceModal } from "./console/SourceModal";
 import { DEFAULT_SETTINGS, runQuery, type RunResult, type Settings } from "./engine/pipeline";
-import { CrossCameraView } from "./views/CrossCameraView";
+import { ArchitectureView } from "./views/ArchitectureView";
 import { DetectionView } from "./views/DetectionView";
-import { ModelView } from "./views/ModelView";
 import { SearchView } from "./views/SearchView";
 import { SourcesView } from "./views/SourcesView";
 import { TrackingView } from "./views/TrackingView";
@@ -17,11 +16,11 @@ import { TrackingView } from "./views/TrackingView";
  * whole project is built to avoid.
  */
 const STAGES = [
-  "attaching clips",
-  "reading stored detections",
-  "applying confidence and size floors",
-  "promoting tracks",
-  "ranking cross-camera candidates",
+  "loading clips",
+  "reading saved detections",
+  "applying thresholds",
+  "building tracks",
+  "ranking matches across cameras",
   "ready"
 ];
 
@@ -149,7 +148,10 @@ export default function App() {
             </div>
           ) : null}
 
-          {result === null ? (
+          {/* The architecture is the same whatever the job, so it never waits for one. */}
+          {view === "architecture" ? (
+            <ArchitectureView />
+          ) : result === null ? (
             <Skeleton kind={view} />
           ) : (
             <>
@@ -165,10 +167,6 @@ export default function App() {
               settings={applied ?? settings}
             />
           ) : null}
-          {view === "cross" ? (
-            <CrossCameraView onInspect={inspect} result={result} settings={applied ?? settings} />
-          ) : null}
-          {view === "model" ? <ModelView /> : null}
             </>
           )}
         </main>

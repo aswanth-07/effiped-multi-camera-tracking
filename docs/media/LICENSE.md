@@ -10,9 +10,9 @@ You must give appropriate credit, use the adaptations only for non-commercial pu
 license further adaptations under the same terms. Apache-2.0 does not cover these assets.
 No raw P-DESTRE video or dataset is redistributed.
 
-The Person Search UI walkthrough and its poster contain adapted P-DESTRE media
-and retain the same non-commercial, attribution, and share-alike terms. Its
-captions identify the precomputed BoxJDE research replay. The walkthrough uses
-captured application states with transitions; it is not a live inference run.
-Any MP4 export of this walkthrough carries the same media license. Source,
-transformations, and hashes are recorded in `ASSET_MANIFEST.json`.
+What is here: the four 15-second source clips the demo replays, a poster frame for each,
+and the person crops shown in the Person Search gallery. Source, transformations, purpose,
+and SHA-256 hash for every file are recorded in `ASSET_MANIFEST.json`.
+
+`docs/social-preview.png` is a screenshot of the console showing those clips and crops, so
+it carries the same non-commercial, attribution, and share-alike terms.

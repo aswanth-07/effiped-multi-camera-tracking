@@ -24,6 +24,9 @@ Usage
     PYTHONPATH=/path/to/checkout:/path/to/paper \
     python tools/build_detection_fixture.py \
         --paper-root /path/to/paper \
+        --model-key <research-preset> \
+        --config <relative-config.yaml> \
+        --checkpoint <relative-checkpoint.pth> \
         --clips /path/to/demo_clips/session_3 \
         --out apps/web/src/data/frame-detections.json
 """
@@ -42,9 +45,9 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--clips", required=True, type=Path)
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--paper-root", required=True, type=Path, help="The research paper/ tree, also on PYTHONPATH.")
-    ap.add_argument("--model-key", default="boxjde_full_fold0")
-    ap.add_argument("--config", default="configs/boxjde/fold0_boxjde_full_roi.yaml")
-    ap.add_argument("--checkpoint", default="runs_boxjde/boxjde_fold0_full_roi/best_model.pth")
+    ap.add_argument("--model-key", required=True)
+    ap.add_argument("--config", required=True, type=Path)
+    ap.add_argument("--checkpoint", required=True, type=Path)
     ap.add_argument("--decode-thresh", type=float, default=0.05)
     ap.add_argument("--track-thresh", type=float, default=0.30)
     ap.add_argument("--frame-stride", type=int, default=2)
@@ -165,7 +168,7 @@ def main() -> int:
     fixture = {
         "schema_version": 1,
         "generated_with": {
-            "checkpoint_key": args.model_key,
+            "model": "EffiPed research version",
             "decode_thresh": args.decode_thresh,
             "track_thresh": args.track_thresh,
             "frame_stride": args.frame_stride,

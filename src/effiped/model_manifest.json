@@ -5,16 +5,16 @@
   "weights_status": "withheld_pending_dataset_rights_review",
   "models": [
     {
-      "key": "effiped_tier1",
-      "label": "EffiPed Tier-1",
+      "key": "effiped",
+      "label": "EffiPed",
       "fold": 0,
       "readout": "four-strip-part-based",
       "descriptor_dim": 256,
-      "filename": "effiped-tier1-v1.pt",
-      "config": "configs/system/effiped-tier1.yaml",
+      "filename": "effiped-v1.pt",
+      "config": "configs/system/effiped.yaml",
       "description": "ConvNeXt V2 JDE model with RoIAlign, four body strips, Coordinate Attention, and gallery association.",
       "benchmark": {
-        "protocol": "P-DESTRE fold-0 validation and test; MOT17 val-half Protocol A",
+        "protocol": "P-DESTRE validation and test; MOT17 validation half",
         "pdestre_val_rank1_cross": 62.8,
         "pdestre_test_rank1_cross": 61.3,
         "mot17_mota": 64.08,

@@ -182,7 +182,7 @@ export function TrackingView({
   const live = useMemo(() => new Set(Object.keys(result?.byId ?? {})), [result]);
 
   if (!result || !video) {
-    return <div className="empty"><p>Run the pipeline to build tracks.</p></div>;
+    return <div className="empty"><p>Run the pipeline to see tracks.</p></div>;
   }
 
   const rows = tracksFor(video.id, settings, result);
@@ -237,7 +237,7 @@ export function TrackingView({
             <span>frame {onScreen.frame}</span>
             <span className="is-accent">{onScreen.boxes} on screen</span>
             <span>{rows.length} tracks</span>
-            <span>{indexed} indexed people</span>
+            <span>{indexed} searchable people</span>
           </figcaption>
         </figure>
 
@@ -248,8 +248,8 @@ export function TrackingView({
                 <th scope="col">Track</th>
                 <th scope="col">Frames</th>
                 <th className="is-num" scope="col">Detections</th>
-                <th className="is-num" scope="col">Peak</th>
-                <th scope="col">Person index</th>
+                <th className="is-num" scope="col">Best score</th>
+                <th scope="col">Person Search</th>
               </tr>
             </thead>
             <tbody>
@@ -295,15 +295,15 @@ export function TrackingView({
                           }}
                           type="button"
                         >
-                          Review,{" "}
+                          Open,{" "}
                           {person.matches.length === 0
-                            ? "no links"
-                            : `${person.matches.length} ${person.matches.length === 1 ? "link" : "links"}`}
+                            ? "no matches"
+                            : `${person.matches.length} ${person.matches.length === 1 ? "match" : "matches"}`}
                         </button>
                       ) : row.personId ? (
-                        "below activation"
+                        "below threshold"
                       ) : (
-                        "not indexed"
+                        "not searchable"
                       )}
                     </td>
                   </tr>
@@ -311,20 +311,13 @@ export function TrackingView({
               })}
               {rows.length === 0 ? (
                 <tr>
-                  <td colSpan={5}>No track has a detection above the current floors.</td>
+                  <td colSpan={5}>No track has a detection above the current thresholds.</td>
                 </tr>
               ) : null}
             </tbody>
           </table>
         </div>
       </div>
-
-      <p className="view__foot">
-        Every local track from the indexing run, drawn over the source clip with the same ids as the
-        table and the person index. Green tracks feed a person in the index at the current thresholds;
-        amber ones were tracked but not indexed, or fall below the activation threshold. Select a row to jump to where that track starts. The run processed every
-        second frame, so on the frames in between a box is placed halfway between its two observations.
-      </p>
     </div>
   );
 }

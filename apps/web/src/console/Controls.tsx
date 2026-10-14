@@ -90,7 +90,6 @@ function Control({
             <b>{survivors.kept.toLocaleString()}</b> of {survivors.total.toLocaleString()} kept
           </span>
         ) : null}
-        <span className="control__hint">{range.hint}</span>
       </p>
     </div>
   );
@@ -145,8 +144,8 @@ export function Controls({
           <p className="notice notice--warn" role="status">
             <AlertTriangle aria-hidden="true" size={13} />
             <span>
-              {floors.map((range) => range.label).join(" and ")} sits below the floor this index was
-              built at. Nothing new appears below it.
+              {floors.map((range) => range.label).join(" and ")} is below the lowest value the demo
+              results were saved at, so going lower shows nothing new.
             </span>
           </p>
         ) : null}

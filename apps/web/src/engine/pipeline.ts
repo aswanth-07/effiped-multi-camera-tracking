@@ -43,15 +43,11 @@ export type Range = {
   /** Where the checked-in index was actually built. */
   indexedAt?: number;
   unit?: string;
-  hint: string;
 };
-
-/** The floors the checked-in index was produced at, from `generated_with`. */
-export const INDEX_SETTINGS = personSearch.generated_with.settings;
 
 export const DEFAULT_SETTINGS: Settings = {
   sources: [0, 1, 2, 3],
-  // The floor the published tracking numbers were run at (sessionStats.detThresh).
+  // The floor the published tracking numbers were run at (0.35).
   // Higher hides real people: the nearest pedestrians in camera 2 score 0.40-0.44.
   detConf: 0.35,
   trackActivation: 0.62,
@@ -68,17 +64,15 @@ export const RANGES: Range[] = [
     min: 0.3,
     max: 0.72,
     step: 0.01,
-    indexedAt: 0.31,
-    hint: "Centre-point score floor. The index holds detections from 0.31 up, so nothing exists below that."
+    indexedAt: 0.31
   },
   {
     key: "trackActivation",
-    label: "Track activation",
+    label: "Person threshold",
     min: 0.6,
     max: 0.72,
     step: 0.005,
-    indexedAt: 0.61,
-    hint: "A track is promoted to a person once its best detection clears this."
+    indexedAt: 0.61
   },
   {
     key: "minBoxHeight",
@@ -86,32 +80,28 @@ export const RANGES: Range[] = [
     min: 40,
     max: 180,
     step: 2,
-    unit: "px",
-    hint: "Drops boxes too short to carry usable appearance. Source frames are 960 by 540."
+    unit: "px"
   },
   {
     key: "frameLimit",
     label: "Frame limit",
     min: 0,
     max: 150,
-    step: 5,
-    hint: "Stop after this many frames per clip. 0 processes all 150."
+    step: 5
   },
   {
     key: "similarity",
     label: "Match similarity",
     min: 0,
     max: 0.92,
-    step: 0.01,
-    hint: "Cosine floor for a cross-camera candidate. Stored pairs run from -0.05 to 0.92."
+    step: 0.01
   },
   {
     key: "topK",
     label: "Candidates per person",
     min: 1,
     max: 12,
-    step: 1,
-    hint: "How many ranked candidates are kept after the similarity floor."
+    step: 1
   }
 ];
 

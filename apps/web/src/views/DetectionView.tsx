@@ -8,7 +8,7 @@ import { detectionFrames, detectionsAt, type RunResult, type Settings } from "..
  * can be reconstructed exactly: seek the clip to that timestamp and stroke every
  * detection that survives the current thresholds. Boxes whose track made it
  * into the person index are marked, so the gap between "detected" and
- * "indexed" is visible rather than hidden.
+ * "searchable" is visible rather than hidden.
  */
 export function DetectionView({ result, settings }: { result: RunResult | null; settings: Settings }) {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -60,7 +60,7 @@ export function DetectionView({ result, settings }: { result: RunResult | null; 
   }, [video, frameIndex, overlays]);
 
   if (!result || sources.length === 0) {
-    return <div className="empty"><p>Run the pipeline to decode detections.</p></div>;
+    return <div className="empty"><p>Run the pipeline to see detections.</p></div>;
   }
 
   return (
@@ -92,7 +92,7 @@ export function DetectionView({ result, settings }: { result: RunResult | null; 
           <span>frame {frameIndex}</span>
           <span>t {timeS.toFixed(2)}s</span>
           <span className="is-accent">{detections.length} detections</span>
-          <span>{indexed} indexed</span>
+          <span>{indexed} searchable</span>
         </div>
       </div>
 
@@ -112,13 +112,6 @@ export function DetectionView({ result, settings }: { result: RunResult | null; 
           {frames.length === 0 ? "none at these thresholds" : `${frames.indexOf(frameIndex) + 1} / ${frames.length}`}
         </span>
       </div>
-
-      <p className="view__foot">
-        Every box the detector returned on this frame, redrawn at a confidence floor of{" "}
-        <b>{settings.detConf.toFixed(2)}</b> and a minimum height of <b>{settings.minBoxHeight}px</b>.
-        Green boxes belong to a person in the search index at the current thresholds; amber ones were
-        detected but are not part of it. Frames are sampled every second frame, as in the indexing run.
-      </p>
     </div>
   );
 }

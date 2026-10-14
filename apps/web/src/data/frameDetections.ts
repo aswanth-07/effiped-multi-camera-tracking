@@ -13,7 +13,7 @@ export type FrameDetectionRow = [number, number, number, number, number, number 
 
 type FrameDetectionFixture = {
   schema_version: number;
-  generated_with: { checkpoint_key: string; frame_stride: number; store_floor: number };
+  generated_with: { model: string; frame_stride: number; store_floor: number };
   videos: { video_index: number; fps: number; frames: Record<string, FrameDetectionRow[]> }[];
 };
 
