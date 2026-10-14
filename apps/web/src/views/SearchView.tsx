@@ -2,7 +2,15 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, ArrowUp, Clock, Search, Video } from "lucide-react";
 
 import { drawFrame, frameTime } from "../components/frameGrabber";
-import { clipDuration, provenanceFor, type PersonRow, type RunResult, type Settings } from "../engine/pipeline";
+import { TrackPlayer } from "../components/TrackPlayer";
+import {
+  clipDuration,
+  personFrame,
+  provenanceFor,
+  type PersonRow,
+  type RunResult,
+  type Settings
+} from "../engine/pipeline";
 
 /**
  * Scrolls a container with an exponential ease-out.
@@ -139,10 +147,18 @@ export function SearchView({
   onSelect: (personId: string) => void;
   onOpenSources: () => void;
 }) {
-  const [sourceId, setSourceId] = useState<number | null>(null);
+  // Arriving with someone already selected (from the Tracking table, or back
+  // from another tab) opens on their camera at the moment their crop was taken,
+  // so the source, its gallery and the candidates heading all name one person.
+  const arriving = selected && result ? result.byId[selected] ?? null : null;
+  const [sourceId, setSourceId] = useState<number | null>(() => arriving?.person.video_index ?? null);
+  const [seekTo, setSeekTo] = useState<{ frame: number; nonce: number } | null>(() =>
+    arriving ? { frame: personFrame(arriving), nonce: 0 } : null
+  );
   const [span, setSpan] = useState<[number, number] | null>(null);
   const [activeMatch, setActiveMatch] = useState<string | null>(null);
   const matchesRef = useRef<HTMLElement>(null);
+  const live = useMemo(() => new Set(Object.keys(result?.byId ?? {})), [result]);
 
   const sources = result?.sources ?? [];
   const source = sources.find((video) => video.id === sourceId) ?? sources[0] ?? null;
@@ -230,6 +246,14 @@ export function SearchView({
 
   const inSource = result.people.filter((r) => r.person.video_index === source.id).length;
   const active = activeMatch ? matches.find((m) => m.person.id === activeMatch) : undefined;
+  const focusPerson = row && row.person.video_index === source.id ? row.person.id : null;
+
+  // Picking someone stops the clip on them, boxed, the way the Tracking table
+  // jumps to a track.
+  const choose = (entry: PersonRow) => {
+    onSelect(entry.person.id);
+    setSeekTo({ frame: personFrame(entry), nonce: Date.now() });
+  };
 
   return (
     <div className="search">
@@ -240,16 +264,14 @@ export function SearchView({
             <span className="pane__count">{source.width}x{source.height} &middot; {source.fps}fps</span>
           </div>
 
-          <video
-            aria-label={`${source.label} footage`}
-            className="pane__video"
-            controls
-            loop
-            muted
-            playsInline
-            poster={source.poster}
-            preload="metadata"
-            src={source.source}
+          <TrackPlayer
+            className="pane__player"
+            focusPerson={focusPerson}
+            key={source.id}
+            live={live}
+            seekTo={seekTo}
+            settings={settings}
+            video={source}
           />
 
           <div aria-label="Select source clip" className="picker" role="group">
@@ -258,7 +280,10 @@ export function SearchView({
                 aria-pressed={video.id === source.id}
                 className={video.id === source.id ? "picker__item is-on" : "picker__item"}
                 key={video.id}
-                onClick={() => setSourceId(video.id)}
+                onClick={() => {
+                  setSourceId(video.id);
+                  setSeekTo(null);
+                }}
                 type="button"
               >
                 <img alt="" loading="lazy" src={video.poster} />
@@ -336,7 +361,7 @@ export function SearchView({
                     aria-selected={isOn}
                     className={isOn ? "tile is-on" : "tile"}
                     key={entry.person.id}
-                    onClick={() => onSelect(entry.person.id)}
+                    onClick={() => choose(entry)}
                     role="option"
                     type="button"
                   >

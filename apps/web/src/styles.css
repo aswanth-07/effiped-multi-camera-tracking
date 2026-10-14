@@ -911,14 +911,15 @@ a:hover { color: var(--link-strong); text-decoration: underline; }
   line-height: 1.7;
 }
 
-.pane__video {
-  width: 100%;
-  aspect-ratio: 16 / 9;
+/* The same overlaid player as Tracking. The clip keeps its 16:9 box before its
+   metadata arrives, so the pane does not jump, and the overlay reads where
+   object-fit put the picture rather than assuming it fills the box. */
+.pane__player {
+  overflow: hidden;
   border-radius: var(--r-lg);
   background: #000;
-  box-shadow: var(--ring);
-  object-fit: cover;
 }
+.pane__player video { aspect-ratio: 16 / 9; }
 
 /* Posters, because a reviewer recognises the scene faster than the label. The
    poster is the control: a card drawn round each one turned a row of four

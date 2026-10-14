@@ -9,6 +9,12 @@ Dates are the dates of the commits that made each change.
 
 ### Added
 
+- The Person Search source clip plays with the indexing run's tracks drawn over it,
+  through the same player as the Tracking workspace. Picking a person pauses the clip
+  on the frame their gallery crop came from (or their most confident view left at
+  the current thresholds) and emphasises every track the index
+  merged into them; opening a track from the Tracking table opens Person Search on
+  that track's camera (2026-10-14).
 - An Architecture tab (key `5`): the system diagram beside the training objective,
   every detection and identity loss term with its weight, the training and inference
   settings, and the reported results. A unit test checks each printed value against

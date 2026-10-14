@@ -325,6 +325,20 @@ export function provenanceFor(personId: string): Provenance | null {
   return { video, appearance };
 }
 
+/**
+ * The frame that shows a person best at the current thresholds: the moment
+ * their gallery crop was taken when that view still survives, else their most
+ * confident surviving view. Seeking the source here puts the person the
+ * reviewer just picked on screen, boxed, looking like the tile they clicked.
+ */
+export function personFrame(row: PersonRow): number {
+  const views = row.detections;
+  const shown = views.find((view) => view.crop !== null && view.crop === row.person.crop);
+  if (shown) return shown.frame_index;
+  if (views.length === 0) return row.person.first_frame;
+  return views.reduce((best, view) => (view.score > best.score ? view : best), views[0]).frame_index;
+}
+
 /** The seconds a clip spans, used to bound the gallery's time filter. */
 export function clipDuration(videoId: number): number {
   return personSearch.videos.find((video) => video.id === videoId)?.duration_s ?? 15;

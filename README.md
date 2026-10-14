@@ -17,7 +17,8 @@ By [Aswanth Raj](https://github.com/aswanth-07).
 already loaded. Switch tabs with the number keys:
 
 - **Person Search** (`1`): choose a camera and a person, then review matches from the other
-  cameras beside the full video frame each one came from.
+  cameras beside the full video frame each one came from. The source clip plays with the
+  tracked boxes drawn on it, and picking a person stops it on them.
 - **Detection** (`2`): every person the detector found in a frame.
 - **Tracking** (`3`): a clip playing with its tracks drawn on it; open any track in Person Search.
 - **Sources** (`4`): the attached clips.

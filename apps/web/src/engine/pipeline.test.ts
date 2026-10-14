@@ -7,6 +7,7 @@ import {
   DETECTION_STRIDE,
   detectionFrames,
   detectionsAt,
+  personFrame,
   runQuery,
   trackBoxesAt,
   trackBoxesForFrame,
@@ -159,6 +160,18 @@ describe("replay engine", () => {
       }
     }
     expect(checked).toBeGreaterThan(100);
+  });
+
+  it("seeks a selected person to a frame where their own box is drawn", () => {
+    for (const settings of [base, { ...base, detConf: 0.6, minBoxHeight: 60 }]) {
+      const result = runQuery(settings);
+      expect(result.people.length).toBeGreaterThan(0);
+      for (const row of result.people) {
+        const frame = personFrame(row);
+        const boxes = trackBoxesForFrame(row.person.video_index, frame, settings);
+        expect(boxes.some((box) => box.personId === row.person.id), `${row.person.id} at ${frame}`).toBe(true);
+      }
+    }
   });
 
   it("stops drawing tracks past the frame limit", () => {

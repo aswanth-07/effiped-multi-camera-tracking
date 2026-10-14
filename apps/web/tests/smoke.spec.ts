@@ -250,6 +250,47 @@ test("the tracking overlay draws the table's tracks and jumps to a selected one"
   expect(await video.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
 });
 
+test("the search source draws the run's boxes and stops on the person picked", async ({ page }) => {
+  const video = page.locator(".pane--source video");
+  const overlay = page.locator(".pane--source .player__overlay");
+  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState), { timeout: 15000 }).toBeGreaterThanOrEqual(2);
+
+  const inked = () =>
+    overlay.evaluate((canvas: HTMLCanvasElement) => {
+      const data = canvas.getContext("2d")!.getImageData(0, 0, canvas.width, canvas.height).data;
+      let painted = 0;
+      for (let i = 3; i < data.length; i += 4) if (data[i] > 0) painted += 1;
+      return painted;
+    });
+  await expect.poll(inked, { timeout: 15000 }).toBeGreaterThan(0);
+
+  // The overlay lies exactly over the picture, so its boxes land on people.
+  const [picture, ink] = [await video.boundingBox(), await overlay.boundingBox()];
+  expect(ink!.x).toBeCloseTo(picture!.x, 0);
+  expect(ink!.y).toBeCloseTo(picture!.y, 0);
+  expect(ink!.width).toBeCloseTo(picture!.width, 0);
+  expect(ink!.height).toBeCloseTo(picture!.height, 0);
+
+  await video.evaluate((v: HTMLVideoElement) => v.play());
+  const tile = withCandidates(page).first();
+  const [from, to] = ((await tile.locator(".tile__sub").first().innerText()).match(/[\d.]+/g) ?? []).map(Number);
+  await tile.click();
+  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.paused)).toBe(true);
+  const at = await video.evaluate((v: HTMLVideoElement) => v.currentTime);
+  expect(at).toBeGreaterThanOrEqual(from - 0.1);
+  expect(at).toBeLessThanOrEqual(to + 0.1);
+
+  // Opening someone from another camera's track table lands on their camera.
+  await page.keyboard.press("3");
+  await page.locator(".view--tracking .seg__item", { hasText: "Camera 3" }).click();
+  const opened = page.locator(".view--tracking tbody tr").filter({ has: page.locator(".link-button") }).first();
+  const track = await opened.locator("th").innerText();
+  await opened.locator(".link-button").click();
+  await expect(page.locator("#gal-heading")).toContainText("Camera 3");
+  await expect(page.locator("#matches-heading")).toContainText(`Candidates for ${track} in Camera 3`);
+  await expect(page.locator(".tile.is-on")).toContainText(track);
+});
+
 test("no layout overflows at desktop or phone width", async ({ page }) => {
   for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
     await page.setViewportSize(viewport);
